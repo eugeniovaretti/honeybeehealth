@@ -7,8 +7,8 @@ output: html_document
 
 ```{r setup, include=FALSE}
 # Get the Data
-colony <- read_csv("/Users/lucamainini/Library/CloudStorage/OneDrive-PolitecnicodiMilano/Nonparametric statistics/BEES/colony.csv")
-stressor <- read_csv("/Users/lucamainini/Library/CloudStorage/OneDrive-PolitecnicodiMilano/Nonparametric statistics/BEES/stressor.csv")
+colony <- read.csv("../Data_bees/colony.csv")
+stressor <- read.csv("../Data_bees/stressor.csv")
 
 ```
 
@@ -16,7 +16,6 @@ stressor <- read_csv("/Users/lucamainini/Library/CloudStorage/OneDrive-Politecni
 ```{r}
 library(explore)
 library(dplyr) 
-explore(data)
 ```
 
 ```{r}
@@ -30,6 +29,7 @@ new_stress <- stressor %>% tidyr::pivot_wider(
 ```{r}
 # Merge data frames together
 data <- inner_join(colony, new_stress, by = c("year","months","state"))
+explore(data)
 ```
 
 
