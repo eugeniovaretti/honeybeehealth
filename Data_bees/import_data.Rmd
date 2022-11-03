@@ -1,0 +1,41 @@
+---
+title: "import_data coffee"
+author: "Luca"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# Get the Data
+colony <- read_csv("/Users/lucamainini/Library/CloudStorage/OneDrive-PolitecnicodiMilano/Nonparametric statistics/BEES/colony.csv")
+stressor <- read_csv("/Users/lucamainini/Library/CloudStorage/OneDrive-PolitecnicodiMilano/Nonparametric statistics/BEES/stressor.csv")
+
+```
+
+
+```{r}
+library(explore)
+library(dplyr) 
+explore(data)
+```
+
+```{r}
+new_stress <- stressor %>% tidyr::pivot_wider(
+  names_from = stressor, 
+  values_from = stress_pct,
+  values_fill = 0
+)
+```
+
+```{r}
+# Merge data frames together
+data <- inner_join(colony, new_stress, by = c("year","months","state"))
+```
+
+
+```{r}
+fm <- lm(data=data, colony_lost_pct~`Varroa mites`+`Other pests/parasites`+Disesases+Pesticides + Other + Unknown)
+summary(fm)
+plot(fm)
+```
+
