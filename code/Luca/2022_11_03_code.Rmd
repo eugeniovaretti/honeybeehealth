@@ -1,0 +1,13 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+LM
+
+```{r}
+fm <- lm(data=data, colony_lost_pct~`Varroa mites`+`Other pests/parasites`+Disesases+Pesticides + Other + Unknown)
+summary(fm)
+plot(fm)
+```
+
