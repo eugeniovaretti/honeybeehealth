@@ -1,0 +1,1 @@
+This folder - output - contains the output of the Rcode
