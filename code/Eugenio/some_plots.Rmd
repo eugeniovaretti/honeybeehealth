@@ -1,0 +1,61 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+data_cleaned
+```
+```{r}
+dim(stressor)
+levels(factor(stressor$stressor))
+```
+
+
+
+
+# trattiamo separatamnte i dati per anno (e.g 2020)
+```{r}
+data_2020 <- data_cleaned[data_cleaned$year == 2020,]
+data_2020
+```
+# Vediamo andamento per California nei 4 trimestri:
+```{r}
+# i <- which(data_2020$state == "Montana")
+# data_mont <- data_2020[i,]
+```
+```{r}
+i = which(stressor$state == "California" & stressor$year == 2021)
+plot(x=factor(stressor$stressor[i]), y=stressor$stress_pct[i])
+```
+
+PLOTTO PERCENTUALI DI COLONY_LOST NEL 2020 PER OGNI STATO
+```{r}
+library(plotly)
+us_data <- map_data("state")
+
+colony_plot <- colony
+colony_plot$state <- tolower(colony_plot$state)
+cv <- colony_plot[colony_plot$year == 2020,c(3,7)]
+cv$state <- factor(cv$state)
+cv[is.na(cv$colony_lost_pct),2]<-0 
+agg = aggregate(cv,
+                by = list(cv$state),
+                FUN = mean,
+                )
+
+agg <- agg[,-2]
+
+
+
+df <- data.frame(
+  state = agg[,1],
+  values = agg[,2]
+)
+
+library(usmap)
+plot_usmap(data = df) + labs(title = "Colony lost percentage in 2020")
+#nota che gli stati vuoti sarebbero in Others
+```
+
+
