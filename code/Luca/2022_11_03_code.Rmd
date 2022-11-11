@@ -14,15 +14,18 @@ library(dplyr)
 
 ```{r}
 library(readr)
+
+# tuesdata <- tidytuesdayR::tt_load(2022, week = 2)
+# colony <- tuesdata$colony
+colony <- read_csv("data/colony.csv")
 data_merged <- read_csv("data/data_merged.csv")
 data <- data_merged[-1]
-View(data)
+#View(data)
 ```
 
 ```{r}
 data = data %>% mutate (gross_lost = (colony_lost)/colony_max)
 ```
-
 
 ```{r}
 explore(data)
@@ -37,14 +40,6 @@ summer <- data %>% filter(months %in% c("April-June","July-September"))
 ```
 
 ```{r}
-tuesdata <- tidytuesdayR::tt_load(2022, week = 2)
-
-colony <- tuesdata$colony
-explore(colony)
-```
-
-
-```{r}
 explore(winter)
 ```
 
@@ -53,10 +48,18 @@ explore(summer)
 ```
 
 
-
 ```{r}
 fm <- lm(data=data, colony_lost_pct~`Varroa mites`+`Other pests/parasites`+Disesases+Pesticides + Other + Unknown)
 summary(fm)
 plot(fm)
 ```
+
+```{r}
+plot(colony$colony_n[0:365], type='l', lty=1)
+```
+
+```{r}
+sum(is.na(colony))
+```
+
 
