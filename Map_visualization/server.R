@@ -17,7 +17,7 @@ library(dplyr)
 
 # 1. Import data
 # colony_plot <- read_csv("data/colony.csv")
-# d <- read.csv('data_merged.csv')
+# d <- read_csv("data/data_merged.csv")
 # d[is.na(d)] <- 0
 # 
 # states.name <- factor(d$state)
@@ -245,14 +245,14 @@ shinyServer(function(input, output) {
         title = paste("Difference between colonies in", input$year1, "and",input$year2, "(%) *")
         
       } else{
-        period1 <- paste(input$period,input$year1, sep='-')
+        period1 <- paste(input$period,input$year1P, sep='-')
         cv1 <- filter(colony_plot, period == period1)
         cv1 <- cv1[,c(3,7)] #select state and colony lost percentage
         
         cv1$state <- factor(cv1$state)
         cv1[is.na(cv1$colony_lost_pct),2]<-0 
         
-        period2 <- paste(input$period,input$year2, sep='-')
+        period2 <- paste(input$period,input$year2P, sep='-')
         cv2 <- filter(colony_plot, period == period2)
         cv2 <- cv2[,c(3,7)] #select state and colony lost percentage
         
@@ -266,7 +266,7 @@ shinyServer(function(input, output) {
         values = cv2$colony_lost_pct-cv1$colony_lost_pct
       )
       
-      title = paste("Difference between colonies in", input$months,input$year1, "and",input$months, input$year2, "(%) *", "(mean=",mean(df$values),")")
+      title = paste("Difference between colonies in", input$months,input$year1P, "and",input$months, input$year2P, "(%) *", "(mean=",mean(df$values),")")
       
       
       plot_usmap(data = df, labels=T) + labs(title = title)+ scale_fill_gradientn(colors = c("#1b98e0", "#f6f805", "#353436"))#,limits = c(0, 50))
