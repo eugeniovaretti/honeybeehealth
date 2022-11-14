@@ -157,14 +157,19 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                       plotOutput("plot_dendogram")
              ),
              column(5,
-                    verbatimTextOutput("plot_table"))),
+                    plotOutput("plot_cluster_map")
+                    )),
              
              fluidRow(
                #column(5,
              #plotlyOutput("plot_cluster_map")
+               verbatimTextOutput("plot_table")
              #)
                
              ),
+             
+            
+  
              
              
              

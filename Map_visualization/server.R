@@ -383,6 +383,8 @@ shinyServer(function(input, output) {
     
     output$plot_table<- renderPrint({ table_group()})
     
+    #output$plot_cls<- renderPrint({ cluster_group()})
+    
     output$plot_cluster_map <- renderPlot({
       #name = input$dist
       # generate 3d plot based on the name of clusters
@@ -390,7 +392,7 @@ shinyServer(function(input, output) {
       
       df_cl <- data.frame(
         state = tolower(states$state),
-        values = as.numeric(cluster_group())
+        values = as.vector(as.numeric(cluster_group()))
       )
       
       plot_usmap(data = df_cl) + labs(title = "Clusters") + scale_fill_gradientn(colors = c("#1b98e0", "#f6f805", "#353436"))
