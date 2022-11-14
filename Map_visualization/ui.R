@@ -161,7 +161,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
              
              fluidRow(
                #column(5,
-             #plotlyOutput("plot_dist")
+             #plotlyOutput("plot_cluster_map")
              #)
                
              ),
