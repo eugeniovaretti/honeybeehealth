@@ -153,8 +153,16 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
              
              
              fluidRow(
-               column(5,plotOutput("plot_dendogram")),
-               column(5,plotlyOutput("plot_dist"))
+               column(5,
+                      plotOutput("plot_dendogram")
+             ),
+             column(5,
+                    verbatimTextOutput("plot_table"))),
+             
+             fluidRow(
+               #column(5,
+             #plotlyOutput("plot_dist")
+             #)
                
              ),
              
