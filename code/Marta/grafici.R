@@ -4,7 +4,7 @@ library(plotly)
 data <- read.csv('cleaned_data.csv')
 d <- read.csv("cleaned_data_withpct.csv")
 stressor <- read.csv('stressor.csv')
-str[is.na(str)] <- 0
+stressor[is.na(stressor)] <- 0
 
 
 #plot1
@@ -113,15 +113,14 @@ yield.price.corrplot <- n.str1.corr %>%
 #boxplot
 n.str1.corr <- d %>% 
   group_by(
-    year) %>% 
-  select(year, colony_lost_pct, Varroa.mites) %>% 
+    year,state) %>% 
+  select(year, state,colony_lost_pct, Varroa.mites) %>% 
   summarise(`Average colony_lost_pct` = mean(colony_lost_pct), `Average Varroa.mites` = mean(Varroa.mites))
 
 boxplot(n.str1.corr$`Average colony_lost_pct`, main="lost_pct", 
         sub=paste("Outlier Rows: ", boxplot.stats(n.str1.corr$`Average colony_lost_pct`)$out))
 boxplot(n.str1.corr$`Average Varroa.mites`, main="str1", 
         sub=paste("Outlier Rows: ", boxplot.stats(n.str1.corr$`Average Varroa.mites`)$out))
-
 #density plots
 plot(density(n.str1.corr$`Average colony_lost_pct`), main="Density Plot: colony_lost_pct", ylab="Frequency", 
      sub=paste("Skewness:", round(e1071::skewness(n.str1.corr$`Average colony_lost_pct`), 2)))

@@ -19,8 +19,10 @@ new_data<-new_data%>%mutate(Unknown=(Unknown/100)*colony_max)
 i2<-which(d$months=="April-June"&d$year=="2019")
 d<-d[-i2,]
 
+d<-d[,-1]
+
 d %>% 
-  write.csv("cleaned_data_withpct.csv")
+  write.csv("cleaned_data_withpct.csv",row.names=F)
 
 new_data %>% 
   write.csv("cleaned_data.csv")
