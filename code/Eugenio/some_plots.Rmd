@@ -4,7 +4,7 @@ output: html_notebook
 ---
 
 ```{r}
-data_cleaned
+#data_cleaned
 ```
 ```{r}
 dim(stressor)
@@ -16,7 +16,7 @@ levels(factor(stressor$stressor))
 
 # trattiamo separatamnte i dati per anno (e.g 2020)
 ```{r}
-data_2020 <- data_cleaned[data_cleaned$year == 2020,]
+data_2020 <- cleaned_data[cleaned_data$year == 2020,]
 data_2020
 ```
 # Vediamo andamento per California nei 4 trimestri:
