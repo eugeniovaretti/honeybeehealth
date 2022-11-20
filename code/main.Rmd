@@ -8,8 +8,8 @@ library(explore)
 library(dplyr) 
 
 # Get the Data
-colony <- read.csv("../Data_bees/colony.csv")
-stressor <- read.csv("../Data_bees/stressor.csv")
+colony <- read.csv("../data/colony.csv")
+stressor <- read.csv("../data/stressor.csv")
 
 new_stress <- stressor %>% tidyr::pivot_wider(
   names_from = stressor, 
@@ -19,5 +19,16 @@ new_stress <- stressor %>% tidyr::pivot_wider(
 
 # Merge data frames together
 data <- inner_join(colony, new_stress, by = c("year","months","state"))
+```
+
+```{r}
 explore(data)
 ```
+
+```{r}
+data [is.na(data)] <- 0
+new_stress [is.na(new_stress)] <- 0
+data_plot <-dplyr::select(new_stress,-state)
+ggpairs(data_plot) + theme_bw()
+```
+
