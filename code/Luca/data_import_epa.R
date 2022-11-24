@@ -15,7 +15,7 @@ aqs_credentials(username = datamartAPI_user,
 )
 
 # returns a tibble of all benzene annualy
-# North Carolina = 1995
+# North Carolina = 37
 ## parameter = 45201 #benzene
 data_extr <- aqs_annualsummary_by_state(parameter = "45201",
 bdate = as.Date("19950515",
