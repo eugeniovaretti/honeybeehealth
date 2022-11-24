@@ -2,6 +2,10 @@ library(RAQSAPI)
 library("keyring") 
 keyring::key_set(service = "AQSDatamart", username = "luca1.mainini@mail.polimi.it")
 
+## credenziali
+# Your user ID is your email address: luca1.mainini@mail.polimi.it 
+# Your key is: copperheron34 
+
 datamartAPI_user <- "luca1.mainini@mail.polimi.it" 
 server <- "AQSDatamart"
 aqs_credentials(username = datamartAPI_user,
