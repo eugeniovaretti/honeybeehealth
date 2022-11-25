@@ -11,7 +11,7 @@
 
 
 
-<title>Main</title>
+<title>R Notebook</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1762,16 +1762,595 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Main</h1>
+<h1 class="title toc-ignore">R Notebook</h1>
 
 </div>
 
 
 <!-- rnb-text-begin -->
-<p>#Importazione dataset:</p>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2ltcG9ydG8gaSBkYXRpw6xcbnNldHdkKFwiQzovVXNlcnMvVXRlbnRlL0Rlc2t0b3AvUE9MSU1JL05PTiBQQVJBTUVUUklDL25wX3Byb2plY3QvXCIpICNub3RlYm9vayBmYW5ubyBza2lmb1xuYGBgIn0= -->
+<pre class="r"><code>#importo i datiì
+setwd(&quot;C:/Users/Utente/Desktop/POLIMI/NON PARAMETRIC/np_project/&quot;) #notebook fanno skifo</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogVGhlIHdvcmtpbmcgZGlyZWN0b3J5IHdhcyBjaGFuZ2VkIHRvIEM6L1VzZXJzL1V0ZW50ZS9EZXNrdG9wL1BPTElNSS9OT04gUEFSQU1FVFJJQy9ucF9wcm9qZWN0IGluc2lkZSBhIG5vdGVib29rIGNodW5rLiBUaGUgd29ya2luZyBkaXJlY3Rvcnkgd2lsbCBiZSByZXNldCB3aGVuIHRoZSBjaHVuayBpcyBmaW5pc2hlZCBydW5uaW5nLiBVc2UgdGhlIGtuaXRyIHJvb3QuZGlyIG9wdGlvbiBpbiB0aGUgc2V0dXAgY2h1bmsgdG8gY2hhbmdlIHRoZSB3b3JraW5nIGRpcmVjdG9yeSBmb3Igbm90ZWJvb2sgY2h1bmtzLlxuIn0= -->
+<pre><code>Warning: The working directory was changed to C:/Users/Utente/Desktop/POLIMI/NON PARAMETRIC/np_project inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the working directory for notebook chunks.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc291cmNlKFwiY29kZS91dGlscy9yZWFkX3N0YXRlZGF0YS5SXCIpXG5yZWFkc3RhdGUgPC0gcmVhZF9zdGF0ZWRhdGEoKVxuYGBgIn0= -->
+<pre class="r"><code>source(&quot;code/utils/read_statedata.R&quot;)
+readstate &lt;- read_statedata()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuIn0= -->
+<pre><code>`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgQWxhYmFtYSAgQXZlcmFnZSBUZW1wZXJhdHVyZSBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  Alabama  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgQWxhc2thICBBdmVyYWdlIFRlbXBlcmF0dXJlIGhhcyBtb3JlIHJvdyB0aGFuIGV4cGVjdGVkOiAgMzJcbiJ9 -->
+<pre><code>Warning in read_statedata() :
+  Alaska  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgQXJpem9uYSAgQXZlcmFnZSBUZW1wZXJhdHVyZSBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  Arizona  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgQXJrYW5zYXMgIEF2ZXJhZ2UgVGVtcGVyYXR1cmUgaGFzIG1vcmUgcm93IHRoYW4gZXhwZWN0ZWQ6ICAzMlxuIn0= -->
+<pre><code>Warning in read_statedata() :
+  Arkansas  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgQ2FsaWZvcm5pYSAgQXZlcmFnZSBUZW1wZXJhdHVyZSBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  California  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgQ29sb3JhZG8gIEF2ZXJhZ2UgVGVtcGVyYXR1cmUgaGFzIG1vcmUgcm93IHRoYW4gZXhwZWN0ZWQ6ICAzMlxuIn0= -->
+<pre><code>Warning in read_statedata() :
+  Colorado  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgQ29ubmVjdGljdXQgIEF2ZXJhZ2UgVGVtcGVyYXR1cmUgaGFzIG1vcmUgcm93IHRoYW4gZXhwZWN0ZWQ6ICAzMlxuIn0= -->
+<pre><code>Warning in read_statedata() :
+  Connecticut  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgRGVsYXdhcmUgIEF2ZXJhZ2UgVGVtcGVyYXR1cmUgaGFzIG1vcmUgcm93IHRoYW4gZXhwZWN0ZWQ6ICAzMlxuIn0= -->
+<pre><code>Warning in read_statedata() :
+  Delaware  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgRmxvcmlkYSAgQXZlcmFnZSBUZW1wZXJhdHVyZSBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  Florida  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgR2VvcmdpYSAgQXZlcmFnZSBUZW1wZXJhdHVyZSBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  Georgia  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgSWRhaG8gIEF2ZXJhZ2UgVGVtcGVyYXR1cmUgaGFzIG1vcmUgcm93IHRoYW4gZXhwZWN0ZWQ6ICAzMlxuIn0= -->
+<pre><code>Warning in read_statedata() :
+  Idaho  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgSWxsaW5vaXMgIEF2ZXJhZ2UgVGVtcGVyYXR1cmUgaGFzIG1vcmUgcm93IHRoYW4gZXhwZWN0ZWQ6ICAzMlxuIn0= -->
+<pre><code>Warning in read_statedata() :
+  Illinois  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgSW5kaWFuYSAgQXZlcmFnZSBUZW1wZXJhdHVyZSBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  Indiana  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgSW93YSAgQXZlcmFnZSBUZW1wZXJhdHVyZSBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  Iowa  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgS2Fuc2FzICBBdmVyYWdlIFRlbXBlcmF0dXJlIGhhcyBtb3JlIHJvdyB0aGFuIGV4cGVjdGVkOiAgMzJcbiJ9 -->
+<pre><code>Warning in read_statedata() :
+  Kansas  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgS2VudHVja3kgIEF2ZXJhZ2UgVGVtcGVyYXR1cmUgaGFzIG1vcmUgcm93IHRoYW4gZXhwZWN0ZWQ6ICAzMlxuIn0= -->
+<pre><code>Warning in read_statedata() :
+  Kentucky  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgTG91aXNpYW5hICBBdmVyYWdlIFRlbXBlcmF0dXJlIGhhcyBtb3JlIHJvdyB0aGFuIGV4cGVjdGVkOiAgMzJcbiJ9 -->
+<pre><code>Warning in read_statedata() :
+  Louisiana  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbk5ldyBuYW1lczpcbiogYG1lYW4oVmFsdWUpYCAtPiBgbWVhbihWYWx1ZSkuLi4zYFxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjRgXG5gc3VtbWFyaXNlKClgIGhhcyBncm91cGVkIG91dHB1dCBieSAneWVhcicuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlIGAuZ3JvdXBzYFxuYXJndW1lbnQuXG5gc3VtbWFyaXNlKClgIGhhcyBncm91cGVkIG91dHB1dCBieSAneWVhcicuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlIGAuZ3JvdXBzYFxuYXJndW1lbnQuXG5OZXcgbmFtZXM6XG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uM2BcbiogYG1lYW4oVmFsdWUpYCAtPiBgbWVhbihWYWx1ZSkuLi40YFxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbk5ldyBuYW1lczpcbiogYG1lYW4oVmFsdWUpYCAtPiBgbWVhbihWYWx1ZSkuLi4zYFxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjRgXG5gc3VtbWFyaXNlKClgIGhhcyBncm91cGVkIG91dHB1dCBieSAneWVhcicuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlIGAuZ3JvdXBzYFxuYXJndW1lbnQuXG5gc3VtbWFyaXNlKClgIGhhcyBncm91cGVkIG91dHB1dCBieSAneWVhcicuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlIGAuZ3JvdXBzYFxuYXJndW1lbnQuXG5OZXcgbmFtZXM6XG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uM2BcbiogYG1lYW4oVmFsdWUpYCAtPiBgbWVhbihWYWx1ZSkuLi40YFxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbk5ldyBuYW1lczpcbiogYG1lYW4oVmFsdWUpYCAtPiBgbWVhbihWYWx1ZSkuLi4zYFxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjRgXG5gc3VtbWFyaXNlKClgIGhhcyBncm91cGVkIG91dHB1dCBieSAneWVhcicuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlIGAuZ3JvdXBzYFxuYXJndW1lbnQuXG5gc3VtbWFyaXNlKClgIGhhcyBncm91cGVkIG91dHB1dCBieSAneWVhcicuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlIGAuZ3JvdXBzYFxuYXJndW1lbnQuXG5OZXcgbmFtZXM6XG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uM2BcbiogYG1lYW4oVmFsdWUpYCAtPiBgbWVhbihWYWx1ZSkuLi40YFxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgSU1QT1JUQU5URTogTG8gU3RhdG8gZGVsIGNzdiBub24gY29pbmNpZGUgY29uIGxvIFN0YXRvIGRlbGxhIGNhcnRlbGxhOiBOZXZhZGFcbiJ9 -->
+<pre><code>Warning in read_statedata() :
+  IMPORTANTE: Lo Stato del csv non coincide con lo Stato della cartella: Nevada</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbk5ldyBuYW1lczpcbiogYG1lYW4oVmFsdWUpYCAtPiBgbWVhbihWYWx1ZSkuLi4zYFxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjRgXG5gc3VtbWFyaXNlKClgIGhhcyBncm91cGVkIG91dHB1dCBieSAneWVhcicuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlIGAuZ3JvdXBzYFxuYXJndW1lbnQuXG5gc3VtbWFyaXNlKClgIGhhcyBncm91cGVkIG91dHB1dCBieSAneWVhcicuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlIGAuZ3JvdXBzYFxuYXJndW1lbnQuXG5OZXcgbmFtZXM6XG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uM2BcbiogYG1lYW4oVmFsdWUpYCAtPiBgbWVhbihWYWx1ZSkuLi40YFxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbk5ldyBuYW1lczpcbiogYG1lYW4oVmFsdWUpYCAtPiBgbWVhbihWYWx1ZSkuLi4zYFxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjRgXG5gc3VtbWFyaXNlKClgIGhhcyBncm91cGVkIG91dHB1dCBieSAneWVhcicuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlIGAuZ3JvdXBzYFxuYXJndW1lbnQuXG5gc3VtbWFyaXNlKClgIGhhcyBncm91cGVkIG91dHB1dCBieSAneWVhcicuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlIGAuZ3JvdXBzYFxuYXJndW1lbnQuXG5OZXcgbmFtZXM6XG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uM2BcbiogYG1lYW4oVmFsdWUpYCAtPiBgbWVhbihWYWx1ZSkuLi40YFxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbk5ldyBuYW1lczpcbiogYG1lYW4oVmFsdWUpYCAtPiBgbWVhbihWYWx1ZSkuLi4zYFxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjRgXG5gc3VtbWFyaXNlKClgIGhhcyBncm91cGVkIG91dHB1dCBieSAneWVhcicuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlIGAuZ3JvdXBzYFxuYXJndW1lbnQuXG5gc3VtbWFyaXNlKClgIGhhcyBncm91cGVkIG91dHB1dCBieSAneWVhcicuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlIGAuZ3JvdXBzYFxuYXJndW1lbnQuXG5OZXcgbmFtZXM6XG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uM2BcbiogYG1lYW4oVmFsdWUpYCAtPiBgbWVhbihWYWx1ZSkuLi40YFxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuIn0= -->
+<pre><code>`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgT3JlZ29uICBBdmVyYWdlIFRlbXBlcmF0dXJlIGhhcyBtb3JlIHJvdyB0aGFuIGV4cGVjdGVkOiAgMzJcbiJ9 -->
+<pre><code>Warning in read_statedata() :
+  Oregon  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgUGVubnN5bHZhbmlhICBBdmVyYWdlIFRlbXBlcmF0dXJlIGhhcyBtb3JlIHJvdyB0aGFuIGV4cGVjdGVkOiAgMzJcbiJ9 -->
+<pre><code>Warning in read_statedata() :
+  Pennsylvania  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgUmhvZGUgSXNsYW5kICBBdmVyYWdlIFRlbXBlcmF0dXJlIGhhcyBtb3JlIHJvdyB0aGFuIGV4cGVjdGVkOiAgMzJcbiJ9 -->
+<pre><code>Warning in read_statedata() :
+  Rhode Island  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgU291dGggQ2Fyb2xpbmEgIEF2ZXJhZ2UgVGVtcGVyYXR1cmUgaGFzIG1vcmUgcm93IHRoYW4gZXhwZWN0ZWQ6ICAzMlxuIn0= -->
+<pre><code>Warning in read_statedata() :
+  South Carolina  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgU291dGggRGFrb3RhICBBdmVyYWdlIFRlbXBlcmF0dXJlIGhhcyBtb3JlIHJvdyB0aGFuIGV4cGVjdGVkOiAgMzJcbiJ9 -->
+<pre><code>Warning in read_statedata() :
+  South Dakota  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgVGVubmVzc2VlICBBdmVyYWdlIFRlbXBlcmF0dXJlIGhhcyBtb3JlIHJvdyB0aGFuIGV4cGVjdGVkOiAgMzJcbiJ9 -->
+<pre><code>Warning in read_statedata() :
+  Tennessee  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgVGV4YXMgIFByZWNpcGl0YXRpb24gaGFzIG1vcmUgcm93IHRoYW4gZXhwZWN0ZWQ6ICAyOVxuIn0= -->
+<pre><code>Warning in read_statedata() :
+  Texas  Precipitation has more row than expected:  29</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuIn0= -->
+<pre><code>`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgVGV4YXMgIEF2ZXJhZ2UgVGVtcGVyYXR1cmUgaGFzIG1vcmUgcm93IHRoYW4gZXhwZWN0ZWQ6ICAzMlxuIn0= -->
+<pre><code>Warning in read_statedata() :
+  Texas  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgVXRhaCAgQXZlcmFnZSBUZW1wZXJhdHVyZSBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  Utah  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgVmVybW9udCAgQXZlcmFnZSBUZW1wZXJhdHVyZSBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  Vermont  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgVmlyZ2luaWEgIEF2ZXJhZ2UgVGVtcGVyYXR1cmUgaGFzIG1vcmUgcm93IHRoYW4gZXhwZWN0ZWQ6ICAzMlxuIn0= -->
+<pre><code>Warning in read_statedata() :
+  Virginia  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgV2FzaGluZ3RvbiAgQXZlcmFnZSBUZW1wZXJhdHVyZSBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  Washington  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICd5ZWFyJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgXG5hcmd1bWVudC5cbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.
+`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgV2VzdCBWaXJnaW5pYSAgQXZlcmFnZSBUZW1wZXJhdHVyZSBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  West Virginia  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgSU1QT1JUQU5URTogTG8gU3RhdG8gZGVsIGNzdiBub24gY29pbmNpZGUgY29uIGxvIFN0YXRvIGRlbGxhIGNhcnRlbGxhOiBXaXNjb25zaW5cbiJ9 -->
+<pre><code>Warning in read_statedata() :
+  IMPORTANTE: Lo Stato del csv non coincide con lo Stato della cartella: Wisconsin</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuIn0= -->
+<pre><code>`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgV2lzY29uc2luICBQcmVjaXBpdGF0aW9uIGhhcyBtb3JlIHJvdyB0aGFuIGV4cGVjdGVkOiAgMzJcbiJ9 -->
+<pre><code>Warning in read_statedata() :
+  Wisconsin  Precipitation has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuIn0= -->
+<pre><code>`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgV2lzY29uc2luICBBdmVyYWdlIFRlbXBlcmF0dXJlIGhhcyBtb3JlIHJvdyB0aGFuIGV4cGVjdGVkOiAgMzJcbiJ9 -->
+<pre><code>Warning in read_statedata() :
+  Wisconsin  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgSU1QT1JUQU5URTogTG8gU3RhdG8gZGVsIGNzdiBub24gY29pbmNpZGUgY29uIGxvIFN0YXRvIGRlbGxhIGNhcnRlbGxhOiBXeW9taW5nXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  IMPORTANTE: Lo Stato del csv non coincide con lo Stato della cartella: Wyoming</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuIn0= -->
+<pre><code>`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgV3lvbWluZyAgUHJlY2lwaXRhdGlvbiBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  Wyoming  Precipitation has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ3llYXInLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2BcbmFyZ3VtZW50LlxuIn0= -->
+<pre><code>`summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups`
+argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiByZWFkX3N0YXRlZGF0YSgpIDpcbiAgV3lvbWluZyAgQXZlcmFnZSBUZW1wZXJhdHVyZSBoYXMgbW9yZSByb3cgdGhhbiBleHBlY3RlZDogIDMyXG4ifQ== -->
+<pre><code>Warning in read_statedata() :
+  Wyoming  Average Temperature has more row than expected:  32</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxuKiBgbWVhbihWYWx1ZSlgIC0+IGBtZWFuKFZhbHVlKS4uLjNgXG4qIGBtZWFuKFZhbHVlKWAgLT4gYG1lYW4oVmFsdWUpLi4uNGBcbiJ9 -->
+<pre><code>New names:
+* `mean(Value)` -&gt; `mean(Value)...3`
+* `mean(Value)` -&gt; `mean(Value)...4`</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1haW4iDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KI0ltcG9ydGF6aW9uZSBkYXRhc2V0Og0KYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9DQpsaWJyYXJ5KGV4cGxvcmUpDQpsaWJyYXJ5KGRwbHlyKSANCg0KIyBHZXQgdGhlIERhdGENCmNvbG9ueSA8LSByZWFkLmNzdigiLi4vZGF0YS9jb2xvbnkuY3N2IikNCnN0cmVzc29yIDwtIHJlYWQuY3N2KCIuLi9kYXRhL3N0cmVzc29yLmNzdiIpDQpjbGVhbmVkX2RhdGEgPC0gcmVhZC5jc3YoIi4uL2RhdGEvY2xlYW5lZF9kYXRhLmNzdiIpDQpgYGANCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQoNCmBgYHtyfQ0KI2ltcG9ydG8gaSBkYXRpw6wNCnNldHdkKCJDOi9Vc2Vycy9VdGVudGUvRGVza3RvcC9QT0xJTUkvTk9OIFBBUkFNRVRSSUMvbnBfcHJvamVjdC8iKSAjbm90ZWJvb2sgZmFubm8gc2tpZm8NCnNvdXJjZSgiY29kZS91dGlscy9yZWFkX3N0YXRlZGF0YS5SIikNCnJlYWRzdGF0ZSA8LSByZWFkX3N0YXRlZGF0YSgpDQpgYGANCg==</div>
 
 
 
@@ -1818,7 +2397,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("main.Rmd");
+  window.initializeSourceEmbed("prova_readstate.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
