@@ -38,7 +38,7 @@ read_statedata <- function() {
     {
       #n <- sub(".csv","",sub(paste(namedir,"/",sep=''),"",filenames[i]))
       if(intest[[i]]$V1 != state[j])
-        warning(paste("IMPORTANTE: Lo Stato del csv non coincide con lo Stato della cartella:",state[j], sep= " "))
+        warning(paste("IMPORTANTE: Lo Stato del csv non coincide con lo Stato della cartella:",state[j],filenames[i],sep= " "))
       n <- intest[[i]]$V2
       if(j==1)
         cols_name <- c(cols_name,n)
@@ -64,10 +64,28 @@ read_statedata <- function() {
       b[o_d] <- "October-December"
       a$months <- b
       
-      # fine preprocessing, posso mediare per ogni trimestre
-      a <- a %>%
-        group_by(year,months) %>%
-        summarise(mean(Value))
+      # fine preprocessing, posso mediare (o onsderare min e max) per ogni trimestre
+      if(grepl("max", tolower(n)))
+      {
+        a <- a %>%
+          group_by(year,months) %>%
+          summarise(max(Value))
+      }
+      else if(grepl("min", tolower(n)))
+      {
+        a <- a %>%
+          group_by(year,months) %>%
+          summarise(min(Value))
+      }
+      else
+      {
+        a <- a %>%
+          group_by(year,months) %>%
+          summarise(mean(Value))
+      }
+
+      
+      
       
       if(dim(a)[1]!=30)
         warning(paste(state[j], n,"has more row than expected: ", dim(a)[1], sep=" "))
