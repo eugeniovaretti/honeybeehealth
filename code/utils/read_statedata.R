@@ -3,12 +3,13 @@
 #' (anno - trimestre - stato) per gli US con attributi (temperatura, pioggia, 
 #' inquinamento, ecc..) salvati in csv nelle cartelle per ogni stato 
 #' (si possono salvare quanti attributi si vogliono
-#' per ogni stato, l'importante è che siano gli stessi per ogni stato!).
+#' per ogni stato, l'importante è che siano gli stessi in ogni stato (cartella)!).
 #' In particolare, per il formato del csv scarcato si compie la media nel trimestre
-#' per ogni attributo.
+#' per ogni attributo - e se nella colonna è presente il termine "max" o "min"
+#' compie le rispettive operazioni.
 
-read_statedata <- function() {
-  
+read_statedata <- function(ita_convert = T) {
+
   #' per ogni cartella che trovo in state_data, corrispondente ad ogni stato, devo
   #' listare tutti i csv presenti che corrispondono a una colonna del "nuovo" dataset.
 
@@ -70,21 +71,17 @@ read_statedata <- function() {
         a <- a %>%
           group_by(year,months) %>%
           summarise(max(Value))
-      }
-      else if(grepl("min", tolower(n)))
+      } else if(grepl("min", tolower(n)))
       {
         a <- a %>%
           group_by(year,months) %>%
           summarise(min(Value))
-      }
-      else
+      } else
       {
         a <- a %>%
           group_by(year,months) %>%
           summarise(mean(Value))
       }
-
-      
       
       
       if(dim(a)[1]!=30)
@@ -95,6 +92,7 @@ read_statedata <- function() {
       else
         parzial_result <- cbind(parzial_result, a[1:30,3])
     }
+    
     colnames(parzial_result) <- cols_name
     #aggiungo colonna relativa a stato
     parzial_result <- cbind(parzial_result, state = rep(state[j],dim(parzial_result)[1]))
@@ -102,6 +100,10 @@ read_statedata <- function() {
   
     
   }
+  
+  #conversione temperature se flagita = T
+  col_to_convert <- which(grepl("temp", tolower(cols_name)))
+  result[,col_to_convert] <- fahrenheit.to.celsius(result[,col_to_convert], round = 2)
   
   return(result)
 }
