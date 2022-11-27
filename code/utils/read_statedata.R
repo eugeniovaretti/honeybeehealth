@@ -59,7 +59,7 @@ read_statedata <- function(ita_convert = T) {
       a_j <- 4<=b & b<=6
       j_s <- 7 <= b & b <= 9
       o_d <- 10 <= b & b <= 12
-      b[j_m] <- "January-March"
+      b[j_m] <- "AJanuary-March"
       b[a_j] <- "April-June"
       b[j_s] <- "July-September"
       b[o_d] <- "October-December"
