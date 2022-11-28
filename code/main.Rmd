@@ -4,6 +4,7 @@ output: html_notebook
 ---
 #Importazione dataset:
 ```{r setup, include=FALSE}
+library(readr)
 library(explore)
 library(dplyr) 
 
@@ -11,4 +12,20 @@ library(dplyr)
 colony <- read.csv("../data/colony.csv")
 stressor <- read.csv("../data/stressor.csv")
 cleaned_data <- read.csv("../data/cleaned_data.csv")
+cleaned_data_final=read.csv('cleaned_final_data.csv')
 ```
+
+```{r create cleaned_data_final}
+data_bees <- read_csv("data/new_data/data_bees.csv")
+
+new_data <- data_bees %>% tidyr::pivot_wider(
+  names_from = 'Data Item', 
+  values_from = Value,
+  values_fill = NULL
+)
+
+bee_data <- new_data[!is.na(new_data$`HONEY, BEE COLONIES, RENOVATED - INVENTORY, MEASURED IN COLONIES`),]
+bee_data <- bee_data %>% select(-`Week Ending`, -`Ag District`, -`Ag District Code`, -County,-`County ANSI`,-`Zip Code`,-Region, -Watershed, -`CV (%)`, -`HONEY, BEE COLONIES, RENOVATED - INVENTORY, MEASURED IN COLONIES`, -`HONEY, BEE COLONIES - INVENTORY, MEASURED IN COLONIES`)
+write.csv(bee_data,"cleaned_final_data.csv")
+```
+
