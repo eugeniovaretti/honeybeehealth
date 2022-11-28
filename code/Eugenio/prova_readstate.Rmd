@@ -1,0 +1,12 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+#importo i datiì
+setwd("C:/Users/Utente/Desktop/POLIMI/NON PARAMETRIC/np_project/") #notebook fanno skifo
+source("code/utils/read_statedata.R")
+readstate <- read_statedata()
+```
