@@ -24,11 +24,14 @@ aqs_credentials(username = datamartAPI_user,
 
 #extract US STATES
 library("tidycensus")
-data(fips_codes)
-us_codes <- unique(fips_codes$state_code)
+states<- aqs_states(return_header = FALSE)
+us_codes <- unique(states$stateFIPS)
+us_codes = us_codes[!us_codes %in% c(66,78,80,"CC")] #escludiamo 66 = Guam, 78 = Virgin Islands, 80 =Country Of Mexico, CC: Canada
   
 data_extr <- data.frame()
-for (state in us_codes[us_codes>=22]){
+
+
+for (state in us_codes){
   print(paste("---- downloading state",state))
   temp <- aqs_quarterlysummary_by_state(parameter = "88101",
                                           bdate = as.Date("20150101",
@@ -41,9 +44,9 @@ for (state in us_codes[us_codes>=22]){
   )
   data <- temp %>% select(-actual_days_gt_std, -tribal_code, -tribal_land, -estimated_days_gt_std  # removing null columns 
   )%>% filter (pollutant_standard == 'PM25 24-hour 2012'
-  ) %>% filter (datum == "WGS84" & quarterly_criteria_met=='Y' & poc=="2"
+  ) %>% filter (datum == "WGS84" & quarterly_criteria_met=='Y' & poc=="1"
   ) %>% group_by(state_code,year,quarter
-  ) %>% summarise( media = mean(arithmetic_mean), min = min(minimum_value), max = max(maximum_value)) 
+  ) %>% summarise( media = mean(arithmetic_mean, na.rm = TRUE), min = min(minimum_value, na.rm = TRUE), max = max(maximum_value, na.rm = TRUE)) 
   
   data_extr <- rbind(data_extr,data)
 } 
@@ -68,4 +71,8 @@ data <- temp %>% select(-actual_days_gt_std, -tribal_code, -tribal_land, -estima
 res1 <- data %>% filter (pollutant_standard == 'PM25 24-hour 2012'
 ) %>% filter (datum == "WGS84" & quarterly_criteria_met=='Y' & site_number=="0030")
 
+
+save(data_extr, file = "pm25_complete.RData")
+
+data_extr[is.na(data_extr)]
                 

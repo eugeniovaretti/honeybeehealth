@@ -261,6 +261,11 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
              
              
              
+    ),
+    
+    tabPanel("Trend of n during year",
+             plotOutput("trend_years")         
+             
     )
     
             
