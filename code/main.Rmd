@@ -12,8 +12,13 @@ library(dplyr)
 colony <- read.csv("../data/colony.csv")
 stressor <- read.csv("../data/stressor.csv")
 cleaned_data <- read.csv("../data/cleaned_data.csv")
-cleaned_data_final=read.csv('cleaned_final_data.csv')
+cleaned_data_final=read.csv('../data/cleaned_final_data.csv')
 ```
+
+```{r}
+cleaned_data_final2$HONEY..BEE.COLONIES..AFFECTED.BY.VARROA.MITES...INVENTORY..MEASURED.IN.PCT.OF.COLONIES
+```
+
 
 ```{r create cleaned_data_final}
 data_bees <- read_csv("data/new_data/data_bees.csv")
@@ -24,8 +29,24 @@ new_data <- data_bees %>% tidyr::pivot_wider(
   values_fill = NULL
 )
 
+#remove not useful columns
 bee_data <- new_data[!is.na(new_data$`HONEY, BEE COLONIES, RENOVATED - INVENTORY, MEASURED IN COLONIES`),]
-bee_data <- bee_data %>% select(-`Week Ending`, -`Ag District`, -`Ag District Code`, -County,-`County ANSI`,-`Zip Code`,-Region, -Watershed, -`CV (%)`, -`HONEY, BEE COLONIES, RENOVATED - INVENTORY, MEASURED IN COLONIES`, -`HONEY, BEE COLONIES - INVENTORY, MEASURED IN COLONIES`)
-write.csv(bee_data,"cleaned_final_data.csv")
+bee_data <- bee_data %>% select(-`Week Ending`, -`Ag District`, -`Ag District Code`, -County,-`County ANSI`,-`Zip Code`,-Region, -Watershed, -`CV (%)`, -`HONEY, BEE COLONIES, RENOVATED - INVENTORY, MEASURED IN COLONIES`, -`HONEY, BEE COLONIES - INVENTORY, MEASURED IN COLONIES`, -watershed_code,-Geo.Level, -Program, -Domain,-Commodity,-Domain.Category)
+
+cleaned_data_final <- bee_data
+cleaned_data_final <- cleaned_data_final%>% rename( Varroa.mites=`HONEY..BEE.COLONIES..AFFECTED.BY.VARROA.MITES...INVENTORY..MEASURED.IN.PCT.OF.COLONIES`) 
+cleaned_data_final <- cleaned_data_final%>% rename( colony_reno_pct=`HONEY..BEE.COLONIES..RENOVATED...INVENTORY..MEASURED.IN.PCT.OF.COLONIES`) 
+cleaned_data_final <- cleaned_data_final%>% rename( Unknown=`HONEY..BEE.COLONIES..AFFECTED.BY.UNKNOWN.CAUSES...INVENTORY..MEASURED.IN.PCT.OF.COLONIES`) 
+cleaned_data_final <- cleaned_data_final%>% rename( Pests.excl.Varroa.mites=`HONEY..BEE.COLONIES..AFFECTED.BY.PESTS...EXCL.VARROA.MITES.....INVENTORY..MEASURED.IN.PCT.OF.COLONIES`) 
+cleaned_data_final <- cleaned_data_final%>% rename( Pesticides=`HONEY..BEE.COLONIES..AFFECTED.BY.PESTICIDES...INVENTORY..MEASURED.IN.PCT.OF.COLONIES`)  
+cleaned_data_final <- cleaned_data_final%>% rename( Other=`HONEY..BEE.COLONIES..AFFECTED.BY.OTHER.CAUSES...INVENTORY..MEASURED.IN.PCT.OF.COLONIES`)  
+cleaned_data_final <- cleaned_data_final%>% rename( Disesases=`HONEY..BEE.COLONIES..AFFECTED.BY.DISEASE...INVENTORY..MEASURED.IN.PCT.OF.COLONIES`)
+cleaned_data_final <- cleaned_data_final%>% rename( colony_loss_pct=`HONEY..BEE.COLONIES...LOSS..DEADOUT..MEASURED.IN.PCT.OF.COLONIES`)
+cleaned_data_final <- cleaned_data_final%>% rename( colony_loss=`HONEY..BEE.COLONIES...LOSS..DEADOUT..MEASURED.IN.COLONIES`)
+cleaned_data_final <- cleaned_data_final%>% rename( colony_cd_loss=`HONEY..BEE.COLONIES...LOSS..COLONY.COLLAPSE.DISORDER..MEASURED.IN.COLONIES`)
+cleaned_data_final <- cleaned_data_final%>% rename( colony_added=`HONEY..BEE.COLONIES...ADDED...REPLACED..MEASURED.IN.COLONIES`)
+cleaned_data_final <- cleaned_data_final%>% rename( colony_max=`HONEY..BEE.COLONIES...INVENTORY..MAX..MEASURED.IN.COLONIES`)
+
+write.csv(cleaned_data_final,"cleaned_final_data2.csv")
 ```
 
