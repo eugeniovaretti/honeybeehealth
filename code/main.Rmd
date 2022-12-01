@@ -41,11 +41,12 @@ data_fin[data_fin$State== "OTHER STATES",'State ANSI'] = "OS"
 data_fin[is.na(data_fin)] <- 0
 #mutate_if(is.integer, ~replace(., is.na(.), 0))
 
-write.csv(data_fin,"cleaned_final_pulito.csv")
+write.csv(data_fin,"cleaned_final_pulito.csv", row.names = F)
 ```
 
 
 ```{r create cleaned_data_final}
+#old
 data_bees <- read_csv("data/new_data/data_bees.csv")
 
 new_data <- data_bees %>% tidyr::pivot_wider(
