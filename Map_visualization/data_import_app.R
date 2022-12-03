@@ -1,3 +1,5 @@
+library(dplyr)
+
 colony_plot <- read_csv("data/colony.csv")
 d <- read_csv("data/data_merged.csv")
 d[is.na(d)] <- 0
