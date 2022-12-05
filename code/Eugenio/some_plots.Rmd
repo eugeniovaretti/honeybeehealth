@@ -4,7 +4,7 @@ output: html_notebook
 ---
 
 ```{r}
-data_cleaned
+data_cleaned<-cleaned_data
 ```
 ```{r}
 dim(stressor)
