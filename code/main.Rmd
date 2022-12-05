@@ -14,6 +14,13 @@ stressor <- read.csv("../data/stressor.csv")
 cleaned_data <- read.csv("../data/cleaned_data.csv")
 cleaned_data_final=read.csv('../data/new_data/cleaned_by_state.csv')
 data_us <- read_csv(".../data/new_data/US_data.csv")
+
+#weather data
+source("utils/read_statedata.R")
+library(weathermetrics)
+#readstate <- read_statedata() #da sistemare la getwd() per sti notebook -> se vuoi runna prova_readstate.R in code/Eugenio
+
+
 ```
 
 ```{r}
