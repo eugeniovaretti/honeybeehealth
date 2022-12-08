@@ -1,11 +1,11 @@
 library(mvtnorm)
 library(rgl)
 library(car)
-# 
-# groups <- levels(factor(readstate$state))
-# temp_smooth <- readstate[,c(1,2,4,8)]
+# # 
+# groups <- levels(factor(stateraw$state))
+# temp_smooth <- stateraw[,c(1,2,4,8)]
 # tempmin_smooth_new <- temp_smooth %>% tidyr::pivot_wider(
-#   names_from = state, 
+#   names_from = state,
 #   values_from = ` Minimum Temperature`,
 #   values_fill = 0
 # )
@@ -16,17 +16,19 @@ library(car)
 # 
 # #ATTENZIONE! se giorni sulle ascisse -> t(A) in caso
 # 
-# time <- 1:30
-# 
 # data_F <- as.matrix(tempmin_smooth_new[,-c(1,2,48,49)])
 # data_F[is.na(data_F)]<-0
 # which(is.na(data_F))
 # 
 # # Choice 1: we set a high dimensional basis (interpolating)
 # # Pros: no loss of information
-# # Cons: possible overfitting 
+# # Cons: possible overfitting
 # nbasis <- 30
-# basis <- create.fourier.basis(rangeval=c(1,30),nbasis=30) 
+# basis <- create.fourier.basis(rangeval=c(1,90),nbasis=30)
+# basimat <- eval.basis(seq(from=1,to=90),basis)
+# coef <- lsfit(basimat,data_F[,1],intercept=FALSE)$coef
+# Xobs <- basimat %*% coef
+# matplot(Xobs)
 # 
 # library(fdacluster)
 # #qua bisogna valutare la base nei punti e:
@@ -273,7 +275,7 @@ res <- kma(
   warping_method = "affine",
   dissimilarity_method = "pearson"
 )
-#plot(res,type="data")
+plot(res,type="data")
 
 # plot cluster tempmin
 library(plotly)
@@ -322,7 +324,7 @@ df <- data.frame(
 )
 
 library(usmap)
-plot_usmap(data = df) + labs(title = "Cluster by prec")
+plot_usmap(data = df) + labs(title = "Cluster by pdsi")
 
 
 
