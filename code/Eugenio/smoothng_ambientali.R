@@ -275,7 +275,7 @@ res <- kma(
   warping_method = "affine",
   dissimilarity_method = "pearson"
 )
-#plot(res,type="data")
+plot(res,type="data")
 
 # plot cluster tempmin
 library(plotly)
@@ -324,7 +324,7 @@ df <- data.frame(
 )
 
 library(usmap)
-plot_usmap(data = df) + labs(title = "Cluster by prec")
+plot_usmap(data = df) + labs(title = "Cluster by pdsi")
 
 
 
