@@ -1,4 +1,4 @@
-n.str1.corr <- d2 %>% 
+n.str1.corr <- d %>% 
   group_by(
     year,months) %>% 
   select(year, months,colony_lost_pct) %>% 
@@ -17,6 +17,13 @@ for(i in 1:n){
 plot(as.factor(n.str1.corr_s$months), n.str1.corr$`Average colony_lost_pct`,xlab='quarter',
      col=c("red","blue"),main='Original Data')
 
+n <- dim(data)[1]
+for(i in 1:n){
+  ifelse((data$months[i] == "April-June" | data$months[i] == "July-September" ), 
+         data$months[i] <- "Summer",  data$months[i] <- "Winter")
+}
+plot(as.factor(data$months), data$colony_lost_pct,xlab='quarter',
+     col=c("red","blue"),main='Original Data')
 
 
 

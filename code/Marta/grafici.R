@@ -5,23 +5,23 @@ data <- read.csv('cleaned_data.csv')
 d <- read.csv("cleaned_data_withpct.csv")
 stressor <- read.csv('stressor.csv')
 stressor[is.na(stressor)] <- 0
-
-
+US <-read.csv("US_data.csv")
+US[is.na(US)] <- 0
 #plot1
 library(tidyverse)
 
-year_level <- str %>%
+year_level <- stressor %>%
   group_by(year,stressor) %>% 
   summarise(usage_year = mean(stress_pct, na.rm = T),
-            num_col_year = mean(new_data$colony_max, na.rm = T))
+            num_col_year = mean(d$colony_max, na.rm = T))
 
 ggplot(year_level, aes(x = year, y = usage_year, color = stressor, group = stressor)) +
   geom_point(size = 1.4) +
   ggplot2::geom_line() +
-  labs(title = "Change in the Use of Different Neonicotinoids in the US from 1998 to 2016\n",
+  labs(title = "Change in the stressor in the US from 2015 to 2022",
        x = "Year",
-       y = "stresor",
-       color = "Neonicotinoid Type",
+       y = "stressor",
+       color = "stressor Type",
        caption = "Data Source: NASS, USGS") +
   scale_x_continuous(breaks = seq(2015, 2022, by = 1)) +
   geom_vline(aes(xintercept = 2018), linetype = "dotted") + 
@@ -39,16 +39,16 @@ ggplot(year_level, aes(x = year, y = usage_year, color = stressor, group = stres
         plot.caption = element_text(hjust = 1))
 
 #plot2
-year_region_level <- new_data %>%
+year_region_level <- d %>%
   group_by(year, state) %>%
   summarise(num_col_year = mean(colony_lost_pct, na.rm = T))
 
 ggplot(year_region_level, aes(x = year, y = num_col_year, color = state, group = state)) +
   geom_point(size = 1.4) +
   geom_line() + 
-  labs(title = "Total Number of Honey Bee Colonies in the US from 1998 to 2016\n",
+  labs(title = "mean avg of colony_lost_pct in the US from 2015 to 2022",
        x = "Year",
-       y = "Number of Colonies (Millions)",
+       y = "avg pct of colony_lost",
        caption = "Data Source: NASS, USGS",
        color = "Region") +
   scale_x_continuous(breaks = seq(2015, 2022, by = 2)) +
