@@ -6,7 +6,7 @@ library(car)
 # temp_smooth <- stateraw[,c(1,2,4,8)]
 # tempmin_smooth_new <- temp_smooth %>% tidyr::pivot_wider(
 #   names_from = state,
-#   values_from = ` Minimum Temperature`,
+#   values_from = MinimumTemperature,
 #   values_fill = 0
 # )
 # 
@@ -57,7 +57,7 @@ library(car)
 # temp_smooth <- readstate[,c(1,2,7,8)]
 # tempmin_smooth_new <- temp_smooth %>% tidyr::pivot_wider(
 #   names_from = state, 
-#   values_from = ` Average Temperature`,
+#   values_from = AverageTemperature,
 #   values_fill = 0
 # )
 # 
@@ -89,7 +89,7 @@ library(car)
 # prec_smooth <- readstate[,c(1,2,6,8)]
 # prec_smooth_new <- prec_smooth %>% tidyr::pivot_wider(
 #   names_from = state, 
-#   values_from = ` Precipitation`,
+#   values_from = Precipitation,
 #   values_fill = 0
 # )
 # 
@@ -147,7 +147,7 @@ groups <- levels(factor(stateraw$state))
 temp_min <- stateraw[,c(1,2,4,8)]
 temp_min <- temp_min %>% tidyr::pivot_wider(
   names_from = state, 
-  values_from = ` Minimum Temperature`,
+  values_from = MinimumTemperature,
   values_fill = 0
 )
 
@@ -185,7 +185,7 @@ plot_usmap(data = df) + labs(title = "Cluster by temp min")
 temp_max <- stateraw[,c(1,2,3,8)]
 temp_max <- temp_max %>% tidyr::pivot_wider(
   names_from = state, 
-  values_from = ` Maximum Temperature`,
+  values_from = MaximumTemperature,
   values_fill = 0
 )
 
@@ -220,7 +220,7 @@ plot_usmap(data = df) + labs(title = "Cluster by tempmax")
 temp_avg <- stateraw[,c(1,2,7,8)]
 temp_avg <- temp_avg %>% tidyr::pivot_wider(
   names_from = state, 
-  values_from = ` Average Temperature`,
+  values_from = AverageTemperature,
   values_fill = 0
 )
 
@@ -256,7 +256,7 @@ plot_usmap(data = df) + labs(title = "Cluster by average temp")
 prec <- stateraw[,c(1,2,6,8)]
 prec <- prec %>% tidyr::pivot_wider(
   names_from = state, 
-  values_from = ` Precipitation`,
+  values_from = Precipitation,
   values_fill = 0
 )
 
@@ -294,7 +294,7 @@ plot_usmap(data = df) + labs(title = "Cluster by prec")
 pdsi <- stateraw[,c(1,2,5,8)]
 pdsi <- pdsi %>% tidyr::pivot_wider(
   names_from = state, 
-  values_from = ` Palmer Drought Severity Index (PDSI)`,
+  values_from = PalmerDroughtSeverityIndexPDSI,
   values_fill = 0
 )
 

@@ -37,7 +37,7 @@ read_rawstatedata <- function(ita_convert = T) {
       #n <- sub(".csv","",sub(paste(namedir,"/",sep=''),"",filenames[i]))
       if(intest[[i]]$V1 != state[j])
         warning(paste("IMPORTANTE: Lo Stato del csv non coincide con lo Stato della cartella:",state[j],filenames[i],sep= " "))
-      n <- intest[[i]]$V2
+      n <- gsub("[[:space:]]|\\(|\\)", "", intest[[i]]$V2)  #gsub rimuove whitespaces e parentesi
       if(j==1)
         cols_name <- c(cols_name,n)
       else if(!(n %in% cols_name))

@@ -9,20 +9,19 @@ output: html_notebook
 head(readstate)
 multi_cluster <- readstate %>%
   group_by(state,months) %>%
-  summarise(` Maximum Temperature`= max(` Maximum Temperature`),
-            ` Minimum Temperature`= min(` Minimum Temperature`),
-            ` Precipitation` = mean(` Precipitation`), 
-            ` Average Temperature` = mean(` Average Temperature`),
-            ` Palmer Drought Severity Index (PDSI)`
+  summarise(MaximumTemperature= max(MaximumTemperature),
+            MinimumTemperature= min(MinimumTemperature),
+            Precipitation = mean(Precipitation), 
+            AverageTemperature = mean(AverageTemperature),
+            PalmerDroughtSeverityIndexPDSI = mean(PalmerDroughtSeverityIndexPDSI)
             )
 
 multi_cluster <- multi_cluster %>%
   group_by(state) %>%
-  summarise(max(` Maximum Temperature`), min(` Minimum Temperature`), mean(` Precipitation`)
-            , mean(` Average Temperature`), mean(` Palmer Drought Severity Index (PDSI)`))
+  summarise(max(MaximumTemperature), min(MinimumTemperature), mean(Precipitation)
+            , mean(AverageTemperature), mean(PalmerDroughtSeverityIndexPDSI))
 
-# ho cercato su internet precipitazioni medie annuali texas -> 51.2 inches -> divido per 12 -> 4.266667
-multi_cluster[multi_cluster$state=="Texas",4] <- 4.266667
+
 multi_cluster[multi_cluster$state=="Alaska",6] <- 0
 which(is.na(multi_cluster))
 ```

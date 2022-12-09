@@ -40,7 +40,7 @@ read_statedata <- function(ita_convert = T) {
       #n <- sub(".csv","",sub(paste(namedir,"/",sep=''),"",filenames[i]))
       if(intest[[i]]$V1 != state[j])
         warning(paste("IMPORTANTE: Lo Stato del csv non coincide con lo Stato della cartella:",state[j],filenames[i],sep= " "))
-      n <- intest[[i]]$V2
+      n <- gsub("[[:space:]]|\\(|\\)", "", intest[[i]]$V2) #gsub rimuove whitespaces oppure parentesi
       if(j==1)
         cols_name <- c(cols_name,n)
       else if(!(n %in% cols_name))
@@ -59,11 +59,15 @@ read_statedata <- function(ita_convert = T) {
       a_j <- 4<=b & b<=6
       j_s <- 7 <= b & b <= 9
       o_d <- 10 <= b & b <= 12
-      b[j_m] <- "AJanuary-March"
+      b[j_m] <- "January-March"
       b[a_j] <- "April-June"
       b[j_s] <- "July-September"
       b[o_d] <- "October-December"
       a$months <- b
+      a$months <- factor(a$months, levels = c("January-March",
+                                              "April-June",
+                                              "July-September",
+                                              "October-December"))
       
       # fine preprocessing, posso mediare (o onsderare min e max) per ogni trimestre
       if(grepl("max", tolower(n)))
