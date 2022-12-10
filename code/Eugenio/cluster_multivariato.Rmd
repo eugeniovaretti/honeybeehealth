@@ -133,9 +133,12 @@ library(plotly)
 us_data <- map_data("state")
 df <- data.frame(
   state = tolower(multi_cluster$state),
-  values = cluster.ew
+  values = cluster.ea
 )
 
+## !! righe che servono a creare cluster_idx -> prima runna smoothing amb
+cluster_index <- cbind(cluster_index, multi_all_avg = cluster.ea)
+cluster_index <- cbind(cluster_index, multi_all_ward = cluster.ew)
 library(usmap)
 plot_usmap(data = df) + labs(title = "Std Multivariate cluster (all cov)")
 ```
@@ -192,11 +195,18 @@ df <- data.frame(
   values = cluster.ew
 )
 
+cluster_index <- cbind(cluster_index, multi_nopdsi_ward = cluster.ew)
+cluster_index <- cbind(cluster_index, multi_nopdsi_avg = cluster.ea)
 library(usmap)
 plot_usmap(data = df) + labs(title = "Std Multivariate cluster (without PDSI)")
 ```
 
 ```{r}
-plot_ly(x=std_multi_cluster[,1], y=std_multi_cluster[,2], z=std_multi_cluster[,3], color=cluster.ew, pch=19)
+plot_ly(x=std_multi_cluster[,1], y=std_multi_cluster[,2], z=std_multi_cluster[,3], color=cluster.ea, pch=19)
+```
+
+```{r}
+#write.csv(as.data.frame(cluster_index),"../../data/cluster_index.csv", row.names = F)
+
 ```
 
