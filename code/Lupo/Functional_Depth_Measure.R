@@ -9,6 +9,8 @@ library(dplyr)
 readstate <- read_statedata()
 stateraw <- read_rawstatedata()
 
+#write.csv(readstate, "data/new_data/temp_prec_trimesters.csv", row.names=FALSE)
+
 df_final <- read.csv("data/new_data/data_bystate_temp_perc.csv")
 
 #from readstate dataset: there are more states rather than data_bystate_temp_perc
