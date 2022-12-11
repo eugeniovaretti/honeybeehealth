@@ -13,7 +13,7 @@ cluster2<-df[which(df$values==2),1]
 cluster3<-df[which(df$values==3),1]
 
 states.name <- factor(data$state)
-i1<-which(states.name==c("hawaii"))
+i1<-which(states.name==c("other states"))
 data<-data[-i1,]
 
 p_value <- numeric(8)
@@ -81,7 +81,7 @@ T_stat <- numeric(B)
 for(perm in 1:B){
   # Permutation:
   permutation <- sample(1:n)
-  weight_perm <- colony_lost_pct[permutation]
+  weight_perm <- num_col_year[permutation]
   fit_perm <- aov(weight_perm ~ state)
   # Test statistic:
   T_stat[perm] <- summary(fit_perm)[[1]][1,4]
