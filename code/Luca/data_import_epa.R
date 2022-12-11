@@ -44,15 +44,19 @@ for (state in us_codes){
   )
   data <- temp %>% select(-actual_days_gt_std, -tribal_code, -tribal_land, -estimated_days_gt_std  # removing null columns 
   )%>% filter (pollutant_standard == 'PM25 24-hour 2012'
-  ) %>% filter (datum == "WGS84" & quarterly_criteria_met=='Y' & poc=="1"
+  ) %>% filter (datum == "WGS84" & quarterly_criteria_met=='Y' #& poc=="1"
   ) %>% group_by(state_code,year,quarter
   ) %>% summarise( media = mean(arithmetic_mean, na.rm = TRUE), min = min(minimum_value, na.rm = TRUE), max = max(maximum_value, na.rm = TRUE)) 
   
   data_extr <- rbind(data_extr,data)
 } 
 View(data_extr)
+
+## -------- CHECK DATA QUALITY -----
+check =data_extr %>% filter(year!=2022) %>% group_by(state_code,year) %>% count() #per each year and state we should have 4 average value (one per quarter)
+check[!check$n==4,] #25 missing values
  
-## --------PROVA - by step --------
+## -------- PROVA - by step --------
 # direttamente per semestre parameter = "88101" : PM 2.5, stato 37
 temp <- aqs_quarterlysummary_by_state(parameter = "88101",
                                       bdate = as.Date("20160101",
@@ -72,7 +76,7 @@ res1 <- data %>% filter (pollutant_standard == 'PM25 24-hour 2012'
 ) %>% filter (datum == "WGS84" & quarterly_criteria_met=='Y' & site_number=="0030")
 
 
-save(data_extr, file = "pm25_complete.RData")
+save(data_extr, file = "pm25.RData")
 
 data_extr[is.na(data_extr)]
                 
