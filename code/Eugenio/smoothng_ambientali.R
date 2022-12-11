@@ -143,6 +143,8 @@ stateraw <- read_rawstatedata()
 
 groups <- levels(factor(stateraw$state))
 
+cluster_index<- cbind(state=groups)
+
 ########cluster by temp min#######
 temp_min <- stateraw[,c(1,2,4,8)]
 temp_min <- temp_min %>% tidyr::pivot_wider(
@@ -175,6 +177,7 @@ df <- data.frame(
   state = tolower(groups),
   values = res$labels
 )
+cluster_index <- cbind(cluster_index, temp_min=res$labels)
 
 library(usmap)
 plot_usmap(data = df) + labs(title = "Cluster by temp min")
@@ -212,7 +215,7 @@ df <- data.frame(
   state = tolower(groups),
   values = res$labels
 )
-
+cluster_index <- cbind(cluster_index, temp_max=res$labels)
 library(usmap)
 plot_usmap(data = df) + labs(title = "Cluster by tempmax")
 
@@ -248,7 +251,7 @@ df <- data.frame(
   state = tolower(groups),
   values = res$labels
 )
-
+cluster_index <- cbind(cluster_index, temp_avg=res$labels)
 library(usmap)
 plot_usmap(data = df) + labs(title = "Cluster by average temp")
 
@@ -260,31 +263,31 @@ prec <- prec %>% tidyr::pivot_wider(
   values_fill = 0
 )
 
-data_F <- as.matrix(prec[,-c(1,2,44)]) #42+2 è il texas
+data_F <- as.matrix(prec[,-c(1,2)]) #42+2 è il texas
 which(is.na(data_F))
 
 #creo matrice x contenente la grid di valutazione (sarànno 47stati x 30punti)
-x = matrix(rep(rep(1:90),48), ncol= 90,byrow = T)
+x = matrix(rep(rep(1:90),49), ncol= 90,byrow = T)
 #creo matrice evaluation data (nObs*nDim*nPts) contenente i valori
-y = array(t(data_F), c(48,1,90))
+y = array(t(data_F), c(49,1,90))
 res <- kma(
   x,
   y,
-  n_clust = 5,
+  n_clust = 3,
   center_method = "medoid",
   warping_method = "affine",
   dissimilarity_method = "pearson"
 )
 plot(res,type="data")
 
-# plot cluster tempmin
+# plot cluster prec
 library(plotly)
 us_data <- map_data("state")
 df <- data.frame(
-  state = tolower(groups[-42]),
+  state = tolower(groups),
   values = res$labels
 )
-
+cluster_index <- cbind(cluster_index, prec=res$labels)
 library(usmap)
 plot_usmap(data = df) + labs(title = "Cluster by prec")
 
@@ -315,16 +318,19 @@ res <- kma(
 )
 plot(res,type="data")
 
-# plot cluster tempmin
+# plot cluster pdsi
 library(plotly)
 us_data <- map_data("state")
 df <- data.frame(
   state = tolower(groups[-2]),
   values = res$labels
 )
-
 library(usmap)
 plot_usmap(data = df) + labs(title = "Cluster by pdsi")
+
+#queste 3 righe servono per creazione cluster_idx, metto null a Alaska
+pdsi_lab <- append(res$labels, NA, 1)
+cluster_index <- cbind(cluster_index, pdsi=pdsi_lab)
 
 
 
