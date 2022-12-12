@@ -209,7 +209,10 @@ plot(tst)
 
 domain_indices <- which(tst$adjusted_pval < 0.05)
 years <- c("2015-S1", "2015-S2", "2016-S1", "2016-S2", "2017-S1", "2017-S2",
-           "2018-S1", "2018-S2", "2019-S1", "2019-S2", "2020-S1", "2020-S2",
-           "2021-S1", "2021-S2")
+           "2018-S1", "2018-S2", "2019-S1", "2020-S1", "2020-S2", "2021-S1",
+           "2021-S2", "2022-S2")
 years[domain_indices] # --> "2015-S1" "2016-S1" "2017-S1" "2018-S1" "2021-S1" "2021-S2"
 #--> these are the regions where the distributions are different
+
+
+#possible improvement for functional tests: 
