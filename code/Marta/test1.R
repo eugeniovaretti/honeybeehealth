@@ -10,19 +10,16 @@ for(i in 1:n){
          data$months[i] <- "Summer",  data$months[i] <- "Winter")
 }
 
-#per evitare la dipendenza faccio il test per ogni anno
-df_season <- read.csv('df_season.csv')
-
 p_value <- numeric(8)
 x11()
 par(mfrow=c(2,4))
 year<-c("2015","2016","2017","2018","2019","2020","2021","2022")
 for (j in 1:8){
   
-i2<-which(df_season$season=="Summer"&df_season$year_revisited==year[j])
-i3<-which(df_season$season=="Winter"&df_season$year_revisited==year[j])
-t1<-df_season[i2,4]  #summer population in 2015
-t2<-df_season[i3,4]  #winter population in 2015
+i2<-which(data$months=="Summer"&data$year==year[j])
+i3<-which(data$months=="Winter"&data$year==year[j])
+t1<-data[i2,8]  #summer population in 2015
+t2<-data[i3,8]  #winter population in 2015
 
 #paired population
 delta.0 <- 0
@@ -42,8 +39,7 @@ n2 <- length(t2)[1]
 n <- n1+n2
 T2 <- numeric(B)
 set.seed(seed)
-for(perm in 1:B)
-{
+for(perm in 1:B){
   # Random permutation
   # obs: exchanging data within couples means changing the sign of the difference
   signs.perm <- rbinom(n1, 1, 0.5)*2 - 1
