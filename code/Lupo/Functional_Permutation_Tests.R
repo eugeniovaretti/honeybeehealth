@@ -5,6 +5,8 @@ library(tidyverse)
 library(fdatest)
 
 df_final <- read.csv("data/new_data/data_bystate_temp_perc.csv")
+df_final <- na.omit(df_final)
+which(is.na(df_final))
 
 #functional test to test the difference between summer and winter in colony lost
 
@@ -208,11 +210,100 @@ plot(tst)
 #significance values, dark grey is 1%, light is 5%).
 
 domain_indices <- which(tst$adjusted_pval < 0.05)
-years <- c("2015-S1", "2015-S2", "2016-S1", "2016-S2", "2017-S1", "2017-S2",
-           "2018-S1", "2018-S2", "2019-S1", "2020-S1", "2020-S2", "2021-S1",
-           "2021-S2", "2022-S2")
-years[domain_indices] # --> "2015-S1" "2016-S1" "2017-S1" "2018-S1" "2021-S1" "2021-S2"
-#--> these are the regions where the distributions are different
+years <- c("2015-Q1Q2", "2015-Q3Q4", "2016-Q1Q2", "2016-Q3Q4", "2017-Q1Q2", "2017-Q3Q4",
+           "2018-Q1Q2", "2018-Q3Q4", "2019-Q1Q3", "2019-Q4-2020-Q2", "2020-Q1Q3",
+           "2020-Q4-2021-Q2", "2021-Q1Q3", "2021-Q4-2022-Q2")
+years[domain_indices] # --> "2015-Q1Q2" "2016-Q1Q2" "2017-Q1Q2" "2018-Q1Q2"
+#"2021-Q1Q3" "2021-Q4-2022-Q2" --> these are the regions where the distributions are different
 
 
-#possible improvement for functional tests: 
+#possible improvement for functional tests: fill the missing values in 2019-Q2
+#with a SARIMA model
+
+#----------------------------------------------------------------------------
+
+#test temperature max e varroa
+
+grid <- seq(1,29)
+
+varroa <- df_final[,c(1,2,3,11)]
+varroa_pivot <- varroa %>% tidyr::pivot_wider(
+  names_from = "state",
+  values_from = "Varroa.mites",
+  values_fill = 0
+)
+varroa_matrix <- as.matrix(varroa_pivot[,-c(1,2)]) #remove year and months column
+f_varroa <- fData(grid,t(varroa_matrix))
+
+temp_max <- df_final[,c(1,2,3,17)]
+temp_max_pivot <- temp_max %>% tidyr::pivot_wider(
+  names_from = "state",
+  values_from = "MaximumTemperature",
+  values_fill = 0
+)
+temp_max_matrix <- as.matrix(temp_max_pivot[,-c(1,2)]) #remove year and months column
+f_temp_max <- fData(grid,t(temp_max_matrix))
+
+#global test
+
+seed <- 2781991
+B <- 1000
+data <- rbind(t(varroa_matrix),t(temp_max_matrix)) #global dataset
+n <- nrow(data)
+n_varroa <- nrow(t(varroa_matrix))
+n_temp_max <- nrow(t(temp_max_matrix))
+meandiff <- (colMeans(t(varroa_matrix))-colMeans(t(temp_max_matrix)))
+plot(meandiff,type = 'l') #pointwise difference
+T0 <- sum(meandiff^2) #squared L2 distance between the two sample means (pointwise
+#means for every column)
+T0
+
+T0_perm <- numeric(B)
+
+for(perm in 1:B){
+  permutation <- sample(n)
+  data_perm <- data[permutation,]
+  perm_varroa <- data_perm[1:n_varroa,] 
+  perm_temp_max <- data_perm[(n_temp_max+1):n,] 
+  T0_perm[perm] <- sum(((colMeans(perm_varroa)-colMeans(perm_temp_max)))^2)
+}
+
+sum(T0_perm >= T0)/B
+hist(T0_perm,xlim = c(0,max(T0_perm)))
+abline(v=T0,col='green')
+#pvalue = 0 --> difference in distribution
+
+#local permutation test
+
+periods <- c("2015-Q1", "2015-Q2", "2015-Q3", "2015-Q4", "2016-Q1", "2016-Q2",
+             "2016-Q3", "2016-Q4","2017-Q1", "2017-Q2","2017-Q3", "2017-Q4",
+             "2018-Q1", "2018-Q2", "2018-Q3", "2018-Q4","2019-Q1", "2019-Q3",
+             "2019-Q4", "2020-Q1","2020-Q2", "2020-Q3","2020-Q4", "2021-Q1",
+             "2021-Q2", "2021-Q3", "2021-Q4", "2022-Q1", "2022-Q2")
+tst <- IWT2(t(varroa_matrix),t(temp_max_matrix))
+plot(tst)
+domain_indices <- which(tst$adjusted_pval < 0.05)
+periods[domain_indices]
+
+#local permutation tests between varroa e temp max normalized
+
+temp_smooth <- df_final[,c(1,2,3,21)]
+tempmean_smooth_new <- temp_smooth %>% tidyr::pivot_wider(
+  names_from = "state",
+  values_from = "AverageTemperature",
+  values_fill = 0
+)
+data_Fp2 <- as.matrix(tempmean_smooth_new[,-c(1,2)]) #remove year and months column
+f_data_temp <- fData(grid,t(data_Fp2))
+
+tempmax_n <- t(t(temp_max_matrix)/colSums(temp_max_matrix))
+varroa_n <- t(t(varroa_matrix)/colSums(varroa_matrix))
+
+tst2 <- IWT2(t(varroa_n),t(tempmax_n))
+plot(tst2)
+domain_indices2 <- which(tst2$adjusted_pval < 0.05)
+periods[domain_indices2]
+
+#no relevant results!!
+
+#--------------------------------------------------------------------
