@@ -10,12 +10,12 @@ knitr::opts_knit$set(root.dir = "/Users/lucamainini/Documents/GitHub/np_project/
 
 ```{r import data}
 library(readr)
-data <- read_csv("data/new_data/data_bystate_temp_perc.csv")
+data_bystate_temp_perc <- read_csv("data/new_data/data_bystate_temp_perc.csv")
 ```
 
 ```{r}
 library(dplyr)
-data <- data %>% mutate(colony_lost_pct = colony_lost_pct/100)
+data <- data_bystate_temp_perc %>% mutate(colony_lost_pct = colony_lost_pct/100)
 data <- data %>% mutate(Varroa.mites = Varroa.mites/100)
 data <- data %>% mutate(Other.pests.parasites = Other.pests.parasites/100)
 data <- data %>% mutate(Disesases = Disesases/100)
@@ -253,16 +253,79 @@ shapiro.test(unlist(ranef(fm16.1mer)$state))
 
 AIC(fm16.1mer)
 ```
-
+## LOGIT MIXED MODELS
 ```{r}
 lm_mod_log <- lmer(logit_colony_lost_pct ~ year + months + Varroa.mites +Other.pests.parasites+Disesases+Pesticides+Other+Unknown + (1|state),
                   data = data)
 summary(lm_mod_log)
 AIC(lm_mod_log)
+scale_fill_gradientn(colors = c("#1b98e0", "#f6f805", "#353436"),limits = c(0, 50)) #+ geom_text()
 ```
+
 ```{r}
 plot(lm_mod_log)
 shapiro.test(residuals(lm_mod_log))
+```
+
+```{r}
+fm16.1mer <- lm_mod_log
+confint(fm16.1mer,oldNames=TRUE)
+
+## Var-Cov matrix of fixed-effects
+vcovb <- vcov(fm16.1mer) 
+cat("\nVar-Cov matrix of fixed-effects:\n")
+vcovb
+corb <- cov2cor(vcovb) 
+nms <- abbreviate(names(fixef(fm16.1mer)), 5)
+rownames(corb) <- nms
+cat("\nCorrelation matrix of fixed-effects:\n")
+corb
+
+cat("Var-Cov matrix of random-effects and errors\n")
+print(vc <- VarCorr(fm16.1mer), comp = c("Variance", "Std.Dev."))
+
+sigma2_eps <- as.numeric(get_variance_residual(fm16.1mer))
+cat("the variance associated to eps sigma2_eps is",sigma2_eps)
+sigma2_b <- as.numeric(get_variance_random(fm16.1mer))
+cat("the variance associated to random effect sigma2_b is",sigma2_b)
+
+## Let's compute the conditional and marginal var-cov matrix of Y
+sgma <- summary(fm16.1mer)$sigma  # sigma^2
+
+A <- getME(fm16.1mer, "A") # A  --> N x n, A represents the D (not italic), variance of random effect
+I.n <- Diagonal(ncol(A)) # IN  --> n x n
+
+## the conditional variance-covariance matrix of Y (diagonal matrix)
+## conditional to the random effect è semplicemente la matrice fixed effect
+cat("\n SigmaErr:\n")
+SigmaErr = sgma^2 * (I.n)
+# SigmaErr ha dimensione n_oss x n_oss
+
+# Conditioned to the random effects b_i, we observe the var-cov of the errors
+# that are independent and homoscedastic
+
+## we visualize the first 20 rows/columns of the matrix
+plot(as.matrix(SigmaErr[1:20,1:20]), main = 'Conditional estimated Var-Cov matrix of Y')
+
+cat("the MARGINAL variance-covariance matrix of Y (block-diagonal matrix) is")
+V <- sgma^2 * (I.n + crossprod(A)) # V = s^2*(I_N+A*A) --> s^2*(I_N) is the error part, s^2*(A*A) is the random effect part
+  #-> V is a block-diagional matrix, the marginal var-cov matrix
+
+# visualization of the first 20 rows/columns
+plot(as.matrix(V[1:20,1:20]), main = 'Marginal estimated Var-Cov matrix of Y')
+
+
+# Another way to interpret the variance output is to note percentage of the subject variance out 
+# of the total, i.e. the Percentage of Variance explained by the Random Effect (PVRE).
+# This is also called the intraclass correlation (ICC), because it is also an estimate of the within 
+# cluster correlation.
+
+PVRE <- sigma2_b/(sigma2_b+sigma2_eps)
+cat("The Proportion of Variance due to Random Effect is",PVRE) # 15% is quite high! 
+
+cat("\nvisualization of the random intercepts with their 95% confidence intervals in the dotplot\n")
+# Random effects: b_0i for i=1,...,234
+dotplot(ranef(fm16.1mer, condVar=T))
 ```
 
 ## GAM
