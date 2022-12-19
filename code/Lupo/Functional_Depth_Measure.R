@@ -1,15 +1,16 @@
 #Lupo functional depth measures
 
-source("code/utils/read_statedata.R")
-source("code/utils/read_rawstatedata.R")
+#source("code/utils/read_statedata.R")
+#source("code/utils/read_rawstatedata.R")
 
 library(weathermetrics)
+library(rgl)
 library(roahd)
 library(dplyr)
 library(fda)
 library(fdacluster) # NON MI FUNZIONA ???? :(
-noreadstate <- read_statedata()
-stateraw <- read_rawstatedata()
+#noreadstate <- read_statedata()
+#stateraw <- read_rawstatedata()
 
 #write.csv(readstate, "data/new_data/temp_prec_trimesters.csv", row.names=FALSE)
 
@@ -22,54 +23,54 @@ df_final <- read.csv("data/new_data/data_bystate_temp_perc.csv")
 
 #from readstate dataset
 
-groups <- levels(factor(readstate$state))
-
-#precipitations
-precipitations <- readstate[,c(1,2,6,8)]
-prec_pivot <- precipitations %>% tidyr::pivot_wider(
-  names_from = state,
-  values_from = 'Precipitation',
-  values_fill = 0
-)
-prec_matrix <- as.matrix(prec_pivot[,-c(1,2)])
-#which(is.na(data_Fp))
-#data_Fp[is.na(data_Fp)]<-0
-
-grid <- seq(1,30)
-matplot(grid,prec_matrix, type="l", col=adjustcolor(col=1,alpha.f = .4))
-
-f_prec <- fData(grid,t(prec_matrix))
-plot(f_prec, main="Precipitations") 
-#plot(f_prec[1:5,])
-
-#mean temp
-temp_mean <- readstate[,c(1,2,7,8)]
-temp_mean_pivot<- temp_mean %>% tidyr::pivot_wider(
-  names_from = "state",
-  values_from = "AverageTemperature",
-  values_fill = 0
-)
-temp_mean_matrix <- as.matrix(temp_mean_pivot[,-c(1,2)]) #remove year and months column
-grid <- seq(1,30)
-f_temp_mean <- fData(grid,t(temp_mean_matrix))
-plot(f_temp_mean, main="Mean temperature") 
-
-#Bivariate data: precipitations and average temperature
-
-prec_mean_temp <- as.mfData(list(f_prec, f_temp_mean))
-plot(prec_mean_temp)
-do.call(args = lapply(1:2, function(ind)
-  MHI(prec_mean_temp$fDList[[ind]])), what = "cor")
-# --> Spearman correlation index: 0.46
-
-## Computing depth measures in a FDA framework
-
-mbd_prec <- MBD(Data = f_prec)
-median_prec <- median_fData(fData = f_prec, type = "MBD")
-plot(median_prec) #curve that has the highest value of MBD
-
-plot(f_prec)
-lines(grid,median_prec$values) 
+# groups <- levels(factor(readstate$state))
+# 
+# #precipitations
+# precipitations <- readstate[,c(1,2,6,8)]
+# prec_pivot <- precipitations %>% tidyr::pivot_wider(
+#   names_from = state,
+#   values_from = 'Precipitation',
+#   values_fill = 0
+# )
+# prec_matrix <- as.matrix(prec_pivot[,-c(1,2)])
+# #which(is.na(data_Fp))
+# #data_Fp[is.na(data_Fp)]<-0
+# 
+# grid <- seq(1,30)
+# matplot(grid,prec_matrix, type="l", col=adjustcolor(col=1,alpha.f = .4))
+# 
+# f_prec <- fData(grid,t(prec_matrix))
+# plot(f_prec, main="Precipitations") 
+# #plot(f_prec[1:5,])
+# 
+# #mean temp
+# temp_mean <- readstate[,c(1,2,7,8)]
+# temp_mean_pivot<- temp_mean %>% tidyr::pivot_wider(
+#   names_from = "state",
+#   values_from = "AverageTemperature",
+#   values_fill = 0
+# )
+# temp_mean_matrix <- as.matrix(temp_mean_pivot[,-c(1,2)]) #remove year and months column
+# grid <- seq(1,30)
+# f_temp_mean <- fData(grid,t(temp_mean_matrix))
+# plot(f_temp_mean, main="Mean temperature") 
+# 
+# #Bivariate data: precipitations and average temperature
+# 
+# prec_mean_temp <- as.mfData(list(f_prec, f_temp_mean))
+# plot(prec_mean_temp)
+# do.call(args = lapply(1:2, function(ind)
+#   MHI(prec_mean_temp$fDList[[ind]])), what = "cor")
+# # --> Spearman correlation index: 0.46
+# 
+# ## Computing depth measures in a FDA framework
+# 
+# mbd_prec <- MBD(Data = f_prec)
+# median_prec <- median_fData(fData = f_prec, type = "MBD")
+# plot(median_prec) #curve that has the highest value of MBD
+# 
+# plot(f_prec)
+# lines(grid,median_prec$values) 
 
 #remove the rows with NaN (state 'Hawaii' and 'Other States')
 df_final <- na.omit(df_final)
@@ -103,9 +104,9 @@ f_data_temp <- fData(grid,t(data_Fp2))
 #colony_loss_new$texas = NULL
 #tempmin_smooth_new %>% select(-texas)
 
-colnames(tempmin_smooth_new)
-colnames(colony_loss_new)
-setdiff(colnames(tempmin_smooth_new), colnames(colony_loss_new))
+colnames(tempmean_smooth_new)
+colnames(colony_loss_pivot)
+setdiff(colnames(tempmean_smooth_new), colnames(colony_loss_pivot))
 
 #bivariate with temp mean and colony loss abs
 bivariate_data <- as.mfData(list(f_colony_loss, f_data_temp))
@@ -188,28 +189,160 @@ cor_spearman(multivariate_data, ordering='MEI')
 
 #different results rather than before because here I am using Modified Epigraph Index
 
+#-------------------------------------
+
+#correlations of colony loss pct with stressors
+
+#varroa
+varroa <- df_final[,c(1,2,3,11)]
+varroa_pivot <- varroa %>% tidyr::pivot_wider(
+  names_from = "state",
+  values_from = "Varroa.mites",
+  values_fill = 0
+)
+varroa_matrix <- as.matrix(varroa_pivot[,-c(1,2)]) #remove year and months column
+f_varroa <- fData(grid,t(varroa_matrix))
+
+#other pests
+other_pests <- df_final[,c(1,2,3,12)]
+other_pests_pivot <- other_pests %>% tidyr::pivot_wider(
+  names_from = "state",
+  values_from = "Other.pests.parasites",
+  values_fill = 0
+)
+other_pests_matrix <- as.matrix(other_pests_pivot[,-c(1,2)]) #remove year and months column
+f_other_pests <- fData(grid,t(other_pests_matrix))
+
+#disease
+disease <- df_final[,c(1,2,3,13)]
+disease_pivot <- disease %>% tidyr::pivot_wider(
+  names_from = "state",
+  values_from = "Disesases",
+  values_fill = 0
+)
+disease_matrix <- as.matrix(disease_pivot[,-c(1,2)]) #remove year and months column
+f_disease <- fData(grid,t(disease_matrix))
+
+#pesticides
+pesticides <- df_final[,c(1,2,3,14)]
+pesticides_pivot <- pesticides %>% tidyr::pivot_wider(
+  names_from = "state",
+  values_from = "Pesticides",
+  values_fill = 0
+)
+pesticides_matrix <- as.matrix(pesticides_pivot[,-c(1,2)]) #remove year and months column
+f_pesticides <- fData(grid,t(pesticides_matrix))
+
+#other
+other <- df_final[,c(1,2,3,15)]
+other_pivot <- other %>% tidyr::pivot_wider(
+  names_from = "state",
+  values_from = "Other",
+  values_fill = 0
+)
+other_matrix <- as.matrix(other_pivot[,-c(1,2)]) #remove year and months column
+f_other <- fData(grid,t(other_matrix))
+
+#Unknown
+unknown <- df_final[,c(1,2,3,16)]
+unknown_pivot <- unknown %>% tidyr::pivot_wider(
+  names_from = "state",
+  values_from = "Unknown",
+  values_fill = 0
+)
+unknown_matrix <- as.matrix(unknown_pivot[,-c(1,2)]) #remove year and months column
+f_unknown <- fData(grid,t(unknown_matrix))
+
+multivariate_data <- as.mfData(list(f_colony_loss_pct, f_varroa, f_other_pests,
+                                    f_disease, f_pesticides, f_other, f_unknown))
+plot(multivariate_data)
+cor_spearman(multivariate_data, ordering='MEI') 
+
+#--------------------------
+
 #outliers detection: functional boxplots and outliergrams
 
-#amplitude outliers
-
 #colony loss absolute values
-#adjusted functional boxplot
-fbplot(f_colony_loss, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
+#adjusted functional boxplot (amplitude outliers)
+fbplot(f_colony_loss, main="Magnitude outliers", adjust = list(VERBOSE=FALSE),
+       ylab = "colony loss absolute values", xlab = "time")
+outliergram(f_colony_loss, "shape outliers", adjust = list(VERBOSE=FALSE))
+
 #invisible(outliergram(f_colony_loss))
+
+#outliers: 
+#california      florida      georgia        idaho     michigan    minnesota      montana 
+#4            7            8            9           19           20           23 
+#north dakota south dakota        texas   washington 
+#29           35           37           41 
 
 #max temperature
 fbplot(f_temp_max, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
 
-#shape outliers
-
 #colony loss percentage
-loss_pct_outliers <- invisible(outliergram(f_colony_loss_pct))
-loss_pct_outliers$ID_outliers
+loss_pct_outliers <- invisible(outliergram(f_colony_loss_pct, display = TRUE,
+                    xlab = c("time", "MEI"), ylab = c("colony loss percentage", "MBD"),
+                    main = c("Shape outliers", "Outliergram")))
+loss_pct_outliers$ID_outliers #new mexico
 
-outliergram(f_colony_loss_pct, adjust = list(VERBOSE=FALSE))
+fbplot(f_colony_loss_pct, main="Magnitude outliers", adjust = list(VERBOSE=FALSE),
+       ylab = "colony loss percentage", xlab = "time")
 
 #max temperature
 outliergram(f_temp_max, main="Shape outliers", adjust = list(VERBOSE=FALSE)) #no results
+
+#NON FUNZIONAAAAAAAAAAAAA
+
+#varroa
+fbplot(f_varroa, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
+#fbplot(f_varroa$values, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
+outliergram(f_varroa, main="Shape outliers", adjust = list(VERBOSE=FALSE))
+
+#pesticides
+fbplot(f_pesticides, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
+fbplot(f_pesticides$values, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
+
+#NON FUNZIONAAAAAAAAAA
+
+#----------------------------------------------------
+
+#comparison between median functions
+
+#colony lost pct
+mbd_lost_pct <- MBD(Data = f_colony_loss_pct)
+median_lost_pct <- median_fData(fData = f_colony_loss_pct, type = "MBD")
+plot(median_lost_pct) #curve that has the highest value of MBD
+
+plot(f_colony_loss_pct)
+lines(grid,median_lost_pct$values) 
+
+#varroa
+mbd_varroa <- MBD(Data = f_varroa)
+median_varroa <- median_fData(fData = f_varroa, type = "MBD")
+plot(median_varroa) #curve that has the highest value of MBD
+
+plot(f_varroa)
+lines(grid,median_varroa$values) 
+
+#unknown
+mbd_unknown <- MBD(Data = f_unknown)
+median_unknown <- median_fData(fData = f_unknown, type = "MBD")
+plot(f_unknown)
+lines(grid,median_unknown$values) 
+
+#comparison between two median functions
+plot(median_varroa)
+lines(grid, median_lost_pct$values)
+
+plot(median_lost_pct, ylim=c(0,60), main = "median values with Modified Band Depth",
+     col = "black", ylab = "Percentages (%)", xlab = "time")
+lines(grid,median_unknown$values, col = "red") 
+lines(grid, median_varroa$values, col="blue")
+legend(x = "topright", legend = c("colony lost pct", "unknown", "varroa"),
+       col = c("black", "red", "blue"), pch=19)
+#lines(grid, c(median_varroa$values[-1],0))
+
+#---------------------------
 
 #I should then try to smooth the curves and register them
 
