@@ -2,24 +2,29 @@
 #being Y(i_summer)∼iid Y(summer) and Y(i_winter)∼iid Y(winter), we want to test the equality of the two distributions
 
 ##  H0:Y(summer)=Y(winter) vs H1:Y(summer)≠Y(winter)
+#2015 q1 q2
+#2016 q1 q2
+#2017
+#2018
+#2021 q3 q4
+#2022 q1 q2
 library(progress)
 data <- read.csv('final_data_bystate.csv')
 n<-dim(data)[1]
-for(i in 1:n){
-  ifelse((data$months[i] == "Q2" | data$months[i] == "Q3" ), 
-         data$months[i] <- "Summer",  data$months[i] <- "Winter")
-}
 
-p_value <- numeric(8)
+p_value <- numeric(6)
 x11()
-par(mfrow=c(2,4))
-year<-c("2015","2016","2017","2018","2019","2020","2021","2022")
-for (j in 1:8){
+par(mfrow=c(2,3))
+year<-c("2015","2016","2017","2018","2021","2022")
+for (j in 1:6){
+                                                                  
   
-i2<-which(data$months=="Summer"&data$year==year[j])
-i3<-which(data$months=="Winter"&data$year==year[j])
+i2<-which(data$months=="Q1"&data$year==year[j])
+i3<-which(data$months=="Q2"&data$year==year[j])
 t1<-data[i2,8]  #summer population in 2015
 t2<-data[i3,8]  #winter population in 2015
+
+boxplot(data[c(i2,i3),c(3,8)]$colony_lost_pct ~ data[c(i2,i3),c(3,8)]$months,main=paste('Jan-March vs April-June',year[j]),col=rainbow(2),ylab = "colony_lost_pct") 
 
 #paired population
 delta.0 <- 0
@@ -48,17 +53,18 @@ for(perm in 1:B){
   T2[perm] <- abs(diff.mean_perm-delta.0)
 }
 # plotting the permutational distribution under H0
-hist(T2,xlim=range(c(T2,T20)),breaks=100)
-abline(v=T20,col=3,lwd=4)
+#hist(T2,xlim=range(c(T2,T20)),breaks=100)
+#abline(v=T20,col=3,lwd=4)
 
 #plot(ecdf(T2))
 #abline(v=T20,col=3,lwd=4)
 
 # p-value
-p_val[j] <- sum(T2>=T20)/B
+p_value[j] <- sum(T2>=T20)/B
 }
-#[1] 0.00010 0.00661 0.00001 0.00001 0.10453 0.52872
-# 0.00010 0.00229
+
+#[1] 0.00000 0.00001 0.00000 0.00000 0.02032 0.01439
+
 
 
 
