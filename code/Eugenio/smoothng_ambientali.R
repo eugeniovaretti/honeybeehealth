@@ -142,7 +142,7 @@ readstate <- read_statedata()
 stateraw <- read_rawstatedata() 
 
 groups <- levels(factor(stateraw$state))
-
+set.seed(202212)
 cluster_index<- cbind(state=groups)
 
 ########cluster by temp min#######
@@ -168,16 +168,9 @@ res <- kma(
   warping_method = "affine",
   dissimilarity_method = "pearson"
 )
-#plot(res,type="data")
+plot(res,type="data")
 
-#groups[which(res$labels==1)]
-library(plotly)
-us_data <- map_data("state")
-df <- data.frame(
-  state = tolower(groups),
-  values = res$labels
-)
-cluster_index <- cbind(cluster_index, temp_min=res$labels)
+#cluster_index <- cbind(cluster_index, temp_min=res$labels)
 
 library(usmap)
 plot_usmap(data = df) + labs(title = "Cluster by temp min")
@@ -204,7 +197,7 @@ res <- kma(
   y,
   n_clust = 3,
   center_method = "medoid",
-  warping_method = "affine",
+  warping_method = "affine", #forse "none" è meglio
   dissimilarity_method = "pearson"
 )
 
@@ -275,10 +268,11 @@ res <- kma(
   y,
   n_clust = 3,
   center_method = "medoid",
-  warping_method = "affine",
+  warping_method = "none",#ha senso se no trasformare le curve?? shift+dilataz no
   dissimilarity_method = "pearson"
 )
 plot(res,type="data")
+
 
 # plot cluster prec
 library(plotly)
@@ -287,10 +281,10 @@ df <- data.frame(
   state = tolower(groups),
   values = res$labels
 )
-cluster_index <- cbind(cluster_index, prec=res$labels)
+#cluster_index <- cbind(cluster_index, prec=res$labels)
 library(usmap)
 plot_usmap(data = df) + labs(title = "Cluster by prec")
-
+cluster_idxf <- cbind(cluster_idxf, prec_warpnone = res$labels)
 
 
 ##############cluster by PDSI#####################à
@@ -313,7 +307,7 @@ res <- kma(
   y,
   n_clust = 3,
   center_method = "medoid",
-  warping_method = "affine",
+  warping_method = "none",
   dissimilarity_method = "pearson"
 )
 plot(res,type="data")
