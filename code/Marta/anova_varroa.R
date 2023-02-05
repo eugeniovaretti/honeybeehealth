@@ -13,15 +13,15 @@ indexs<-which(data$months=='Summer')
 summer<-data[indexs,]
 winter<-data[indexw,]
 
-cluster1<-tolower(indexes[which(indexes$temp_min==1),1])
-cluster2<-tolower(indexes[which(indexes$temp_min==2),1])
-cluster3<-tolower(indexes[which(indexes$temp_min==3),1])
+cluster1<-tolower(indexes[which(indexes$temp_avg==1),1])
+cluster2<-tolower(indexes[which(indexes$temp_avg==2),1])
+cluster3<-tolower(indexes[which(indexes$temp_avg==3),1])
 #cluster4<-tolower(indexes[which(indexes$multi_all_ward==4),1])
 library(plotly)
 us_data <- map_data("state")
 df <- data.frame(
   state = tolower(indexes$state),
-  values = indexes$temp_min
+  values = indexes$temp_avg
 )
 
 library(usmap)
@@ -52,18 +52,18 @@ for (j in 1:8){
   
   year_2015 <- d_2015 %>%
     group_by(state) %>%
-    summarise(num_col_year = mean(colony_lost_pct, na.rm = T))
+    summarise(num_col_year = mean(Varroa.mites, na.rm = T))
   
   s_2015<-summer_2015%>%
     group_by(state) %>%
-    summarise(num_col_summer = mean(colony_lost_pct, na.rm = T))
+    summarise(Varroa_summer = mean(Varroa.mites, na.rm = T))
   
   w_2015<-winter_2015%>%
     group_by(state) %>%
-    summarise(num_col_winter = mean(colony_lost_pct, na.rm = T))
+    summarise(Varroa_winter = mean(Varroa.mites, na.rm = T))
   
-  year_2015$num_col_summer<-s_2015$num_col_summer
-  year_2015$num_col_winter<-w_2015$num_col_winter
+  year_2015$Varroa_summer<-s_2015$Varroa_summer
+  year_2015$Varroa_winter<-w_2015$Varroa_winter
   
   states.name <- factor(year_2015$state)
   i1<-which(states.name==c("other states"))
@@ -79,8 +79,6 @@ for (j in 1:8){
     
     }else if (year_2015$state[i]%in%cluster3) {year_2015$state[i]<-"cluster3"
     
-    }else if (year_2015$state[i]%in%cluster4) {year_2015$state[i]<-"cluster4"
-    
     }
   }
   
@@ -89,14 +87,14 @@ for (j in 1:8){
   n<-dim(year_2015)[1]
   
   #boxplot(num_col_year ~ state,main=paste('year',year[j]),col=rainbow(3),ylim=c(0,30))
-  boxplot(num_col_summer ~ state,main=paste('summer',year[j]),col=c("red","green",
-  "blue"),ylim=c(0,40))
-  boxplot(num_col_winter ~ state,main=paste('winter',year[j]),col=c("red","green",
-                                                                    "blue"),ylim=c(0,40))
+  boxplot(Varroa_summer ~ state,main=paste('summer',year[j]),col=c("red","green",
+                                                                    "blue"))
+  boxplot(Varroa_winter ~ state,main=paste('winter',year[j]),col=c("red","green",
+                                                                    "blue"))
   
   fit <- aov(num_col_year ~ state,data=year_2015)
-  fits<- aov(num_col_summer~ state,data=year_2015)
-  fitw<- aov(num_col_winter~ state,data=year_2015)
+  fits<- aov(Varroa_summer~ state,data=year_2015)
+  fitw<- aov(Varroa_winter~ state,data=year_2015)
   
   T0 <- summary(fit)[[1]][1,4]
   Ts <- summary(fits)[[1]][1,4]
@@ -120,7 +118,7 @@ for (j in 1:8){
   for(perm in 1:B){
     # Permutation:
     permutation <- sample(1:n)
-    weight_perm <- num_col_summer[permutation]
+    weight_perm <- Varroa_summer[permutation]
     fit_perm <- aov(weight_perm ~ state)
     # Test statistic:
     T_stats[perm] <- summary(fit_perm)[[1]][1,4]
@@ -129,7 +127,7 @@ for (j in 1:8){
   for(perm in 1:B){
     # Permutation:
     permutation <- sample(1:n)
-    weight_perm <- num_col_winter[permutation]
+    weight_perm <- Varroa_winter[permutation]
     fit_perm <- aov(weight_perm ~ state)
     # Test statistic:
     T_statw[perm] <- summary(fit_perm)[[1]][1,4]
@@ -142,7 +140,7 @@ for (j in 1:8){
   p_value[j] <- sum(T_stat>=T0)/B
   p_val_s[j] <- sum(T_stats>=Ts)/B
   p_val_w[j] <- sum(T_statw>=Tw)/B
-
+  
   #test H0: mu3=m1 vs h1:mu3<m1
   
   i1<- which(year_2015$state=='cluster1')
@@ -156,11 +154,11 @@ for (j in 1:8){
   x1<-year_2015[i1,]
   x2<-year_2015[i3,]
   
-  t1.mean_s = mean(x1$num_col_summer)
-  t2.mean_s = mean(x2$num_col_summer)
+  t1.mean_s = mean(x1$Varroa_summer)
+  t2.mean_s = mean(x2$Varroa_summer)
   T20_s = abs(t1.mean_s-t2.mean_s)
-  t1.mean_w = mean(x1$num_col_winter)
-  t2.mean_w = mean(x2$num_col_winter)
+  t1.mean_w = mean(x1$Varroa_winter)
+  t2.mean_w = mean(x2$Varroa_winter)
   T20_w = abs(t1.mean_w-t2.mean_w)
   
   B = 1000
@@ -213,11 +211,11 @@ for (j in 1:8){
   x1<-year_2015[i2,]
   x2<-year_2015[i3,]
   
-  t1.mean_s = mean(x1$num_col_summer)
-  t2.mean_s = mean(x2$num_col_summer)
+  t1.mean_s = mean(x1$Varroa_summer)
+  t2.mean_s = mean(x2$Varroa_summer)
   T20_s = abs(t1.mean_s[1]-t2.mean_s[1])
-  t1.mean_w = mean(x1$num_col_winter)
-  t2.mean_w = mean(x2$num_col_winter)
+  t1.mean_w = mean(x1$Varroa_winter)
+  t2.mean_w = mean(x2$Varroa_winter)
   T20_w = abs(t1.mean_w[1]-t2.mean_w[1])
   
   B = 100
@@ -268,11 +266,11 @@ for (j in 1:8){
   x1<-year_2015[i1,]
   x2<-year_2015[i2,]
   
-  t1.mean_s = mean(x1$num_col_summer)
-  t2.mean_s = mean(x2$num_col_summer)
+  t1.mean_s = mean(x1$Varroa_summer)
+  t2.mean_s = mean(x2$Varroa_summer)
   T20_s = abs(t1.mean_s[1]-t2.mean_s[1])
-  t1.mean_w = mean(x1$num_col_winter)
-  t2.mean_w = mean(x2$num_col_winter)
+  t1.mean_w = mean(x1$Varroa_winter)
+  t2.mean_w = mean(x2$Varroa_winter)
   T20_w = abs(t1.mean_w[1]-t2.mean_w[1])
   
   B = 100
@@ -311,7 +309,7 @@ for (j in 1:8){
   }
   
   
-#hist(T2,xlim=range(c(T2,T20)),main = paste('H0: mu1=m2'))
+  #hist(T2,xlim=range(c(T2,T20)),main = paste('H0: mu1=m2'))
   #abline(v=T20,col=3,lwd=4)
   
   #plot(ecdf(T2))
@@ -335,6 +333,8 @@ p_val_2_3_w
 #the type of cluster is not affecting the loss of bees
 
 #in the 2015 there is statistical evidence to state that in cluster 2 the loss of bess was higher
+
+
 
 
 

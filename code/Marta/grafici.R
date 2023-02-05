@@ -18,7 +18,7 @@ year_level <- stressor %>%
 ggplot(year_level, aes(x = year, y = usage_year, color = stressor, group = stressor)) +
   geom_point(size = 1.4) +
   ggplot2::geom_line() +
-  labs(title = "Change in the stressor in the US from 2015 to 2022",
+  labs(title = "annual average stressor impact in the US from 2015 to 2022",
        x = "Year",
        y = "stressor",
        color = "stressor Type",
