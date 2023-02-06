@@ -8,7 +8,7 @@ library(rgl)
 library(roahd)
 library(dplyr)
 library(fda)
-library(fdacluster) # NON MI FUNZIONA ???? :(
+library(fdacluster)
 #noreadstate <- read_statedata()
 #stateraw <- read_rawstatedata()
 
@@ -264,11 +264,9 @@ cor_spearman(multivariate_data, ordering='MEI')
 
 #colony loss absolute values
 #adjusted functional boxplot (amplitude outliers)
-fbplot(f_colony_loss, main="Magnitude outliers", adjust = list(VERBOSE=FALSE),
+roahd::fbplot(f_colony_loss, main="Magnitude outliers", adjust = list(VERBOSE=FALSE),
        ylab = "colony loss absolute values", xlab = "time")
-outliergram(f_colony_loss, "shape outliers", adjust = list(VERBOSE=FALSE))
-
-#invisible(outliergram(f_colony_loss))
+outliergram(f_colony_loss, adjust = list(VERBOSE=FALSE))
 
 #outliers: 
 #california      florida      georgia        idaho     michigan    minnesota      montana 
@@ -277,7 +275,7 @@ outliergram(f_colony_loss, "shape outliers", adjust = list(VERBOSE=FALSE))
 #29           35           37           41 
 
 #max temperature
-fbplot(f_temp_max, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
+roahd::fbplot(f_temp_max, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
 
 #colony loss percentage
 loss_pct_outliers <- invisible(outliergram(f_colony_loss_pct, display = TRUE,
@@ -285,24 +283,20 @@ loss_pct_outliers <- invisible(outliergram(f_colony_loss_pct, display = TRUE,
                     main = c("Shape outliers", "Outliergram")))
 loss_pct_outliers$ID_outliers #new mexico
 
-fbplot(f_colony_loss_pct, main="Magnitude outliers", adjust = list(VERBOSE=FALSE),
+roahd::fbplot(f_colony_loss_pct, main="Magnitude outliers", adjust = list(VERBOSE=FALSE),
        ylab = "colony loss percentage", xlab = "time")
 
 #max temperature
-outliergram(f_temp_max, main="Shape outliers", adjust = list(VERBOSE=FALSE)) #no results
-
-#NON FUNZIONAAAAAAAAAAAAA
+outliergram(f_temp_max, adjust = list(VERBOSE=FALSE)) #no results
+outliergram(f_temp_max)
 
 #varroa
-fbplot(f_varroa, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
+roahd::fbplot(f_varroa, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
 #fbplot(f_varroa$values, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
-outliergram(f_varroa, main="Shape outliers", adjust = list(VERBOSE=FALSE))
+outliergram(f_varroa, adjust = list(VERBOSE=FALSE))
 
 #pesticides
-fbplot(f_pesticides, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
-fbplot(f_pesticides$values, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
-
-#NON FUNZIONAAAAAAAAAA
+roahd::fbplot(f_pesticides, main="Magnitude outliers", adjust = list(VERBOSE=FALSE))
 
 #----------------------------------------------------
 
