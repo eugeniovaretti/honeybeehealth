@@ -1,4 +1,5 @@
 #manova (devo mettere il - nella statsitica test?)
+d <- read.csv('temp_prec_trimesters.csv')
 data <- read.csv('final_data_bystate.csv')
 n<-dim(data)[1]
 for(i in 1:n){
@@ -75,9 +76,9 @@ for (j in 1:8){
   y_2015        <- year_2015[,2:8]
   stressor<-year_2015[,3:8]
   
-  #plot(y_2015,col=species.name)
+  plot(y_2015,col=species.name)
   boxplot(varroa ~ state,main=paste('varroa',year[j]),col=rainbow(3),ylim=c(0,50))
-  boxplot(pesticide ~ state,main=paste('pesticide',year[j]),col=rainbow(3),ylim=c(0,50))
+  #boxplot(pesticide ~ state,main=paste('pesticide',year[j]),col=rainbow(3),ylim=c(0,50))
   #boxplot(disease ~ state,main=paste('disease',year[j]),col=rainbow(3),ylim=c(0,50))
   #boxplot(pests ~ state,main=paste('pests',year[j]),col=rainbow(3),ylim=c(0,50))
   #boxplot(other ~ state,main=paste('other',year[j]),col=rainbow(3),ylim=c(0,50))

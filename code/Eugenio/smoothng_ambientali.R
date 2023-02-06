@@ -168,7 +168,9 @@ res <- kma(
   warping_method = "affine",
   dissimilarity_method = "pearson"
 )
-plot(res,type="data")
+
+plot(res,type="data",colors(c("green","blue","red")))
+
 
 #cluster_index <- cbind(cluster_index, temp_min=res$labels)
 
@@ -200,7 +202,7 @@ res <- kma(
   warping_method = "affine", #forse "none" è meglio
   dissimilarity_method = "pearson"
 )
-
+plot(res,type="data")
 # plot cluster
 library(plotly)
 us_data <- map_data("state")
@@ -266,7 +268,7 @@ y = array(t(data_F), c(49,1,90))
 res <- kma(
   x,
   y,
-  n_clust = 3,
+  n_clust = 4,
   center_method = "medoid",
   warping_method = "none",#ha senso se no trasformare le curve?? shift+dilataz no
   dissimilarity_method = "pearson"
