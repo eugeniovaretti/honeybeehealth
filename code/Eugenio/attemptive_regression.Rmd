@@ -1,0 +1,80 @@
+---
+title: "Regression"
+output: html_notebook
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "C:/Users/Utente/Desktop/POLIMI/NON PARAMETRIC/np_project/")
+```
+
+```{r import data}
+library(readr)
+data <- read_csv("data/new_data/data_bystate_temp_perc.csv")
+```
+This code try to fit a regression (GAM) for colony_lost_pct wrt to stressors and time,state.
+Let's try first considering the year in order to have a "simple" situation,
+then we will consider functional data through year.
+Our apptemptive model is:
+$colonylost_{pct} = f(stressors) + f(time) + f(state) + \epsilon$
+Let's explore the data and the relation between the variables:
+
+```{r}
+data_2021 <- data[data$year==2021,]
+data_2021 <- data_2021 %>%
+  group_by(state) %>%
+  summarize(colony_n = mean(colony_n),
+            colony_lost = mean(colony_lost),
+            colony_lost_pct = mean(colony_lost_pct),
+            colony_added = mean(colony_added),
+            colony_reno = mean(colony_reno),
+            Varroa.mites = mean(colony_n*Varroa.mites/100),
+            Other.pests.parasites = mean(colony_n*Other.pests.parasites/100),
+            Disesases = mean(colony_n*Disesases/100),
+            Pesticides = mean(colony_n*Pesticides/100),
+            Other = mean(colony_n*Other/100),
+            Unknown = mean(colony_n*Unknown/100),
+            )
+plot(y=data_2021$colony_lost, x=data_2021$colony_n, ylab = "colony_lost", xlab="colony_N",
+     log="xy")
+```
+Come immaginato c'è rel lineare tra colony_lost e colony_N.
+Andiamo a vedere i vari stressori come impattano su colony_lost e se potrebbe esserci
+```{r}
+plot(y=data_2021$colony_lost, x=data_2021$Varroa.mites, ylab = "colony_lost", xlab="Varroa",
+     log="xy")
+plot(y=data_2021$colony_lost, x=data_2021$Other.pests.parasites, ylab = "colony_lost", xlab="Other.pests.parasites",
+     log="xy")
+plot(y=data_2021$colony_lost, x=data_2021$Disesases, ylab = "colony_lost", xlab="Disesases",
+     log="xy")
+plot(y=data_2021$colony_lost, x=data_2021$Pesticides, ylab = "colony_lost", xlab="Pesticides",
+     log="xy")
+plot(y=data_2021$colony_lost, x=data_2021$Other, ylab = "colony_lost", xlab="Other",
+     log="xy")
+plot(y=data_2021$colony_lost, x=data_2021$Unknown, ylab = "colony_lost", xlab="Unknown",
+     log="xy")
+```
+Bene, si può modellizzare la parte di stressore attraverso modello lineare 
+```{r}
+model <- lm(colony_lost ~ colony_n + Varroa.mites + Pesticides 
+            + Other.pests.parasites + Disesases + Other + Unknown , data=data_2021)
+summary(model)
+```
+```{r}
+model_r <- lm(colony_lost ~ colony_n + Pesticides 
+             + Disesases + Other , data=data_2021)
+summary(model_r)
+
+  shapiro.test(residuals(model_r))
+  par(mfrow=c(2,2))
+  plot(model_r)
+  
+```
+
+
+
+
+
+
+
