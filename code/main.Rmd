@@ -4,7 +4,6 @@ output: html_notebook
 ---
 #Importazione dataset:
 ```{r setup, include=FALSE}
-library(readr)
 library(explore)
 library(dplyr) 
 
@@ -12,43 +11,4 @@ library(dplyr)
 colony <- read.csv("../data/colony.csv")
 stressor <- read.csv("../data/stressor.csv")
 cleaned_data <- read.csv("../data/cleaned_data.csv")
-cleaned_data_final=read.csv('../data/new_data/cleaned_by_state.csv')
-data_us <- read_csv(".../data/new_data/US_data.csv")
-
-#weather data
-source("utils/read_statedata.R")
-library(weathermetrics)
-#readstate <- read_statedata() #da sistemare la getwd() per sti notebook -> se vuoi runna prova_readstate.R in code/Eugenio
-
-
 ```
-
-```{r}
-#data_bees <- read_csv(".../data/new_data/data_bees.csv")
-
-data_bees[data_bees$Value =="(Z)",'Value'] = "0"
-data_bees$Value = as.numeric(gsub(",", "", data_bees$Value))
-data_bees[data_bees$Period=="FIRST OF APR",'Period']= "APR THRU JUN"
-
-data_bees[data_bees$Period=="FIRST OF JAN",'Period']= "JAN THRU MAR"
-
-data_bees[data_bees$Period=="FIRST OF JUL",'Period']= "JUL THRU SEP"
-
-data_bees[data_bees$Period=="FIRST OF OCT",'Period']= "OCT THRU DEC"
-
-data_to_be_piv = data_bees[!data_bees$Period=="MARKETING YEAR",]
-
-new_data <- data_to_be_piv %>% tidyr::pivot_wider(
-  names_from = 'Data Item', 
-  values_from = Value,
-  values_fill = NULL
-)
-data_fin <- new_data %>% select(-`Week Ending`, -`Ag District`, -`Ag District Code`, -County,-`County ANSI`,-`Zip Code`,-Region, -Watershed, -`CV (%)`, -watershed_code, -Program, -Domain,-Commodity, -`Domain Category`,-`Geo Level`)
-
-data_fin[data_fin$State== "OTHER STATES",'State ANSI'] = "OS"
-data_fin[is.na(data_fin)] <- 0
-#mutate_if(is.integer, ~replace(., is.na(.), 0))
-
-write.csv(data_fin,"cleaned_final_pulito.csv", row.names = F)
-```
-

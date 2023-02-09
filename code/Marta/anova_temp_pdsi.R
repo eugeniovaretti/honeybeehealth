@@ -13,9 +13,9 @@ indexs<-which(data$months=='Summer')
 summer<-data[indexs,]
 winter<-data[indexw,]
 
-cluster1<-tolower(indexes[which(indexes$temp_min==1),1])
-cluster2<-tolower(indexes[which(indexes$temp_min==2),1])
-cluster3<-tolower(indexes[which(indexes$temp_min==3),1])
+cluster1<-tolower(indexes[which(indexes$temp_avg==1),1])
+cluster2<-tolower(indexes[which(indexes$temp_avg==2),1])
+cluster3<-tolower(indexes[which(indexes$temp_avg==3),1])
 #cluster4<-tolower(indexes[which(indexes$multi_all_ward==4),1])
 library(plotly)
 us_data <- map_data("state")

@@ -273,7 +273,7 @@ y = array(t(data_F), c(49,1,90))
 res <- kma(
   x,
   y,
-  n_clust = 4,
+  n_clust = 3,
   center_method = "medoid",
   warping_method = "affine",
   dissimilarity_method = "pearson"

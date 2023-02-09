@@ -2,78 +2,21 @@
 #being Y(i_summer)∼iid Y(summer) and Y(i_winter)∼iid Y(winter), we want to test the equality of the two distributions
 
 ##  H0:Y(summer)=Y(winter) vs H1:Y(summer)≠Y(winter)
-#2015 q1 q2
-#2016 q1 q2
-#2017
-#2018
-#2021 q3 q4
-#2022 q1 q2
 library(progress)
-data <- read.csv('final_data_bystate.csv')
-n<-dim(data)[1]
+data <- read.csv('cleaned_data.csv')
 
-p_value <- numeric(6)
-x11()
-par(mfrow=c(2,3))
-year<-c("2015","2016","2017","2018","2021","2022")
-for (j in 1:6){
-                                                                  
-  
-i2<-which(data$months=="Q1"&data$year==year[j])
-i3<-which(data$months=="Q2"&data$year==year[j])
-t1<-data[i2,8]  #summer population in 2015
-t2<-data[i3,8]  #winter population in 2015
-
-boxplot(data[c(i2,i3),c(3,8)]$colony_lost_pct ~ data[c(i2,i3),c(3,8)]$months,main=paste('Jan-March vs April-June',year[j]),col=rainbow(2),ylab = "colony_lost_pct") 
-
-#paired population
-delta.0 <- 0
-diff <- t1-t2
-diff.mean <- mean(diff)
-diff.cov <- var(diff)
-
-#euclidean distance between the difference in means and the hypothesised value
-T20 <- abs(diff.mean-delta.0) 
-#Mahalanobis distance, but "forgetting" about the covariance between the values
-#T20 <- as.numeric( (diff.mean-delta.0) %*% solve(diag(diag(diff.cov))) %*% (diff.mean-delta.0))
-
-B = 100000
-seed = 26111992
-n1 <- length(t1)[1]
-n2 <- length(t2)[1]
-n <- n1+n2
-T2 <- numeric(B)
-set.seed(seed)
-for(perm in 1:B){
-  # Random permutation
-  # obs: exchanging data within couples means changing the sign of the difference
-  signs.perm <- rbinom(n1, 1, 0.5)*2 - 1
-  diff_perm <- diff * matrix(signs.perm,nrow=n1,ncol=1,byrow=FALSE)
-  diff.mean_perm <- mean(diff_perm)
-  T2[perm] <- abs(diff.mean_perm-delta.0)
-}
-# plotting the permutational distribution under H0
-#hist(T2,xlim=range(c(T2,T20)),breaks=100)
-#abline(v=T20,col=3,lwd=4)
-
-#plot(ecdf(T2))
-#abline(v=T20,col=3,lwd=4)
-
-# p-value
-p_value[j] <- sum(T2>=T20)/B
+for(i in 1:n){
+  ifelse((data$months[i] == "April-June" | data$months[i] == "July-September" ), 
+         data$months[i] <- "Summer",  data$months[i] <- "Winter")
 }
 
-#[1] 0.00000 0.00001 0.00000 0.00000 0.02032 0.01439
+#per evitare la dipendenza faccio il test per ogni anno
+df_season <- read.csv('df_season.csv')
 
-
-
-
-
-
-
-
-
-
+i2<-which(df_season$season=="Summer"&df_season$year_revisited=="2015")
+i3<-which(df_season$season=="Winter"&df_season$year_revisited=="2015")
+t1<-df_season[i2,4]  #summer population in 2015
+t2<-df_season[i3,4]  #winter population in 2015
 
 #p_val=1e-04
 
@@ -126,5 +69,41 @@ t2<-df_season[i3,4]
 
 #p_val=0.00229
 
+#paired population
+delta.0 <- 0
+diff <- t1-t2
+diff.mean <- mean(diff)
+diff.cov <- var(diff)
 
+#euclidean distance between the difference in means and the hypothesised value
+T20 <- abs(diff.mean-delta.0) 
+#Mahalanobis distance, but "forgetting" about the covariance between the values
+#T20 <- as.numeric( (diff.mean-delta.0) %*% solve(diag(diag(diff.cov))) %*% (diff.mean-delta.0))
+
+B = 100000
+seed = 26111992
+n1 <- length(t1)[1]
+n2 <- length(t2)[1]
+n <- n1+n2
+T2 <- numeric(B)
+set.seed(seed)
+for(perm in 1:B)
+{
+  # Random permutation
+  # obs: exchanging data within couples means changing the sign of the difference
+  signs.perm <- rbinom(n1, 1, 0.5)*2 - 1
+  diff_perm <- diff * matrix(signs.perm,nrow=n1,ncol=1,byrow=FALSE)
+  diff.mean_perm <- mean(diff_perm)
+  T2[perm] <- abs(diff.mean_perm-delta.0)
+  }
+# plotting the permutational distribution under H0
+hist(T2,xlim=range(c(T2,T20)),breaks=100)
+abline(v=T20,col=3,lwd=4)
+
+plot(ecdf(T2))
+abline(v=T20,col=3,lwd=4)
+
+# p-value
+p_val <- sum(T2>=T20)/B
+p_val
 
