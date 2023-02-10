@@ -596,11 +596,13 @@ lambdaT <- smoothing_temp_iso$optimization$lambda_solution[2]
 
 #save(smoothing_temp_iso, file ="code/Lupo/smoothing_iso_temp_06022022.Rdata")
 
+#does not work!
 open3d()
 mfrow3d(3, 1, byrow = TRUE, sharedMouse = FALSE)
 plot(smoothing_temp_iso$fit.FEM.time, time_locations=time_locations) #axes=FALSE
 #axes3d(col='white')
 
+#does not work!
 open3d()
 mfrow3d(3, 2, byrow = T)
 for (i in 1:6) {
@@ -622,8 +624,6 @@ plot(smoothing_temp_iso$fit.FEM.time, time_locations=time_locations[time_instant
 plot(smoothing_temp_iso$fit.FEM.time, time_locations=time_locations)
 
 ########## ADD COVARIATES ##########
-
-#load("/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Lupo/smoothing_temp_cov_iso_VarroaDisPest_08022022.Rdata")
 
 df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
 df <- df[df$state != "hawaii" & df$state != "other states",]
@@ -693,6 +693,9 @@ covariates[,6] <- as.numeric(df_covariates[,12]) #precipitation
 #the order is with time t associated to all the states, followed by time t+1
 #associated to all the states...
 
+#smoothing_temp_cov_iso and smoothing_temp_cov_iso2 are the models with covariates
+#rows ordered as described above
+#load("/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Lupo/smoothing_temp_cov_iso_VarroaDisPest_08022022.Rdata")
 
 ############################################################################.
 
@@ -701,20 +704,24 @@ covariates[,6] <- as.numeric(df_covariates[,12]) #precipitation
 # by the next state in alphabetical order with all the times, ...
 
 df_covariates <- df_covariates %>% arrange(state, year, months)
-ncov <- 6
+ncov <- 3
 covariates <- matrix(NA,nrow=dim(df_covariates)[1],ncol=ncov)
 covariates[,1] <- as.numeric(df_covariates[,4]) #varroa
 covariates[,2] <- as.numeric(df_covariates[,7]) #pesticides
 covariates[,3] <- as.numeric(df_covariates[,8]) #other
-covariates[,4] <- as.numeric(df_covariates[,9]) #unknown
-covariates[,5] <- as.numeric(df_covariates[,11]) #min temp
-covariates[,6] <- as.numeric(df_covariates[,12]) #precipitation
+#covariates[,4] <- as.numeric(df_covariates[,9]) #unknown
+#covariates[,5] <- as.numeric(df_covariates[,11]) #min temp
+#covariates[,6] <- as.numeric(df_covariates[,12]) #precipitation
+
+
+#smoothing_temp_cov_iso3 is the model with covariates and rows ordered as described above
+#load("/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Lupo/smoothing_temp_covinv_iso_VarroaPestOther_09022022.Rdata")
 
 
 ############################################################################.
 
 start_time <- Sys.time()
-smoothing_temp_cov_iso2 <- smooth.FEM.time(locations=data_locations, time_locations=time_locations,
+smoothing_temp_cov_iso <- smooth.FEM.time(locations=data_locations, time_locations=time_locations,
                                       observations=data_loss, 
                                       FEMbasis=basisobj,
                                       covariates = covariates,
@@ -729,6 +736,7 @@ final_time = end_time - start_time
 
 #save(smoothing_temp_cov_iso , file ="code/Lupo/smoothing_temp_cov_iso_VarroaDisPest_08022022.Rdata")
 #save(smoothing_temp_cov_iso2 , file ="code/Lupo/smoothing_temp_cov_iso_VarroaPestOtherUnknMinTempPrec_09022022.Rdata")
+#save(smoothing_temp_cov_iso3 , file ="code/Lupo/smoothing_temp_covinv_iso_VarroaPestOther_09022022.Rdata")
 
 smoothing_temp_cov_iso$solution$rmse
 f <- smoothing_temp_cov_iso$solution$f
@@ -814,84 +822,121 @@ for (t in time_instants){
   contour(z=evalmat,x=as.vector(X),y=as.vector(Y),zlim=zlim, add=T,colkey=F,col="black",levels=levels)
   plot(st_geometry(orotl_sf), width=2, add=T)
 }
-  
+
+#outcome: adding the covariates in the case of colony_loss_pct does not change that
+#much in terms of rmse, and the estimate values of betas parameter are all really
+#low, around 0.001 / 0.005. Moreover, GCV around 46-48.
+#case with covariates are the models: smoothing_temp_cov_iso, smoothing_temp_cov_iso2,
+#smoothing_temp_cov_iso3
+
+#The case without covariates, i.e. smoothing_temp_iso has GCV around 48 and rmse
+#around 6.38
+
+#################### LAMBDA SET #############################################
+
+smoothing_temp_cov_iso$solution$rmse
+smoothing_temp_cov_iso$optimization$lambda_solution
+smoothing_temp_cov_iso$optimization$GCV_vector
+
+lambdaS <- c(1e-4, 1e-3, 1e-2, 1e-1, 1, 5)
+lambdaT <- c(1, 5)
+start_time <- Sys.time()
+smoothing_temp_cov_lambda <- smooth.FEM.time(locations=data_locations, time_locations=time_locations,
+                                          observations=data_loss, 
+                                          FEMbasis=basisobj,
+                                          covariates = covariates,
+                                          lambda.selection.criterion='grid',
+                                          lambda.selection.lossfunction='GCV',
+                                          lambdaS = lambdaS,
+                                          lambdaT = lambdaT)
+end_time <- Sys.time()
+final_time = end_time - start_time
+
+smoothing_temp_cov_lambda$solution$rmse
+smoothing_temp_cov_lambda$optimization
+smoothing_temp_cov_lambda$optimization$GCV_vector
+
+#lambda solution --> lambdaS = 0.1, lambdaT = 0.5
+#GCV = 47.70, rmse = 6.49
+
+#3d plot
+time_instant <- 5 #from 1 to 29
+plot(smoothing_temp_cov_lambda$fit.FEM.time, time_locations=time_locations[time_instant])
+points3d(data_locations[,1], data_locations[,2], data_loss[,time_instant], cex=1, col="black")
+
+########## Write the percentage as values between 0 and 1 ################
+
+df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
+df <- df[df$state != "hawaii" & df$state != "other states",]
+cols <- c("colony_lost_pct", "Varroa.mites", "Other.pests.parasites", "Disesases", "Pesticides", "Other", "Unknown")
+df[cols] <- lapply(df[cols], function(x) x/100)
+
+data_obs <- df[,c(1,2,3,7)]
+
+data <- data_obs %>% tidyr::pivot_wider(
+  names_from = c("year", "months"), 
+  values_from = colony_lost_pct,
+  values_fill = NULL
+)
+
+col_order <- order(colnames(data))
+col_order <- c(1,head(col_order,-1))
+data <- data[,col_order]
+data <- data[,-1] #remove column 'state' from data:
+data_loss_pct <- matrix(as.numeric(unlist(data)),nrow=nrow(data))
+
+#here the order is with time t associated to all the states, followed by time t+1
+#associated to all the states...
+df_covariates <- df[,c(1,2,3,11,14,15)]
+
+#second alternative to build covariates matrix
+ncov <- 3
+covariates <- matrix(NA,nrow=dim(df_covariates)[1],ncol=ncov)
+covariates[,1] <- as.numeric(df_covariates[,4]) #varroa
+covariates[,2] <- as.numeric(df_covariates[,5]) #pesticides
+covariates[,3] <- as.numeric(df_covariates[,6]) #other
+
+lambdaS <- c(1e-4, 1e-3, 1e-2, 1e-1, 1, 5, 10)
+#lambdaS <- c(1e-4)
+lambdaT <- c(1e-1, 1, 5)
+start_time <- Sys.time()
+smoothing_temp_pct_cov <- smooth.FEM.time(locations=data_locations, time_locations=time_locations,
+                                          observations=data_loss_pct, 
+                                          FEMbasis=basisobj,
+                                          covariates = covariates,
+                                          lambda.selection.criterion='grid',
+                                          lambda.selection.lossfunction='GCV',
+                                          lambdaS = lambdaS,
+                                          lambdaT = lambdaT)
+end_time <- Sys.time()
+final_time = end_time - start_time
+
+smoothing_temp_pct_cov$solution$rmse
+smoothing_temp_pct_cov$optimization
+smoothing_temp_pct_cov$optimization$GCV_vector
+
+#lambda solution --> lambdaS = 1, lambdaT = 5
+#GCV = 0.0042, rmse = 0.063
+
+#3d plot
+time_instant <- 5 #from 1 to 29
+plot(smoothing_temp_pct_cov$fit.FEM.time, time_locations=time_locations[time_instant])
+points3d(data_locations[,1], data_locations[,2], data_loss_pct[,time_instant], cex=1, col="black")
+
+#save(smoothing_temp_pct_cov, file ="code/Lupo/smoothing_temp_losspct_VarroaPestOther_09022022.Rdata")
+
+
 ## PROVA SETTANDO MANUALMENTE I VALORI DI LAMBDA
 
 ### TRY WITH COLONY LOSS AS TARGET INSTEAD OF COLONY LOSS PCT
 
 # PROVA A CONVERTIRE LE COORDINATE IN UTM DA LAT-LONG
 
-###############################################################################.
-####                                 GAM                                   ####
-###############################################################################.
+# PROVA WITH COLONY LOSS AS PERCENTAGE LIKE VALUES BETWEEN 0 AND 1 AND NOT BETWEEN
+# 0 AND 100
 
-df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
-df_st <- df[df$state != "hawaii" & df$state != "other states",]
+# TRY TO SCALE LOCATION POSITIONS AND TARGET COVARIATES
 
-df_coord <- read.csv("data/state_coords_lon_lat.csv")
-#remove hawaii:
-df_coord <- df_coord[df_coord$state != "hawaii",]
-#remove Na (for "other states"):
-df_coord <- na.omit(df_coord)
-
-df_new <- merge(df_st, df_coord, by = "state") 
-
-df_new <- df_new %>% arrange(state, year, months)
-
-#remove column "state"
-df_new <- df_new[,-1]
-
-t <- rep(1:29, 44)
-df_new$t <- t #numerical variable for time (needed if we want to smooth the time)
-
-df_new$year <- factor(df_new$year)
-df_new$months <- factor(df_new$months)
-
-#transform colony_lost_pct in values between 0 and 1:
-df_binary <- df_new
-#df_binary$colony_lost_pct <- df_binary$colony_lost_pct/100
-cols <- c("colony_lost_pct", "Varroa.mites", "Other.pests.parasites", "Disesases", "Pesticides", "Other", "Unknown")
-df_binary[cols] <- lapply(df_binary[cols], function(x) x/100)
-
-gam_binary <- gam(colony_lost_pct ~ year + months + year:months + s(colony_max, bs='cr')
-                          + s(I(lon * lat), bs = 'cr') + s(Varroa.mites, bs="cr") + s(Disesases, bs="cr")
-                          + s(Pesticides, bs="cr") + + s(Unknown, bs="cr") + s(Other, bs="cr"),
-                          family=binomial(link="logit"), data=df_binary) 
-
-summary(gam_binary)
-(r_2_squared <- summary(gam_binary)$r.sq)
-summary(gam_binary)$s.pv
-
-fun <- function(x) {(x - min(x)) / (max(x) - min(x))}
-w <- fun(df_binary["colony_max"])
-gam_thinplate_w <- gam(colony_lost_pct ~ year + months + year:months + 
-                          + s(lon,lat, by=unlist(w), bs="tp"), family=binomial(link="logit"), data=df_binary) 
-#weight the function depending on dimension of the state (supposed proportional to colony max)
-
-gam_thinplate <- gam(colony_lost_pct ~ year + months + year:months + 
-                         + s(lon,lat), data=df_binary) 
-summary(gam_thinplate)
-
-
-df_abs <- df_new
-#convert stressors to absolute values:
-df_abs$Varroa.mites <- df_binary$Varroa.mites*df_binary$colony_max
-cols <- c("Varroa.mites", "Other.pests.parasites", "Disesases", "Pesticides", "Other", "Unknown")
-df_abs[cols] <- sapply(df_binary[cols], '*', df_binary$colony_max)
-
-gam_tensprod <- gam(colony_lost ~  colony_n + colony_added + colony_reno + s(Varroa.mites, bs="cr") + s(Disesases, bs="cr")
-                    + s(Pesticides, bs="cr") + s(Unknown, bs="cr") + s(Other, bs="cr") + te(t,lon,lat), data=df_abs) #family=poisson
-summary(gam_tensprod)
-
-gam_tensprod_temp <- gam(colony_lost ~  colony_n + colony_added + colony_reno + s(Varroa.mites, bs="cr") +
-                    + s(Pesticides, bs="cr") + te(t,lon,lat) + s(AverageTemperature, bs="cr")
-                    + s(Precipitation, bs="cr"), data=df_abs) #family=poisson
-summary(gam_tensprod_temp)
-
-gam_tens_spacetime <- gam(colony_lost ~ colony_n + te(lon,lat,t, bs=c("tp","cr"), d=c(2,1), k=10), data=df_abs)
-summary(gam_tens_spacetime)
-
-## TRY WITH SHIFT
 
 
 ###############################################################################.
