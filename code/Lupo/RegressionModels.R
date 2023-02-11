@@ -938,7 +938,6 @@ points3d(data_locations[,1], data_locations[,2], data_loss_pct[,time_instant], c
 # TRY TO SCALE LOCATION POSITIONS AND TARGET COVARIATES
 
 
-
 ###############################################################################.
 #### SEMIPARAMETRIC SPATIAL AUTOREGRESSIVE MODEL ####
 ###############################################################################.
