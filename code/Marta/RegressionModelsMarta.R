@@ -16,14 +16,14 @@ library(dplyr)
 library(RColorBrewer)
 library(sf)
 library(fdaPDE)
-install.packages("devtools")
-require(devtools)
-install_url("https://CRAN.R-project.org/package=fdaPDE")
+#install.packages("devtools")
+#require(devtools)
+#install_version("fdaPDE", version = "1.1-11", repos = "http://cran.us.r-project.org")
 library(viridis)
 library(latex2exp)
 # Model with covariates, using as target variable the absolute value of colony losses
 
-df <- read.csv("data_bystate_temp_perc.csv")
+df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
 
 #set time grid: from 2015 Q1 to 2022 Q2, without 2019 Q2
 times <- unique(df[,c("year", "months")])
