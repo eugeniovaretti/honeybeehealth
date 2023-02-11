@@ -64,3 +64,8 @@ points(p,pch=16,cex=1.5,col=c(rep('blue',dim(data_locations)[1]),rep('orange',di
 plot(st_geometry(orotl_sf), lwd = 3, add=T) #col="blue"
 
 ```
+
+```{r}
+
+```
+
