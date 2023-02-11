@@ -118,7 +118,6 @@ smooth_spatial2 <- smooth.FEM(locations=data_locations, observations=data,
                              lambda=lambda_grid)
 
 #beta <- smooth_spatial$solution$beta
-#z_hat <- smooth_spatial$solution$z_hat
 smooth_spatial2$solution$rmse
 smooth_spatial2$optimization
 
@@ -150,6 +149,37 @@ plot(smooth_spatial2$fit.FEM, axes = FALSE)
 #axes3d(col='white')
 points3d(data_locations[,1], data_locations[,2], data, col="black", pch=19)
 
+
+###############################################################################.
+
+#make a surface prediction for price loss
+
+z_hat <- smooth_spatial$solution$z_hat
+
+df_prices <- read.csv("data/production_year.csv")
+df_prices <- df_prices[,-1]
+df_prices$state <- tolower(df_prices$state)
+df_prices <- df_prices[df_prices$state != "hawaii",]
+df_prices <- df_prices[df_prices$year == 2019,]
+
+#check states missing in df_prices
+df_coord_new <- df_coord
+fun <- function(x) gsub("\\s+", "", x)
+df_coord_new$state <- fun(df_coord$state)
+
+setdiff(df_coord_new$state, df_prices$state)
+# "connecticut" "maryland" "massachusetts" "newmexico" "oklahoma" 
+
+#remove values of the following states from z_hat
+miss_states <- c("connecticut", "maryland", "massachusetts", "newmexico", "oklahoma")
+indices <- which(df_coord_new$state %in% miss_states)
+z_hat_new <- z_hat[-indices]
+colony_n <- df_final$colony_n
+colony_n_new <- colony_n[-indices]
+df_prices$loss_pct <- z_hat_new
+df_prices$colony_n <- colony_n_new 
+
+###############################################################################.
 
 #plot of a window with more 2d plots
 
