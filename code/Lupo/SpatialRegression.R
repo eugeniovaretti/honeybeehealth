@@ -29,10 +29,10 @@ library(latex2exp)
 
 df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
 
-df_spatial <- df[df$year==2019 & df$months =="Q1",]
+df_spatial <- df[df$year==2015 & df$months =="Q1",]
 
 #remove 'hawaii' and 'other states':
-df_spatial <- df_spatial[df_spatial$state != "hawaii" & df_spatial$state != "hawaii",]
+df_spatial <- df_spatial[df_spatial$state != "hawaii" & df_spatial$state != "other states",]
 
 #average colony loss percentage over a time window
 #df_2016 <- df_2016[,c(1,3,7)]
@@ -55,6 +55,7 @@ orotl_sf <- st_read(shapefile)
 
 #boundary points:
 boundary <- read.table("/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Eugenio/boundary_gg.txt", head=T)
+#boundary <- read.table("/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Lupo/boundary_gg_first.txt", head=T)
 
 #target variable: colony loss pct
 data <- as.numeric(df_final[,4]) #/scale_data
@@ -66,11 +67,12 @@ data_locations[,1] <- as.numeric(df_final[,19])
 data_locations[,2] <- as.numeric(df_final[,20])
 
 #covariates matrix
-#ncvov <- 
-#covariates <- matrix(NA,nrow=dim(df_final)[1],ncol=ncov)
-#covariates[,1] <- as.numeric(df_final[,4])
-#covariates[,2] <- as.numeric(df_final[,5])
-#covariates[,3] <- as.numeric(df_final[,6])
+#Varroa.mites = 8, Pesticides = 11, Unknown = 13
+ncov <- 3
+covariates <- matrix(NA,nrow=dim(df_final)[1],ncol=ncov)
+covariates[,1] <- as.numeric(df_final[,8])
+covariates[,2] <- as.numeric(df_final[,11])
+covariates[,3] <- as.numeric(df_final[,13])
 #covariates[,4] <- as.numeric(df_final[,7])
 
 # create the matrix p with all the data locations and boundary locations
@@ -82,8 +84,8 @@ plot(p,pch=16,cex=0.4,col=c(rep('red',dim(data_locations)[1]),rep('black',dim(bo
 # create the boundary segments (each row corresponds to an edge, that goes from
 # the vertex in the first column to the one in the second column)
 isboundary <- matrix(data=NA,nrow=dim(boundary)[1],ncol=2)
-isboundary[,1] <- (length(data)+1):(length(data)+dim(boundary)[1])
-isboundary[,2] <- c((length(data)+2):(length(data)+dim(boundary)[1]),(length(data)+1))
+isboundary[,1] <- (dim(data_locations)[1]+1):(dim(data_locations)[1]+dim(boundary)[1])
+isboundary[,2] <- c((dim(data_locations)[1]+2):(dim(data_locations)[1]+dim(boundary)[1]),(dim(data_locations)[1]+1))
 
 # create and plot the mesh
 mesh_1 <- create.mesh.2D(p, order = 1, segments = isboundary)
@@ -100,7 +102,9 @@ basisobj <- create.FEM.basis(mesh)
 
 start_time <- Sys.time()
 smooth_spatial <- smooth.FEM(locations=data_locations, observations=data, 
-                            FEMbasis=basisobj, lambda.selection.criterion='newton', 
+                            FEMbasis=basisobj, 
+                            #covariates=covariates,
+                            lambda.selection.criterion='newton', 
                             lambda.selection.lossfunction='GCV',
                             DOF.evaluation='exact',
                             lambda.optimization.tolerance = 0.001)
@@ -113,13 +117,15 @@ lambda_grid <- c(1e-4, 1e-3, 1e-2, 1e-1, 1, 5, 10, 20)
 lambda_grid <- c(5e-1)
 smooth_spatial2 <- smooth.FEM(locations=data_locations, observations=data, 
                              FEMbasis=basisobj,
+                             #covariates=covariates,
                              lambda.selection.criterion='grid',
                              lambda.selection.lossfunction='GCV',
                              lambda=lambda_grid)
 
 #beta <- smooth_spatial$solution$beta
 smooth_spatial2$solution$rmse
-smooth_spatial2$optimization
+smooth_spatial2$solution$beta
+smooth_spatial$optimization
 
 #compute rmse with k-fold cross validation
 p <- 10
@@ -149,44 +155,105 @@ plot(smooth_spatial2$fit.FEM, axes = FALSE)
 #axes3d(col='white')
 points3d(data_locations[,1], data_locations[,2], data, col="black", pch=19)
 
+#ADDING COVARIATES DOESN'T ADD ANY IMPROVEMENT IN THESE MODELS
 
 ###############################################################################.
 
-#make a surface prediction for price loss
+###########         make a surface prediction for price loss         ##########
 
-z_hat <- smooth_spatial$solution$z_hat
+###############################################################################.
 
 df_prices <- read.csv("data/production_year.csv")
-df_prices <- df_prices[,-1]
 df_prices$state <- tolower(df_prices$state)
 df_prices <- df_prices[df_prices$state != "hawaii",]
-df_prices <- df_prices[df_prices$year == 2019,]
+df_prices <- df_prices[df_prices$year == 2015,]
 
+#old code when data for some states was missing in df_prices
 #check states missing in df_prices
-df_coord_new <- df_coord
-fun <- function(x) gsub("\\s+", "", x)
-df_coord_new$state <- fun(df_coord$state)
-
-setdiff(df_coord_new$state, df_prices$state)
+#df_coord_new <- df_coord
+#fun <- function(x) gsub("\\s+", "", x)
+#df_coord_new$state <- fun(df_coord$state)
+#setdiff(df_coord_new$state, df_prices$state)
 # "connecticut" "maryland" "massachusetts" "newmexico" "oklahoma" 
 
 #remove values of the following states from z_hat
-miss_states <- c("connecticut", "maryland", "massachusetts", "newmexico", "oklahoma")
-indices <- which(df_coord_new$state %in% miss_states)
-z_hat_new <- z_hat[-indices]
-colony_n <- df_final$colony_n
-colony_n_new <- colony_n[-indices]
-df_prices$loss_pct <- z_hat_new
-df_prices$colony_n <- colony_n_new 
+#miss_states <- c("connecticut", "maryland", "massachusetts", "newmexico", "oklahoma")
+#indices <- which(df_coord_new$state %in% miss_states)
+#z_hat_new <- z_hat[-indices]
+#colony_n <- df_final$colony_n
+#colony_n_new <- colony_n[-indices]
+# I should have CREATED A NEW MESH SINCE HERE SOME LOCATIONS ARE MISSING
+#data_locations <- data_locations[-indices,]
+
+df_prices$loss_pct <- df_final$colony_lost_pct
+df_prices$colony_n <- df_final$colony_n 
+
+#df_prices$loss_abs <- (df_prices$loss_pct/100)*df_prices$colony_n
+#consider the possibility of flooring the value df_prices$loss_abs to make it integer
+
+# NB: THIS LOSS OF MONEY IS JUST IN ONE TRIMESTER (AT THE BEGINNING OF THE YEAR),
+# SINCE OTHERWISE INSTEAD OF COLONY_N I SHOULD USE COLONY_N SUMMED IN ALL THE 
+# 4 TRIMESTERS OF THE YEAR
+
+
+#DATA TO MODEL: TARGET IS THE AVERAGE MONEY LOST IN THE COUNTRY EVERY 100 COLONIES, IN DOLLARS
+#df_prices$average_price: dollar per kilo
+#df_prices$yield_per_colony_kg: kilos of honey
+
+loss_price <- df_prices$loss_pct*df_prices$yield_per_colony_kg*df_prices$average_price #lost money in dollar
+#transform the price in Kdollars
+loss_price <- loss_price/1000
+data <- as.numeric(loss_price)
+range(data)
+
+start_time <- Sys.time()
+smooth_spatial <- smooth.FEM(locations=data_locations, observations=data, 
+                             FEMbasis=basisobj, lambda.selection.criterion='newton', 
+                             lambda.selection.lossfunction='GCV',
+                             DOF.evaluation='exact',
+                             lambda.optimization.tolerance = 0.001)
+end_time <- Sys.time()
+final_time = end_time - start_time
+
+lambda_grid <- c(5e-1)
+smooth_spatial2 <- smooth.FEM(locations=data_locations, observations=data, 
+                              FEMbasis=basisobj,
+                              lambda.selection.criterion='grid',
+                              lambda.selection.lossfunction='GCV',
+                              lambda=lambda_grid)
+
+#smooth_spatial$solution$beta
+smooth_spatial2$solution$rmse
+smooth_spatial2$optimization
+
+#compute rmse with k-fold cross validation
+p <- 10
+RMSE_cv <- rep(NA,p)
+for(i in 1:p)
+{
+  k <- floor(length(data)/p)
+  smooth_cv <- smooth.FEM(locations=data_locations[-((k*(i-1)+1):(k*i)),], observations=data[-((k*(i-1)+1):(k*i))], 
+                          FEMbasis=basisobj, lambda.selection.criterion='grid',
+                          lambda.selection.lossfunction='GCV',
+                          lambda=lambda_grid)
+  RMSE_cv[i] = sqrt(sum((eval.FEM(smooth_cv$fit.FEM, data_locations[((k*(i-1)+1):(k*i)),]) - data[((k*(i-1)+1):(k*i))] )^2)/k)
+}
+mean(RMSE_cv)
+
+#3d plot
+plot(smooth_spatial2$fit.FEM, axes = FALSE)
+#axes3d(col='white')
+points3d(data_locations[,1], data_locations[,2], data, col="black", pch=19)
 
 ###############################################################################.
 
 #plot of a window with more 2d plots
 
 xlim <- range(boundary[,1])+c(-0.5,0.5)
+ylim <- range(boundary[,2])+c(-0.5,0.5)
 Nx <- 100
 Ny <- 100
-zlim <- c(0,50)
+zlim <- c(-2,35)
 #zlim <- range(data)
 
 xmin = xlim[1]
@@ -200,7 +267,7 @@ Ymat <- matrix(1,nrow=Nx,ncol=1) %*% t(Y)
 Xvec = NULL
 for (numc in 1:Ny)
 {
-  Xvec <-mc(Xvec,Xmat[,numc])
+  Xvec <- c(Xvec,Xmat[,numc])
 }
 Yvec = NULL
 for (numc in 1:Ny)
@@ -208,8 +275,8 @@ for (numc in 1:Ny)
   Yvec <- c(Yvec,Ymat[,numc])
 }
 eval_points <- cbind(Xvec, Yvec)
-eval_sol=rep(NA,nrow(eval_points))
 
+eval_sol <- rep(NA,nrow(eval_points))
 SolutionObj <- smooth_spatial2$fit.FEM
 eval_sol <- eval.FEM(SolutionObj, locations = eval_points)
 evalmat <- matrix(eval_sol, nrow=Nx, ncol=Ny, byrow=F)
@@ -217,6 +284,9 @@ levels <- seq(from=min(data),to=max(data),length=10)
 
 image(z=evalmat,x=as.vector(X),y=as.vector(Y),zlim=zlim)
 contour(z=evalmat,x=as.vector(X),y=as.vector(Y),zlim=zlim, add=T,colkey=F,col="black",levels=levels)
+#points(boundary,type = 'l',lwd=2)
+#points(boundary[c(dim(boundary)[1],1),],type = 'l',lwd=2)
+plot(st_geometry(orotl_sf), lwd=2, add=T)
 
 
 
