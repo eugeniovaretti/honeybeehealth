@@ -15,7 +15,10 @@ us_data = us_data %>%
 
 state_coords_lon_lat <- read_csv("data/state_coords_lon_lat.csv")
 final = merge(us_data, state_coords_lon_lat, by = 'state', all = FALSE)
-final = final %>% select(state, area, population, lon, lat)
+population = final %>% select(state, area, population)
+
+write_csv(population, "data/population_us.csv")
+
 # library(tidycensus)
 # census_api_key("c5ef8b2731ebf30b0d05c627514f073cf2f01ed1")
 # pop_data <- get_acs(
