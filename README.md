@@ -1,5 +1,5 @@
-# Honey Bee Health. Analyses of reasons and preventions for high
-risk colony losses
+# Honey Bee Health. 
+Analyses of reasons and preventions for high risk colony losses
 
 Project for the course of NonParametric Statistics
 
