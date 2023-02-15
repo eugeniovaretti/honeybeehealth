@@ -344,6 +344,7 @@ for (i in seq_t){
   
   #covariates matrix
   #Varroa.mites = 8, Parasites = 9, Diseases = 10, Pesticides = 11, Other = 12, Unknown = 13
+  df_cov <- df_final[,c(1,2,3)]
   ncov <- 3
   covariates <- matrix(NA,nrow=dim(df_final)[1],ncol=ncov)
   covariates[,1] <- as.numeric(df_final[,8]) #varroa

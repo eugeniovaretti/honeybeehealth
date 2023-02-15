@@ -22,7 +22,7 @@ library(latex2exp)
 
 
 ###############################################################################.
-#### SPATIAL REGRESSION WITH A MANUAL MESH ####
+####     SPATIAL REGRESSION WITH A MANUAL MESH, TARGET: COLONY LOSS PCT    ####
 ###############################################################################.
 
 #Let's remove the time dependency considering only 1 year and 1 trimester
