@@ -59,8 +59,8 @@ df_abs$Varroa.mites <- df_binary$Varroa.mites*df_binary$colony_max
 cols <- c("Varroa.mites", "Other.pests.parasites", "Disesases", "Pesticides", "Other", "Unknown")
 df_abs[cols] <- sapply(df_binary[cols], '*', df_binary$colony_max)
 
-gam_tensprod <- gam(colony_lost ~  colony_n + colony_added + colony_reno + s(Varroa.mites, bs="cr") + s(Disesases, bs="cr")
-                    + s(Pesticides, bs="cr") + s(Unknown, bs="cr") + s(Other, bs="cr") + te(t,lon,lat), data=df_abs) #family=poisson
+gam_tensprod <- gam(colony_lost ~  colony_max + colony_added + s(Varroa.mites, bs="cr") + s(Disesases, bs="cr")
+                    + s(Pesticides, bs="cr")  + s(Other, bs="cr") + te(lon,lat,t, bs=c("tp","cr"), d=c(2,1), k=10), data=df_abs) #family=poisson
 summary(gam_tensprod)
 
 gam_tensprod_temp <- gam(colony_lost ~  colony_n + colony_added + colony_reno + s(Varroa.mites, bs="cr") +

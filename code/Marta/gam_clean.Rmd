@@ -1,0 +1,132 @@
+---
+title: "GAM clean"
+output: html_notebook
+---
+```{r message=FALSE, warning=FALSE, echo=FALSE}
+#if not installed install all the following libraries
+library(ggplot2)
+library(gridExtra)
+library(roahd)
+  
+library(mgcv)
+library(rgl)
+library(splines)
+library(pbapply)
+library(tidyverse)
+
+library(maps)
+
+```
+
+```{r}
+###GAM###
+df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
+df_coord <- read.csv("data/state_coords_lon_lat.csv")
+
+df_st <- df[df$state != "hawaii" & df$state != "other states",]
+df_coord <- df_coord[df_coord$state != "hawaii" & df_coord$state != "other states",]
+
+df_new <- merge(df_st, df_coord, by = "state")
+df_new <- df_new %>% arrange(state, year, months)
+
+```
+
+```{r}
+indexes<-read.csv('data/new_data/sensitivity.csv')
+df<- indexes%>%select(state,clusterMIN,clusterMAX,clusterAVG,clusterPREC,clusterPDSI)
+
+```
+
+```{r}
+t <- rep(1:29, 44)
+df_new$t <- t #numerical variable for time (needed if we want to smooth the time)
+
+df_new$year <- factor(df_new$year)
+df_new$months <- factor(df_new$months)
+df_new$state <- factor(df_new$state)
+
+
+#transform colony_lost_pct in values between 0 and 1:
+df_binary <- df_new
+
+#dataset for the logit
+cols <- c("colony_lost_pct", "Varroa.mites", "Other.pests.parasites", "Disesases", "Pesticides", "Other", "Unknown")
+df_binary[cols] <- lapply(df_binary[cols], function(x) x/100)
+df_poiss <- df_binary
+df_poiss$colony_lost_pct[which(df_poiss$colony_lost_pct == 0)] = 1e-10
+df_poiss[df_poiss==0]<- 1e-10
+```
+
+```{r}
+new_d<- merge(df,df_poiss,by='state')
+```
+
+
+```{r}
+#remove column "state"
+#df_new <- df_new[,-1]
+
+gam_poiss_purestress <- gam(colony_lost ~
+                      log(Varroa.mites) +
+                      log(Other.pests.parasites) +
+                      log(Pesticides) +
+                      log(Disesases) +
+                      log(Unknown) +
+                      log(Other) +
+                      offset(log(colony_max)) +
+                      te(lon,lat, t, bs=c("tp","cr"), d=c(2,1), k=10)
+                      , family=poisson(link="log"), data=df_poiss)
+summary(gam_poiss_purestress)
+plot(gam_poiss_purestress)
+map("state", add = TRUE, fill = FALSE)
+```
+From the summary we notice that all the stressors are significant.
+The interpretation of the coefficients goes as follow:
+A small $\Delta$% variation in Varroa (e.g) corresponds in a 1.112e-01 * $Delta$% of colony_lost
+We can notice that all the stressors are positive correlated with colony loss.
+Moreover the most influent is, as expected, the Varroa. In particular, given 1000 colonies with 100 affected by Varroa, if you register an increment of 10% in Varroa, it means that you would expect an increment of  1.121% of colony loss.
+```{r}
+df <- data.frame(
+  state = tolower(indexes$state),
+  values = indexes$temp_avg
+)
+
+library(usmap)
+plot_usmap(data = df) + labs(title = " Cluster by temp avg ")+scale_fill_stepsn(colors=c("red","green","darkblue"))
+
+```
+
+
+```{r}
+gam_poiss_purestress <- gam(colony_lost ~
+                      log(Varroa.mites) +
+                      log(Other.pests.parasites) +
+                      log(Pesticides) +
+                      log(Disesases) +
+                      log(Unknown) +
+                      log(Other) +
+                      offset(log(colony_max)) +
+                      clusterAVG+
+                      te(lon,lat, t, bs=c("tp","cr"), d=c(2,1), k=10)
+                      , family=poisson(link="log"), data=new_d)
+summary(gam_poiss_purestress)
+
+```
+
+
+```{r}
+df_abs <- df_new
+#convert stressors to absolute values:
+df_abs$Varroa.mites <- df_new$Varroa.mites*df_new$colony_max
+cols <- c("Other.pests.parasites", "Disesases", "Pesticides", "Other", "Unknown")
+df_abs[cols] <- sapply(df_new[cols], '*', df_new$colony_max)
+
+gam1 <- gam(colony_lost ~ offset(log(colony_max)) + months +  s(lon,lat)
+            , family = poisson(link = log), data=df_abs)
+summary(gam1)
+library(maps)
+plot(gam1)
+map("state", add = TRUE, fill = FALSE)
+
+```
+

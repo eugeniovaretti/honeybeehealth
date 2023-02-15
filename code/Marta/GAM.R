@@ -62,22 +62,31 @@ df_abs[cols] <- sapply(df_binary[cols], '*', df_binary$colony_max)
 
 
 #modello3
-gam_tens_spacetime <- gam(colony_lost ~ colony_max + s(I(Varroa.mites*Other.pests.parasites), bs="cr")
-                          
-                          +s(I(Varroa.mites*Pesticides), bs="cr") + Precipitation + MaximumTemperature
+
+df_abs$AverageTemperature_norm<-scale(df_abs$AverageTemperature, center = TRUE, scale = FALSE)
+df_abs$Precipitation_norm<-scale(df_abs$Precipitation, center = TRUE, scale = FALSE)
+df_abs <- df_abs %>% rename("Precipitation[,1]" = "Precipitation",
+                            "AverageTemperature[,1]" = "AverageTemperature")
+df_abs$AverageTemperature<-scale(df_abs$AverageTemperature, center = TRUE, scale = FALSE)
+gam_tens_spacetime <- gam(colony_lost ~ offset(log(colony_max))
+                          #+ s(I(Varroa.mites*Other.pests.parasites), bs="cr")
+                          #+s(I(Varroa.mites*Pesticides), bs="cr") 
+                          + Precipitation_norm + AverageTemperature_norm
                           +s(Varroa.mites, bs="cr") + s(Other.pests.parasites, bs="cr")
                           + s(Pesticides, bs="cr")   
-                          + te(lon,lat,t, bs=c("tp","cr"), d=c(2,1), k=10), data=df_abs)
+                          + te(lon,lat,t, bs=c("tp","cr"), d=c(2,1), k=12), family=poisson, data=df_abs)
 summary(gam_tens_spacetime)
 plot(gam_tens_spacetime)
 
+
 #modello4
-gam_tens_spacetime <- gam(colony_lost ~ colony_max + s(I(Varroa.mites*Other.pests.parasites), bs="cr")
-                          +Varroa.mites:MaximumTemperature + Precipitation:Other.pests.parasites +
-                            #s(I(Pesticides:Precipitation), bs="cr")+
-                            s(Varroa.mites, bs="cr") + s(Other.pests.parasites, bs="cr")
-                          + s(Pesticides, bs="cr")   
-                          + te(lon,lat,t, bs=c("tp","cr"), d=c(2,1), k=10), data=df_abs)
+gam_tens_spacetime <- gam(colony_lost ~ colony_max
+                          #+ s(I(Varroa.mites*Other.pests.parasites), bs="cr")
+                          #+s(I(Varroa.mites*Pesticides), bs="cr") 
+                          + s(Precipitation, bs="ps") + AverageTemperature
+                          +s(Varroa.mites, bs="cr",k=40) + s(Other.pests.parasites, bs="cr")
+                          + s(Pesticides, bs="ps") + s(Disesases, bs="cr")  
+                          + te(lon,lat,t, bs=c("tp","cc"), d=c(2,1), k=12), data=df_abs)
 summary(gam_tens_spacetime)
 plot(gam_tens_spacetime)
 #l'interazione tra varroa e other pests porta a una crescita della loss fino a quando non sono presenti emtrambi in 
@@ -86,6 +95,7 @@ plot(gam_tens_spacetime)
 
 
 #modello5
+df_abs$AverageTemperature<-scale(df_abs$AverageTemperature, center = TRUE, scale = FALSE)
 gam_tensprod <- gam(colony_lost ~  colony_max + s(I(Varroa.mites*Other.pests.parasites), bs="cr")
                     +s(I(Varroa.mites*Pesticides), bs="cr") +s(I(Disesases*Varroa.mites), bs="cr")
                     + Precipitation + MaximumTemperature+PalmerDroughtSeverityIndexPDSI
