@@ -1,5 +1,4 @@
-
-
+###### RUN LIBRARIES ### -----
 rm(list=ls())
 graphics.off()
 set.seed(1)
@@ -25,7 +24,7 @@ library(latex2exp)
 ####               INFERENCE ON COVARIATES PARAMETERS                      ####
 ###############################################################################.
 
-####### MODEL WITH COVARIATES #######.
+####### MODEL WITH COVARIATES ####### ---
 
 df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
 
@@ -108,7 +107,7 @@ points(p,pch=16,cex=1.5,col=c(rep('blue',dim(data_locations)[1]),rep('orange',di
 plot(st_geometry(orotl_sf), width = 3, add=T) #col="blue"
 
 ###############################################################################.
-##########                  ADD COVARIATES                          ##########
+##########                  ADD COVARIATES                           ##########
 ###############################################################################.
 
 df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
@@ -157,7 +156,7 @@ final_time = end_time - start_time
 
 start_time <- Sys.time()
 smoothing_temp_cov_inference <- smooth.FEM.time(locations=data_locations, time_locations=time_locations,
-                                          observations=data_loss, 
+                                          observations=data_loss_price, 
                                           FEMbasis=basisobj,
                                           covariates = covariates,
                                           lambda.selection.criterion='newton_fd', 
@@ -169,7 +168,7 @@ final_time = end_time - start_time
 
 start_time <- Sys.time()
 smoothing_temp_cov_inference <- smooth.FEM.time(locations=data_locations, time_locations=time_locations,
-                                          observations=data_loss, 
+                                          observations=data_loss_price, 
                                           FEMbasis=basisobj,
                                           covariates = covariates,
                                           lambda.selection.criterion='newton_fd', 
