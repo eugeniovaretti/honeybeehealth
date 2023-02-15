@@ -86,6 +86,7 @@ stats <- data.frame(matrix(NA, nrow = 4, ncol = 8))
 colnames(stats) <- c("2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022")
 rownames(stats) <- c("lambda", "rmse", "rmse_CV", "GCV")
 
+#seq_t <- 1
 for (i in seq_t){
   
   year <- times[i,1]
@@ -160,7 +161,7 @@ xlim <- range(boundary[,1])+c(-0.5,0.5)
 ylim <- range(boundary[,2])+c(-0.5,0.5)
 Nx <- 100
 Ny <- 100
-zlim <- c(-2,30)
+zlim <- c(-2,35)
 #zlim <- range(data)
 
 xmin = xlim[1]
@@ -216,7 +217,59 @@ plot(get(paste("smooth_", year, sep = ""))$fit.FEM, axes = FALSE)
 #axes3d(col='white')
 points3d(data_locations[,1], data_locations[,2], get(paste("data_", year, sep = "")), col="black", pch=19)
 
+###############################################################################.
+####                           Inference                                  ####
 
+#obj<-inferenceDataObjectBuilder(test = 'oat', dim = 2, beta0 = rep(1,4), n_cov = 4)
+#obj2<-inferenceDataObjectBuilder(test = 'sim', dim = 3, component = 'nonparametric', n_cov = 3)
+
+i <- 1 #time_instant (CHANGE!)
+year <- times[i,1]
+month <- times[i,2]
+print(paste("year = ", year, ", month = ", month))
+
+df_spatial <- df[df$year==year & df$months==month,]
+df_final <- merge(df_spatial, df_coord, by = "state") #dataset without hawaii and other states
+#order by state and remove columns of the states and given year and trimester
+df_final <- df_final %>% arrange(state, year, months)
+df_final <- df_final[,-c(1,2,3)]
+
+df_prices_spatial <- df_prices[df_prices$year == year,]
+df_prices_spatial$loss_pct <- df_final$colony_lost_pct
+
+#target variable: 
+loss_price <- df_prices_spatial$loss_pct * df_prices_spatial$yield_per_colony_kg * df_prices_spatial$average_price #lost money in dollar
+#transform the price in Kdollars
+loss_price <- loss_price/1000
+data <- as.numeric(loss_price)
+range(data)
+
+#covariates matrix
+#Varroa.mites = 8, Pesticides = 11, Unknown = 13
+ncov <- 3
+covariates <- matrix(NA,nrow=dim(df_final)[1],ncol=ncov)
+covariates[,1] <- as.numeric(df_final[,8])
+covariates[,2] <- as.numeric(df_final[,11])
+covariates[,3] <- as.numeric(df_final[,13])
+#covariates[,4] <- as.numeric(df_final[,7])
+
+obj_inf <- inferenceDataObjectBuilder(test = 'oat', type = 'esf', component = "parametric",
+                                      dim = 2, n_cov = ncov, beta0 = rep(0,ncov))
+#test = 'sim'
+
+lambda_grid <- 5e-1
+smooth_inference <- smooth.FEM(locations=data_locations, observations=data, 
+                  FEMbasis=basisobj,
+                  covariates = covariates,
+                  lambda.selection.criterion='grid',
+                  lambda.selection.lossfunction='GCV',
+                  lambda=lambda_grid,
+                  inference.data.object = obj_inf)
+
+smooth_inference$solution$beta
+smooth_inference$solution$rmse
+smooth_inference$optimization$GCV
+smooth_inference$inference$beta
 
 ###############################################################################.
 ####                Plots for models of colony loss pct                     ####
@@ -338,3 +391,4 @@ for (i in seq_t){
   plot(st_geometry(orotl_sf), lwd=2, add=T)
 }
 
+############################################################################

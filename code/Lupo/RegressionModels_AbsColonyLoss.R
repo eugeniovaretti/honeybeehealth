@@ -8,7 +8,7 @@ setwd("~/Desktop/NP_project/NP_github/np_project/")
 #install_version("fdaPDE", version = "1.1-11", repos = "http://cran.us.r-project.org") #to complete to install fdaPDE
 
 ###############################################################################.
-#### SPACE TIME MODEL WITH A MANUAL MESH ####
+####     SPACE TIME MODEL WITH A MANUAL MESH, TARGET = ABS COLONY LOSS     ####
 ###############################################################################.
 
 library(ISLR2)
