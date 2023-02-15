@@ -168,7 +168,7 @@ covariates[,6] <- as.numeric(df_covariates[,12]) #precipitation
 
 #smoothing_temp_cov_iso and smoothing_temp_cov_iso2 are the models with covariates
 #rows ordered as described above
-load("/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Lupo/smoothing_temp_cov_iso_VarroaDisPest_08022022.Rdata")
+#load("/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Lupo/smoothing_temp_cov_iso_VarroaDisPest_08022022.Rdata")
 
 ############################################################################.
 
@@ -249,7 +249,6 @@ plotFEM2d_time(smoothing_temp_cov__iso$fit.FEM.time, time=time_locations[time_in
                asp=1,xlab='',ylab='',xaxt="n",yaxt="n", Nx=200, Ny=200)
 plot(st_geometry(orotl_sf), lwd=3, add=T)
 
-
 #### function handwritten
 SolutionObj <- smoothing_temp_cov_iso$fit.FEM.time
 time_instants <- c(1,10,20,29) #change here!
@@ -304,6 +303,18 @@ for (t in time_instants){
 #The case without covariates, i.e. smoothing_temp_iso has GCV around 48 and rmse
 #around 6.38
 
+#plots at a given location
+index_loc <- 25
+data_locations[index_loc,]
+state <- df_coord[index_loc,"state"]
+plot(smoothing_temp_cov_iso$fit.FEM.time, locations=data_locations[index_loc,],
+     main = paste("state = ", state), xlim = c(0,1))
+     #ylim = range(data_loss[index_loc,]))
+     #xlab = "time (t)", ylab = "colony loss percentage", decorate=T)
+points(time_locations, data_loss[index_loc,], pch = 19, cex = 0.5)
+data_loss[index_loc,]
+
+
 ###############################################################################.
 ######                          LAMBDA GRID                            #########
 ###############################################################################.
@@ -312,8 +323,10 @@ smoothing_temp_cov_iso$solution$rmse
 smoothing_temp_cov_iso$optimization$lambda_solution
 smoothing_temp_cov_iso$optimization$GCV_vector
 
-lambdaS <- c(1e-4, 1e-3, 1e-2, 1e-1, 1, 5)
-lambdaT <- c(1, 5)
+#lambdaS <- c(1e-4, 1e-3, 1e-2, 1e-1, 1, 5)
+#lambdaT <- c(1, 5)
+lambdaS <- c(1e-2)
+lambdaT <- c(1e-3)
 start_time <- Sys.time()
 smoothing_temp_cov_lambda <- smooth.FEM.time(locations=data_locations, time_locations=time_locations,
                                              observations=data_loss, 
@@ -337,6 +350,17 @@ smoothing_temp_cov_lambda$optimization$GCV_vector
 time_instant <- 5 #from 1 to 29
 plot(smoothing_temp_cov_lambda$fit.FEM.time, time_locations=time_locations[time_instant])
 points3d(data_locations[,1], data_locations[,2], data_loss[,time_instant], cex=1, col="black")
+
+#index at given location
+index_loc <- 25
+data_locations[index_loc,]
+state <- df_coord[index_loc,"state"]
+plot(smoothing_temp_cov_lambda$fit.FEM.time, locations=data_locations[index_loc,],
+     main = paste("state = ", state), xlim = c(0,1))
+#ylim = range(data_loss[index_loc,]))
+#xlab = "time (t)", ylab = "colony loss percentage", decorate=T)
+points(time_locations, data_loss[index_loc,], pch = 19, cex = 0.5)
+data_loss[index_loc,]
 
 #######         Write the percentage as values between 0 and 1         #########
 
@@ -398,7 +422,6 @@ plot(smoothing_temp_pct_cov$fit.FEM.time, time_locations=time_locations[time_ins
 points3d(data_locations[,1], data_locations[,2], data_loss_pct[,time_instant], cex=1, col="black")
 
 #save(smoothing_temp_pct_cov, file ="code/Lupo/smoothing_temp_losspct_VarroaPestOther_09022022.Rdata")
-
 
 ## PROVA SETTANDO MANUALMENTE I VALORI DI LAMBDA
 

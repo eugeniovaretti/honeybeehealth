@@ -33,7 +33,9 @@ lon_range = range(df_final$lon, na.rm = T)
 
 df_noNa <- na.omit(df_final)
 
-####### LOCAL POLYNOMIAL REGRESSION ####
+###############################################################################.
+#######                   LOCAL POLYNOMIAL REGRESSION                      ####
+###############################################################################.
 
 #https://pjbartlein.github.io/GeogDataAnalysis/lec14.html
 
@@ -79,10 +81,7 @@ contour(grid_longitude, grid_latitude, tann_z, add=TRUE)
 points(df_noNa$lon, df_noNa$lat)
 plot(st_geometry(orotl_sf), add=T)
 
-#############################################################################.
-
-#### Spatial Regression ####
-
+###############################################################################.
 
 shapefile <- "/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Lupo/cb_2018_us_nation_5m/cb_2018_us_nation_5m.shp"
 orotl_sf <- st_read(shapefile)
@@ -106,7 +105,9 @@ US_restricted_coords <- US_coords[US_coords$long > -130 & US_coords$long < -60 &
 
 #write.table(US_restricted_coords,"code/Lupo/boundary.txt",row.names=FALSE)
 
-################ Spatial Regression 
+###############################################################################.
+######                       Spatial Regression                          ######
+###############################################################################.
 
 #Let's remove the time dependency considering only 1 year and averaging over the trimesters
 #YEAR 2016
@@ -499,5 +500,5 @@ library(pspatreg)
 ###############################################################################.
 
 ###############################################################################.
-##### SLIDE MGCV #######
+##### SLIDES MGCV #######
 ###############################################################################.

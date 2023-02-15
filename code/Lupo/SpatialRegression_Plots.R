@@ -186,7 +186,8 @@ eval_points <- cbind(Xvec, Yvec)
 
 eval_sol <- rep(NA,nrow(eval_points))
 
-par(mfrow=c(4,2))
+x11()
+par(mfrow=c(4,2)) #oma=c(0,0,0,0)
 for (i in seq_t){
   
   year <- times[i,1]
@@ -197,13 +198,16 @@ for (i in seq_t){
   
   
   image(z=evalmat,x=as.vector(X),y=as.vector(Y),zlim=zlim, xlab="longitude",
-        ylab="latitude", main = paste("Money loss in kdollars every 100 colonies in ", year, "-", month))
+        ylab="latitude", main = paste("Money loss (kdollars) in following 3 months every 100 colonies in ", year, "-", month))
   contour(z=evalmat,x=as.vector(X),y=as.vector(Y),zlim=zlim, add=T,colkey=F,
           col="black",levels=get(paste("levels_", year, sep = "")))
   #points(boundary,type = 'l',lwd=2)
   #points(boundary[c(dim(boundary)[1],1),],type = 'l',lwd=2)
-  plot(st_geometry(orotl_sf), lwd=2, add=T)
+  plot(st_geometry(orotl_sf), lwd=2, add = T) #add=T
 }
+
+dev.off()
+
 
 
 ###############################################################################.
@@ -223,7 +227,7 @@ points3d(data_locations[,1], data_locations[,2], get(paste("data_", year, sep = 
 #obj<-inferenceDataObjectBuilder(test = 'oat', dim = 2, beta0 = rep(1,4), n_cov = 4)
 #obj2<-inferenceDataObjectBuilder(test = 'sim', dim = 3, component = 'nonparametric', n_cov = 3)
 
-i <- 1 #time_instant (CHANGE!)
+i <- 9 #time_instant (CHANGE!)
 year <- times[i,1]
 month <- times[i,2]
 print(paste("year = ", year, ", month = ", month))
@@ -253,9 +257,9 @@ covariates[,2] <- as.numeric(df_final[,11])
 covariates[,3] <- as.numeric(df_final[,13])
 #covariates[,4] <- as.numeric(df_final[,7])
 
-obj_inf <- inferenceDataObjectBuilder(test = 'oat', type = 'esf', component = "parametric",
+obj_inf <- inferenceDataObjectBuilder(test = 'sim', type = 'esf', component = "parametric",
                                       dim = 2, n_cov = ncov, beta0 = rep(0,ncov))
-#test = 'sim'
+#test = 'sim' or 'oat
 
 lambda_grid <- 5e-1
 smooth_inference <- smooth.FEM(locations=data_locations, observations=data, 
@@ -274,7 +278,6 @@ smooth_inference$inference$beta
 ###############################################################################.
 ####                Plots for models of colony loss pct                     ####
 ###############################################################################.
-
 
 stats_losspct <- data.frame(matrix(NA, nrow = 4, ncol = 8))
 colnames(stats_losspct) <- c("2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022")
