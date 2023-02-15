@@ -120,11 +120,11 @@ df <- df[df$state != "hawaii" & df$state != "other states",]
 df_covariates <- df[,c(1,2,3,11,12,13,14,15,16,17,18,20,21)]
 
 df_covariates <- df_covariates %>% arrange(state, year, months)
-ncov <- 3
+ncov <- 2
 covariates <- matrix(NA,nrow=dim(df_covariates)[1],ncol=ncov)
 covariates[,1] <- as.numeric(df_covariates[,4]) #varroa
-covariates[,2] <- as.numeric(df_covariates[,6]) #diseases
-covariates[,3] <- as.numeric(df_covariates[,7]) #pesticides
+#covariates[,2] <- as.numeric(df_covariates[,6]) #diseases
+covariates[,2] <- as.numeric(df_covariates[,7]) #pesticides
 #covariates[,4] <- as.numeric(df_covariates[,8]) #other
 #covariates[,4] <- as.numeric(df_covariates[,9]) #unknown
 #covariates[,5] <- as.numeric(df_covariates[,11]) #min temp
@@ -136,6 +136,8 @@ covariates[,3] <- as.numeric(df_covariates[,7]) #pesticides
 
 
 obj_inf <- inferenceDataObjectBuilder(test = 'sim', type = 'esf', component = "parametric",
+                                      dim = 2, n_cov = ncov, beta0 = rep(0,ncov))
+obj_inf2 <- inferenceDataObjectBuilder(test = 'oat', type = 'esf', component = "parametric",
                                       dim = 2, n_cov = ncov, beta0 = rep(0,ncov))
 
 lambdaS <- c(1e-1)
@@ -150,6 +152,30 @@ price_temp_cov_inference <- smooth.FEM.time(locations=data_locations, time_locat
                                          lambdaS = lambdaS,
                                          lambdaT = lambdaT,
                                          inference.data.object = obj_inf)
+end_time <- Sys.time()
+final_time = end_time - start_time
+
+start_time <- Sys.time()
+smoothing_temp_cov_inference <- smooth.FEM.time(locations=data_locations, time_locations=time_locations,
+                                          observations=data_loss, 
+                                          FEMbasis=basisobj,
+                                          covariates = covariates,
+                                          lambda.selection.criterion='newton_fd', 
+                                          lambda.selection.lossfunction='GCV',
+                                          DOF.evaluation='stochastic',
+                                          inference.data.object = obj_inf)
+end_time <- Sys.time()
+final_time = end_time - start_time
+
+start_time <- Sys.time()
+smoothing_temp_cov_inference <- smooth.FEM.time(locations=data_locations, time_locations=time_locations,
+                                          observations=data_loss, 
+                                          FEMbasis=basisobj,
+                                          covariates = covariates,
+                                          lambda.selection.criterion='newton_fd', 
+                                          lambda.selection.lossfunction='GCV',
+                                          DOF.evaluation='stochastic',
+                                          inference.data.object = obj_inf2)
 end_time <- Sys.time()
 final_time = end_time - start_time
 
