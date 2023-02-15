@@ -3,7 +3,6 @@
 rm(list=ls())
 graphics.off()
 set.seed(1)
-setwd("~/Desktop/NP_project/NP_github/np_project/")
 
 library(ISLR2)
 library(car)
@@ -32,11 +31,11 @@ df_coord <- na.omit(df_coord)
 df_coord <- df_coord %>% arrange(state)
 
 #shapefile for US boundaries
-shapefile <- "/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Lupo/cb_2018_us_nation_5m/cb_2018_us_nation_5m.shp"
+shapefile <- "code/Lupo/cb_2018_us_nation_5m/cb_2018_us_nation_5m.shp"
 orotl_sf <- st_read(shapefile)
 
 #boundary points:
-boundary <- read.table("/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Eugenio/boundary_gg.txt", head=T)
+boundary <- read.table("code/Eugenio/boundary_gg.txt", head=T)
 #boundary <- read.table("/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Lupo/boundary_gg_first.txt", head=T)
 
 #data locations matrix (in long-lat coordinates)
@@ -186,7 +185,7 @@ eval_points <- cbind(Xvec, Yvec)
 
 eval_sol <- rep(NA,nrow(eval_points))
 
-x11()
+#x11()
 par(mfrow=c(4,2)) #oma=c(0,0,0,0)
 for (i in seq_t){
   
