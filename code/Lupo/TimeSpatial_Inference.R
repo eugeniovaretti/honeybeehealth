@@ -145,6 +145,7 @@ smooth_temp_inference$beta
 smooth_temp_inference$optimization$lambda_solution
 smooth_temp_inference$optimization$GCV_vector
 smooth_temp_inference$inference$beta
+#resulting model is saved as "result.RData"
 
 #3d plot
 time_instant <- 5 #from 1 to 29
