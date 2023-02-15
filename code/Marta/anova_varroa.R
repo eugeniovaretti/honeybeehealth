@@ -1,6 +1,6 @@
-data <- read.csv('final_data_bystate.csv')
-d<-read.csv('data_bystate_temp_perc.csv')
-indexes<-read.csv('cluster_index.csv')
+data <- read.csv('data/new_data/final_data_bystate.csv')
+d<-read.csv('data/new_data/data_bystate_temp_perc.csv')
+indexes<-read.csv('data/cluster_index.csv')
 
 n<-dim(data)[1]
 for(i in 1:n){

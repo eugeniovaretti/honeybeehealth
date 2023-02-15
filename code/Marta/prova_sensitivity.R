@@ -1,4 +1,4 @@
-data<-read.csv("sensitivity.csv")
+data<-read.csv("data/new_data/sensitivity.csv")
 library(survival)
 library(survminer)
 library(dplyr) 
@@ -16,7 +16,7 @@ y<-Surv(data$time, data$status=="Event")
 fit <- survfit(y ~ 1, data = data)
 summary(fit)
 kable(head(tidy(fit),20))
-surv_median(fit)
+
 plot(fit, conf.int = T, xlab='Time [days]', ylab = 'Survival Probability', col='red',
      main="Kaplan-Meier Curve")
 ggsurvplot(fit,
@@ -56,10 +56,11 @@ cluster3P<-df[which(df$values==1),1]
 data <- data %>% rename("clusterMIN" = "clusterMAX",
                                         "clusterMAX" = "clusterMIN"
                                         )
+n=dim(data)[1]
 for(i in 1:n){
-  if(data$clusterMIN[i]=="cluster3"){data$clusterMIN[i]<-"cluster1"
+  if(data$clusterMIN[i]=="cluster1"){data$clusterMIN[i]<-"cluster2"
   
-  }else if (data$clusterMIN[i]=="cluster1") {data$clusterMIN[i]<-"cluster3"
+  }else if (data$clusterMIN[i]=="cluster2") {data$clusterMIN[i]<-"cluster1"
   
   }
 }
@@ -86,11 +87,13 @@ groups <- levels(factor(data$state))
 cluster_index<- cbind(state=groups)
 df <- data.frame(
   state = tolower(groups),
-  values = data$clusterPDSI
+  values = data$MinimumTemperature
 )
-cluster_index <- cbind(cluster_index, temp_avg=data$clusterPDSI)
+cluster_index <- cbind(cluster_index, temp_avg=data$MinimumTemperature)
 library(usmap)
-plot_usmap(data = df) + labs(title = "Cluster by prec")+colors()
+plot_usmap(data = df) + labs(title = "Cluster by temp min")
+                  +colors=c("forestgreen","firebrick1","yellow","red")
+
 
 fit.MIN <- survfit(Surv(time, status=="Event") ~ clusterMIN, data=data)
 ggsurvplot(fit.MIN, 
@@ -100,9 +103,9 @@ ggsurvplot(fit.MIN,
            risk.table.col = "strata", # Change risk table color by groups
            surv.median.line = "hv", # Specify median survival
            ggtheme = theme_bw(), # Change ggplot2 theme
-           legend.labs=c("cluster1","cluster2","cluster3"),   
-           palette=c("firebrick1","forestgreen","dodgerblue2"), 
-           title="Kaplan-Meier Curves by cluster for PREC")
+           legend.labs=c("northern states","southern states","central states"),   
+           palette=c("forestgreen","firebrick1","dodgerblue2"), 
+           title="Kaplan-Meier Curves by cluster for temp min")
 
 #It looks like there’s some differences in the curves 
 #the curves of cluster 1(higher temperature) has a survival probability higher than cluster3 (lower temp min)
@@ -113,8 +116,9 @@ hazard_ratio <- (log_rank_test$obs[1]/log_rank_test$exp[1])/(log_rank_test$obs[3
 hazard_ratio
 #temp min
 #HR= zard_ratio=0.880027
-#the risk of deaths in cluster1 (temp min maggiori, stati a sud) is 0.880027 times the risk in cluster3 (temp min minori, stati a nord)
+#the risk of deaths  negli stati con temp min minori (stati a nord) is 0.880027 times the risk in the cluster with higher minimum temperature (stati a sud)
 
+#AVERAGE TEMPERATURE
 cox.age <- coxph(Surv(time, status=="Event") ~ AverageTemperature, data = data)
 summary(cox.age)
 #the increase of 1 unit in the temperature, decrease the hazard of 0.84535
@@ -131,7 +135,7 @@ plot(fit.min, conf.int=F,
 grid()
 legend('topright', c("Temp = -10", "Temp = -5", "Temp = 1"),
        lty=c(1,1,1), lwd=c(2,2,2), col=c("dodgerblue2","navy","darkmagenta"))
-#as temperature increases the probability of dying decreases
+#as the average temperature increases the probability of dying decreases
 
 ###PREC
 groups <- levels(factor(data$state))
