@@ -1,5 +1,6 @@
 ###GAM###
 df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
+indexes<-read.csv('data/new_data/sensitivity.csv')
 df_st <- df[df$state != "hawaii" & df$state != "other states",]
 
 df_coord <- read.csv("data/state_coords_lon_lat.csv")
@@ -71,22 +72,52 @@ df_abs$AverageTemperature<-scale(df_abs$AverageTemperature, center = TRUE, scale
 gam_tens_spacetime <- gam(colony_lost ~ offset(log(colony_max))
                           #+ s(I(Varroa.mites*Other.pests.parasites), bs="cr")
                           #+s(I(Varroa.mites*Pesticides), bs="cr") 
-                          + Precipitation_norm + AverageTemperature_norm
+                          + Precipitation + AverageTemperature
                           +s(Varroa.mites, bs="cr") + s(Other.pests.parasites, bs="cr")
                           + s(Pesticides, bs="cr")   
-                          + te(lon,lat,t, bs=c("tp","cr"), d=c(2,1), k=12), family=poisson, data=df_abs)
+                          + te(lon,lat,t, bs=c("tp","cr"), d=c(2,1), k=12), family=poisson(link="log"), data=df_abs)
 summary(gam_tens_spacetime)
 plot(gam_tens_spacetime)
+
+gam_tens_spacetime <- gam(colony_lost ~ 0+ offset(log(colony_max))
+                          + s(I(Varroa.mites*Other.pests.parasites), bs="cr")
+                          #+s(I(Varroa.mites*Pesticides), bs="cr") 
+                          #+ Precipitation + AverageTemperature
+                          +s(Varroa.mites, bs="cr") + s(Other.pests.parasites, bs="cr")
+                          + s(Pesticides, bs="cr")   
+                          + te(lon,lat,t, bs=c("tp","cr"), d=c(2,1), k=12), family=poisson(link="log"), data=df_abs)
+summary(gam_tens_spacetime)
+plot(gam_tens_spacetime)
+
+#MODELLO
+library(dplyr)
+
+df<- indexes%>%select(state,clusterMIN,clusterMAX,clusterAVG,clusterPREC,clusterPDSI)
+new_d<- merge(df,df_abs,by='state')
+
+gam_tens_space <- gam(colony_lost ~ offset(log(colony_max))
+                          #+ s(I(Varroa.mites*Other.pests.parasites), bs="cr")
+                          #+s(I(Varroa.mites*Pesticides), bs="cr") 
+                          #+ s(Precipitation_norm, bs="cr") + s(AverageTemperature_norm,bs="cr")
+                          + s(Varroa.mites,bs="cr")
+                          + clusterMIN + s(Other.pests.parasites, bs="cr")
+                          + s(Pesticides, bs="cr")   
+                          + te(lon,lat,t, bs=c("tp","cr"), d=c(2,1), k=12) 
+                          , family=poisson(link="log"), data=new_d)
+summary(gam_tens_space)
+plot(gam_tens_space)
+
 
 
 #modello4
 gam_tens_spacetime <- gam(colony_lost ~ colony_max
-                          #+ s(I(Varroa.mites*Other.pests.parasites), bs="cr")
-                          #+s(I(Varroa.mites*Pesticides), bs="cr") 
-                          + s(Precipitation, bs="ps") + AverageTemperature
-                          +s(Varroa.mites, bs="cr",k=40) + s(Other.pests.parasites, bs="cr")
-                          + s(Pesticides, bs="ps") + s(Disesases, bs="cr")  
-                          + te(lon,lat,t, bs=c("tp","cc"), d=c(2,1), k=12), data=df_abs)
+                          + s(I(Varroa.mites*Other.pests.parasites), bs="cr")
+                          +s(I(Varroa.mites*Pesticides), bs="cr") 
+                          + Precipitation + AverageTemperature
+                          +s(Varroa.mites, bs="cr") + s(Other.pests.parasites, bs="cr")
+                          + s(Pesticides, bs="cr") 
+                          #+ s(Disesases, bs="cr")  
+                          + te(lon,lat,t, bs=c("tp","cr"), d=c(2,1), k=10), data=df_abs)
 summary(gam_tens_spacetime)
 plot(gam_tens_spacetime)
 #l'interazione tra varroa e other pests porta a una crescita della loss fino a quando non sono presenti emtrambi in 

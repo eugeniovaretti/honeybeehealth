@@ -65,9 +65,9 @@ for(i in 1:n){
   }
 }
 
-data$time[34]=13
-data$time[34]=10
-data$time[35]=9
+data$time[17]=19
+data$time[21]=13
+data$time[45]=19
 data$time[26]=21
 data$time[45]=4
 data$time[20]=4
@@ -87,12 +87,12 @@ groups <- levels(factor(data$state))
 cluster_index<- cbind(state=groups)
 df <- data.frame(
   state = tolower(groups),
-  values = data$MinimumTemperature
+  values = data$clusterMIN
 )
-cluster_index <- cbind(cluster_index, temp_avg=data$MinimumTemperature)
+cluster_index <- cbind(cluster_index, temp_avg=data$clusterMIN)
 library(usmap)
-plot_usmap(data = df) + labs(title = "Cluster by temp min")
-                  +colors=c("forestgreen","firebrick1","yellow","red")
+plot_usmap(data = df) + labs(title = "Cluster by avg temp")
+                  +colors=c("forestgreen","firebrick1","dodgerblue2")
 
 
 fit.MIN <- survfit(Surv(time, status=="Event") ~ clusterMIN, data=data)
