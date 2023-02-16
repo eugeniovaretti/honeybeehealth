@@ -29,7 +29,7 @@ plot_clustering <- function(data, coord, loss, M = NULL, a = NULL, dataset_plot,
   posterior_unique_vals_ = NULL
   if(!is.null(unique_vals_chain))
   {
-  source("utils/unique_vals_given_clus.R")
+  source("utils_e/unique_vals_given_clus.R")
   posterior_unique_vals_ = unique_vals_given_clus(unique_vals_chain, data, best_clus$estimate)
   }
   # plots
