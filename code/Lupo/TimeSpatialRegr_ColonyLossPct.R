@@ -175,6 +175,7 @@ covariates[,6] <- as.numeric(df_covariates[,12]) #precipitation
 # Let's try with the covariate matrices inverted, meaning that, on the rows,
 # the data is listed with a state and all the possible times, followed
 # by the next state in alphabetical order with all the times, ...
+# (THIS SHOULD BE THE RIGHT APPROACH)
 
 df_covariates <- df_covariates %>% arrange(state, year, months)
 ncov <- 3

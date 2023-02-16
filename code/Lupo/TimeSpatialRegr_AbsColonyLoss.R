@@ -112,7 +112,7 @@ plot(st_geometry(orotl_sf), width = 3, add=T) #col="blue"
 #- Pesticides: 14
 
 df_covariates <- df_abs[,c(1,2,3,4,11,14)]
-df_covariates <- df_covariates %>% arrange(year, months, state)
+df_covariates <- df_covariates %>% arrange(state, year, months)
 
 #second alternative to build covariates matrix
 ncov <- 3
@@ -122,11 +122,7 @@ covariates[,2] <- as.numeric(df_covariates[,5]) #varroa
 covariates[,3] <- as.numeric(df_covariates[,6]) #pesticides
 
 #here the order of covariates for row is with time t associated to all the states,
-#followed by time t+1 associated to all the states...
-
-# Afterwards, try with the covariate matrices inverted, meaning that, on the rows,
-# the data is listed with a state and all the possible times, followed
-# by the next state in alphabetical order with all the times, ...
+#followed by time t+1 associated to all the states... (this is the right order!)
 
 start_time <- Sys.time()
 smoothing_abs_temp_cov_iso <- smooth.FEM.time(locations=data_locations, time_locations=time_locations,
@@ -321,7 +317,7 @@ plot(st_geometry(orotl_sf), width = 3, add=T) #col="blue"
 #- Pesticides: 14
 
 df_covariates <- df_abs[,c(1,2,3,4,11,14)]
-df_covariates <- df_covariates %>% arrange(year, months, state)
+df_covariates <- df_covariates %>% arrange(state, year, months)
 
 #second alternative to build covariates matrix
 ncov <- 3
@@ -331,11 +327,11 @@ covariates[,2] <- as.numeric(df_covariates[,5]) #varroa
 covariates[,3] <- as.numeric(df_covariates[,6]) #pesticides
 
 #here the order of covariates for row is with time t associated to all the states,
-#followed by time t+1 associated to all the states...
+#followed by time t+1 associated to all the states... (this is the right order!)
 
 # Afterwards, try with the covariate matrices inverted, meaning that, on the rows,
-# the data is listed with a state and all the possible times, followed
-# by the next state in alphabetical order with all the times, ...
+# the data is listed with state associated to all times, followed by the next state in
+#alphabetical order associated again to all times...
 
 start_time <- Sys.time()
 smoothing_abs_temp_cov <- smooth.FEM.time(locations=data_locations, time_locations=time_locations,

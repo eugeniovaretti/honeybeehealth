@@ -71,5 +71,18 @@ summary(gam_tensprod_temp)
 gam_tens_spacetime <- gam(colony_lost ~ colony_n + te(lon,lat,t, bs=c("tp","cr"), d=c(2,1), k=10), data=df_abs)
 summary(gam_tens_spacetime)
 
+
+#Marta
+gam_tens_spacetime <- gam(colony_lost ~ colony_max + s(I(Varroa.mites*Other.pests.parasites), bs="cr")
+                          +Varroa.mites:MaximumTemperature + Precipitation:Other.pests.parasites +
+                            #s(I(Pesticides:Precipitation), bs="cr")+
+                            s(Varroa.mites, bs="cr") + s(Other.pests.parasites, bs="cr")
+                          + s(Pesticides, bs="cr")   
+                          + te(lon,lat,t, bs=c("tp","cr"), d=c(2,1), k=10), data=df_abs, family="poisson")
+summary(gam_tens_spacetime)
+plot(gam_tens_spacetime)
+
 ## TRY WITH SHIFT
+
+
 

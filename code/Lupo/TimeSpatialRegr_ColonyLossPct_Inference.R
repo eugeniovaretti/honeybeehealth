@@ -108,22 +108,20 @@ df <- df[df$state != "hawaii" & df$state != "other states",]
 #Avg temp = 21
 df_covariates <- df[,c(1,2,3,11,12,13,14,15,16,17,18,20,21)]
 
-#First alternative to build covariates matrix
-ncov <- 4
+df_covariates <- df_covariates %>% arrange(state, year, months)
+ncov <- 3
 covariates <- matrix(NA,nrow=dim(df_covariates)[1],ncol=ncov)
 covariates[,1] <- as.numeric(df_covariates[,4]) #varroa
-covariates[,2] <- as.numeric(df_covariates[,7]) #pesticides
-covariates[,3] <- as.numeric(df_covariates[,8]) #other
-covariates[,4] <- as.numeric(df_covariates[,9]) #unknown
+covariates[,2] <- as.numeric(df_covariates[,6]) #diseases
+covariates[,3] <- as.numeric(df_covariates[,7]) #pesticides
+#covariates[,4] <- as.numeric(df_covariates[,8]) #other
+#covariates[,4] <- as.numeric(df_covariates[,9]) #unknown
 #covariates[,5] <- as.numeric(df_covariates[,11]) #min temp
 #covariates[,6] <- as.numeric(df_covariates[,12]) #precipitation
 
 # CHECK THE COVARIATE MATRIX IS IN THE RIGHT ORDER OF TIME AND SPACE: here
-#the order is with time t associated to all the states, followed by time t+1
-#associated to all the states...
-
-#QUESTION: does the matrix of covariates, in the rows, should have first the same state for each time
-#or first each time followed by all the state ?????
+#the order is with state associated to all times, followed by the next state in
+#alphabetical order associated again to all times...
 
 obj_inf <- inferenceDataObjectBuilder(test = 'sim', type = 'esf', component = "parametric",
                                       dim = 2, n_cov = ncov, beta0 = rep(0,ncov))
@@ -145,6 +143,7 @@ smooth_temp_inference$beta
 smooth_temp_inference$optimization$lambda_solution
 smooth_temp_inference$optimization$GCV_vector
 smooth_temp_inference$inference$beta
+#resulting model is saved as "result.RData"
 
 #3d plot
 time_instant <- 5 #from 1 to 29
