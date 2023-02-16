@@ -1,0 +1,14 @@
+---
+title: "Main"
+output: html_notebook
+---
+#Importazione dataset:
+```{r setup, include=FALSE}
+library(explore)
+library(dplyr) 
+
+# Get the Data
+colony <- read.csv("../data/colony.csv")
+stressor <- read.csv("../data/stressor.csv")
+cleaned_data <- read.csv("../data/cleaned_data.csv")
+```

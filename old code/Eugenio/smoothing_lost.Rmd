@@ -1,0 +1,85 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+groups <- levels(factor(colony$state))
+death_smooth <- colony[,c(1,2,3,6)]
+death_smooth_new <- death_smooth %>% tidyr::pivot_wider(
+  names_from = state, 
+  values_from = colony_lost,
+  values_fill = 0
+)
+```
+
+```{r}
+library(fda)
+# First of all we smooth the data. We choose a Fourier basis
+# (periodic). We need to set the dimension of the basis
+  
+  #ATTENZIONE! se giorni sulle ascisse -> t(A) in caso
+  
+  time <- 1:30
+  data_F <- as.matrix(death_smooth_new[,-c(1,2,48,49)])
+  na_data_F <- which(is.na(data_F))
+  data_F[is.na(data_F)]<-0
+  
+  # Choice 1: we set a high dimensional basis (interpolating)
+  # Pros: no loss of information
+  # Cons: possible overfitting 
+  nbasis <- 30
+  basis <- create.fourier.basis(rangeval=c(1,30),nbasis=15) 
+  data_F.fd <- Data2fd(y = data_F,argvals = time, basisobj = basis)
+  plot.fd(data_F.fd)
+  # usare fable (previsione timeseries), fdacluster , funHDDC
+```
+
+```{r}
+library(tidyverse)
+death_smooth_c <- replace(death_smooth$months, levels(factor(death_smooth$months)), )
+prevision_d <- death_smooth %>%
+  unite('Period', year:months, sep=" ", remove = T )
+
+prevision_d
+as_tsibble(prevision_d, key = state, index = as.Date(year))
+```
+
+
+```{r}
+#install.packages("fable")
+library(fable)
+library(tsibble)
+library(tsibbledata)
+library(lubridate)
+library(dplyr)
+
+
+t <- aus_retail %>%
+  filter(
+    State %in% c("New South Wales", "Victoria"),
+    Industry == "Department stores"
+  ) %>% 
+  model(
+    ets = ETS(box_cox(Turnover, 0.3)),
+    arima = ARIMA(log(Turnover)),
+    snaive = SNAIVE(Turnover)
+  ) %>%
+  forecast(h = "2 years") %>% 
+  autoplot(filter(aus_retail, year(Month) > 2010), level = NULL)
+
+prev %>%
+  filter(
+    state %in% c("Alabama", "California")
+  ) %>% 
+  model(
+    ets = ETS(box_cox(colony_lost, 0.3)),
+    arima = ARIMA(log(colony_lost)),
+    snaive = SNAIVE(colony_lost)
+  ) %>%
+  forecast(h = "2 years") %>% 
+  autoplot(filter(death_smooth, year(year) > 2019), level = NULL)
+```
+
+  

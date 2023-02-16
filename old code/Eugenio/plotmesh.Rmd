@@ -1,0 +1,71 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+##Plotmesh
+
+## Plotting the mesh
+```{r}
+library(ISLR2)
+library(car)
+library(mgcv)
+library(rgl)
+library(splines)
+library(pbapply)
+library(np)
+library(fda)
+library(dplyr)
+
+library(RColorBrewer)
+library(sf)
+library(fdaPDE)
+library(viridis)
+library(latex2exp)
+######### Plot Mesh ###########
+
+df_coord <- read.csv("../../data/state_coords_lon_lat.csv")
+#remove 'hawaii' and remove Na (for "other states"):
+df_coord <- df_coord[df_coord$state != "hawaii",]
+df_coord <- na.omit(df_coord)
+
+#shapefile for US boundaries
+shapefile <- "../Lupo/cb_2018_us_nation_5m/cb_2018_us_nation_5m.shp"
+orotl_sf <- st_read(shapefile)
+
+#boundary points:
+boundary <- read.table("boundary_gg.txt", head=T)
+
+#data locations matrix (in long-lat coordinates)
+data_locations <- matrix(NA,nrow=dim(df_coord)[1],ncol=2)
+data_locations[,1] <- as.numeric(df_coord[,1])
+data_locations[,2] <- as.numeric(df_coord[,2])
+
+# create the matrix p with all the data locations and boundary locations
+p <- matrix(data=NA,nrow=dim(data_locations)[1]+dim(boundary)[1],ncol=2)
+p[,1] <- c(data_locations[,1],boundary[,1])
+p[,2] <- c(data_locations[,2],boundary[,2])
+plot(p,pch=16,cex=0.4,col=c(rep('red',dim(data_locations)[1]),rep('black',dim(boundary)[1])))
+
+# create the boundary segments (each row corresponds to an edge, that goes from
+# the vertex in the first column to the one in the second column)
+isboundary <- matrix(data=NA,nrow=dim(boundary)[1],ncol=2)
+isboundary[,1] <- (dim(data_locations)[1]+1):(dim(data_locations)[1]+dim(boundary)[1])
+isboundary[,2] <- c((dim(data_locations)[1]+2):(dim(data_locations)[1]+dim(boundary)[1]),(dim(data_locations)[1]+1))
+
+# create and plot the mesh
+mesh_1 <- create.mesh.2D(p, order = 1, segments = isboundary)
+mesh <- refine.mesh.2D(mesh_1, maximum_area=0.5, minimum_angle = 30)
+par(mar=c(0,0,0,0))
+plot(mesh,asp=1, pch=".")
+box()
+points(mesh$nodes[which(mesh$nodesmarkers==0),], pch=16,cex=0.6)
+points(mesh$nodes[which(mesh$nodesmarkers==1),], pch=16, col='red',cex=0.6)
+points(p,pch=16,cex=1.5,col=c(rep('blue',dim(data_locations)[1]),rep('orange',dim(boundary)[1])))
+plot(st_geometry(orotl_sf), lwd = 3, add=T) #col="blue"
+
+```
+
+```{r}
+
+```
+

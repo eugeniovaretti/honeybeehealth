@@ -1,0 +1,737 @@
+year_revisited,state,season,colony_lost_pct
+2015,alabama,Summer,14.0
+2015,alabama,Winter,26.0
+2015,arizona,Summer,16.0
+2015,arizona,Winter,13.0
+2015,arkansas,Summer,22.0
+2015,arkansas,Winter,11.0
+2015,california,Summer,10.0
+2015,california,Winter,15.0
+2015,colorado,Summer,11.5
+2015,colorado,Winter,12.0
+2015,connecticut,Summer,2.0
+2015,connecticut,Winter,22.0
+2015,florida,Summer,16.0
+2015,florida,Winter,13.0
+2015,georgia,Summer,15.5
+2015,georgia,Winter,14.0
+2015,hawaii,Summer,10.0
+2015,hawaii,Winter,4.0
+2015,idaho,Summer,10.0
+2015,idaho,Winter,4.0
+2015,illinois,Summer,12.0
+2015,illinois,Winter,40.0
+2015,indiana,Summer,10.5
+2015,indiana,Winter,22.0
+2015,iowa,Summer,7.0
+2015,iowa,Winter,18.0
+2015,kansas,Summer,10.5
+2015,kansas,Winter,23.0
+2015,kentucky,Summer,12.5
+2015,kentucky,Winter,39.0
+2015,louisiana,Summer,4.0
+2015,louisiana,Winter,16.0
+2015,maine,Summer,9.5
+2015,maine,Winter,6.0
+2015,maryland,Summer,6.0
+2015,maryland,Winter,41.0
+2015,massachusetts,Summer,5.0
+2015,massachusetts,Winter,22.0
+2015,michigan,Summer,9.5
+2015,michigan,Winter,19.0
+2015,minnesota,Summer,17.0
+2015,minnesota,Winter,5.0
+2015,mississippi,Summer,11.0
+2015,mississippi,Winter,11.0
+2015,missouri,Summer,6.5
+2015,missouri,Winter,15.0
+2015,montana,Summer,4.5
+2015,montana,Winter,6.0
+2015,nebraska,Summer,7.0
+2015,nebraska,Winter,8.0
+2015,new jersey,Summer,5.5
+2015,new jersey,Winter,12.0
+2015,new mexico,Summer,18.5
+2015,new mexico,Winter,10.0
+2015,new york,Summer,8.5
+2015,new york,Winter,22.0
+2015,north carolina,Summer,10.0
+2015,north carolina,Winter,27.0
+2015,north dakota,Summer,12.5
+2015,north dakota,Winter,1.0
+2015,ohio,Summer,9.5
+2015,ohio,Winter,48.0
+2015,oklahoma,Summer,4.5
+2015,oklahoma,Winter,23.0
+2015,oregon,Summer,7.5
+2015,oregon,Winter,8.0
+2015,other states,Summer,12.0
+2015,other states,Winter,23.0
+2015,pennsylvania,Summer,7.5
+2015,pennsylvania,Winter,31.0
+2015,south carolina,Summer,11.0
+2015,south carolina,Winter,15.0
+2015,south dakota,Summer,12.5
+2015,south dakota,Winter,5.0
+2015,tennessee,Summer,11.0
+2015,tennessee,Winter,21.0
+2015,texas,Summer,11.5
+2015,texas,Winter,10.0
+2015,utah,Summer,17.5
+2015,utah,Winter,14.0
+2015,vermont,Summer,1.5
+2015,vermont,Winter,13.0
+2015,virginia,Summer,6.5
+2015,virginia,Winter,28.0
+2015,washington,Summer,8.0
+2015,washington,Winter,13.0
+2015,west virginia,Summer,8.0
+2015,west virginia,Winter,30.0
+2015,wisconsin,Summer,11.0
+2015,wisconsin,Winter,28.0
+2015,wyoming,Summer,10.0
+2015,wyoming,Winter,17.0
+2016,alabama,Summer,13.5
+2016,alabama,Winter,15.5
+2016,arizona,Summer,17.5
+2016,arizona,Winter,23.5
+2016,arkansas,Summer,9.5
+2016,arkansas,Winter,14.0
+2016,california,Summer,9.5
+2016,california,Winter,13.0
+2016,colorado,Summer,12.0
+2016,colorado,Winter,9.5
+2016,connecticut,Summer,6.5
+2016,connecticut,Winter,8.5
+2016,florida,Summer,11.5
+2016,florida,Winter,14.0
+2016,georgia,Summer,11.5
+2016,georgia,Winter,15.5
+2016,hawaii,Summer,5.0
+2016,hawaii,Winter,3.5
+2016,idaho,Summer,9.0
+2016,idaho,Winter,12.0
+2016,illinois,Summer,10.0
+2016,illinois,Winter,10.0
+2016,indiana,Summer,4.5
+2016,indiana,Winter,11.0
+2016,iowa,Summer,10.0
+2016,iowa,Winter,17.0
+2016,kansas,Summer,24.5
+2016,kansas,Winter,31.0
+2016,kentucky,Summer,10.5
+2016,kentucky,Winter,16.5
+2016,louisiana,Summer,10.0
+2016,louisiana,Winter,13.5
+2016,maine,Summer,12.5
+2016,maine,Winter,3.0
+2016,maryland,Summer,3.5
+2016,maryland,Winter,9.5
+2016,massachusetts,Summer,5.0
+2016,massachusetts,Winter,9.0
+2016,michigan,Summer,10.5
+2016,michigan,Winter,12.0
+2016,minnesota,Summer,14.5
+2016,minnesota,Winter,12.0
+2016,mississippi,Summer,10.5
+2016,mississippi,Winter,9.5
+2016,missouri,Summer,5.5
+2016,missouri,Winter,9.0
+2016,montana,Summer,5.5
+2016,montana,Winter,4.5
+2016,nebraska,Summer,16.0
+2016,nebraska,Winter,7.0
+2016,new jersey,Summer,5.0
+2016,new jersey,Winter,10.0
+2016,new mexico,Summer,19.5
+2016,new mexico,Winter,15.5
+2016,new york,Summer,13.5
+2016,new york,Winter,11.0
+2016,north carolina,Summer,6.5
+2016,north carolina,Winter,10.5
+2016,north dakota,Summer,9.0
+2016,north dakota,Winter,9.5
+2016,ohio,Summer,9.0
+2016,ohio,Winter,15.5
+2016,oklahoma,Summer,8.5
+2016,oklahoma,Winter,15.5
+2016,oregon,Summer,5.0
+2016,oregon,Winter,5.5
+2016,other states,Summer,11.5
+2016,other states,Winter,12.0
+2016,pennsylvania,Summer,7.5
+2016,pennsylvania,Winter,17.0
+2016,south carolina,Summer,8.5
+2016,south carolina,Winter,17.0
+2016,south dakota,Summer,9.5
+2016,south dakota,Winter,8.5
+2016,tennessee,Summer,8.5
+2016,tennessee,Winter,15.0
+2016,texas,Summer,9.0
+2016,texas,Winter,9.5
+2016,utah,Summer,14.5
+2016,utah,Winter,10.0
+2016,vermont,Summer,3.0
+2016,vermont,Winter,11.0
+2016,virginia,Summer,7.0
+2016,virginia,Winter,13.5
+2016,washington,Summer,5.5
+2016,washington,Winter,8.0
+2016,west virginia,Summer,8.5
+2016,west virginia,Winter,15.0
+2016,wisconsin,Summer,11.5
+2016,wisconsin,Winter,14.5
+2016,wyoming,Summer,14.0
+2016,wyoming,Winter,5.0
+2017,alabama,Summer,8.0
+2017,alabama,Winter,16.0
+2017,arizona,Summer,14.0
+2017,arizona,Winter,20.0
+2017,arkansas,Summer,14.5
+2017,arkansas,Winter,13.5
+2017,california,Summer,9.5
+2017,california,Winter,14.0
+2017,colorado,Summer,12.5
+2017,colorado,Winter,10.0
+2017,connecticut,Summer,4.5
+2017,connecticut,Winter,10.0
+2017,florida,Summer,18.0
+2017,florida,Winter,12.5
+2017,georgia,Summer,11.0
+2017,georgia,Winter,10.5
+2017,hawaii,Summer,4.0
+2017,hawaii,Winter,4.0
+2017,idaho,Summer,11.5
+2017,idaho,Winter,10.0
+2017,illinois,Summer,9.0
+2017,illinois,Winter,17.0
+2017,indiana,Summer,9.0
+2017,indiana,Winter,20.5
+2017,iowa,Summer,7.5
+2017,iowa,Winter,14.0
+2017,kansas,Summer,15.5
+2017,kansas,Winter,26.0
+2017,kentucky,Summer,15.0
+2017,kentucky,Winter,16.0
+2017,louisiana,Summer,12.5
+2017,louisiana,Winter,5.0
+2017,maine,Summer,5.0
+2017,maine,Winter,20.0
+2017,maryland,Summer,10.5
+2017,maryland,Winter,14.0
+2017,massachusetts,Summer,5.0
+2017,massachusetts,Winter,27.0
+2017,michigan,Summer,12.0
+2017,michigan,Winter,10.0
+2017,minnesota,Summer,12.0
+2017,minnesota,Winter,10.5
+2017,mississippi,Summer,8.0
+2017,mississippi,Winter,6.0
+2017,missouri,Summer,5.0
+2017,missouri,Winter,11.5
+2017,montana,Summer,7.0
+2017,montana,Winter,7.0
+2017,nebraska,Summer,5.5
+2017,nebraska,Winter,9.0
+2017,new jersey,Summer,2.5
+2017,new jersey,Winter,5.5
+2017,new mexico,Summer,26.5
+2017,new mexico,Winter,30.5
+2017,new york,Summer,7.0
+2017,new york,Winter,18.0
+2017,north carolina,Summer,12.0
+2017,north carolina,Winter,16.5
+2017,north dakota,Summer,7.0
+2017,north dakota,Winter,6.0
+2017,ohio,Summer,7.5
+2017,ohio,Winter,18.0
+2017,oklahoma,Summer,6.5
+2017,oklahoma,Winter,4.0
+2017,oregon,Summer,9.0
+2017,oregon,Winter,8.5
+2017,other states,Summer,6.5
+2017,other states,Winter,16.5
+2017,pennsylvania,Summer,5.5
+2017,pennsylvania,Winter,18.5
+2017,south carolina,Summer,8.0
+2017,south carolina,Winter,8.5
+2017,south dakota,Summer,9.0
+2017,south dakota,Winter,7.0
+2017,tennessee,Summer,15.5
+2017,tennessee,Winter,14.0
+2017,texas,Summer,10.5
+2017,texas,Winter,13.5
+2017,utah,Summer,14.0
+2017,utah,Winter,9.5
+2017,vermont,Summer,2.0
+2017,vermont,Winter,5.5
+2017,virginia,Summer,10.5
+2017,virginia,Winter,14.0
+2017,washington,Summer,12.0
+2017,washington,Winter,9.0
+2017,west virginia,Summer,7.5
+2017,west virginia,Winter,11.5
+2017,wisconsin,Summer,11.5
+2017,wisconsin,Winter,16.5
+2017,wyoming,Summer,9.5
+2017,wyoming,Winter,14.5
+2018,alabama,Summer,14.0
+2018,alabama,Winter,12.0
+2018,arizona,Summer,19.5
+2018,arizona,Winter,22.5
+2018,arkansas,Summer,10.5
+2018,arkansas,Winter,32.0
+2018,california,Summer,9.5
+2018,california,Winter,13.5
+2018,colorado,Summer,12.5
+2018,colorado,Winter,22.0
+2018,connecticut,Summer,3.5
+2018,connecticut,Winter,6.5
+2018,florida,Summer,17.0
+2018,florida,Winter,18.0
+2018,georgia,Summer,12.5
+2018,georgia,Winter,16.0
+2018,hawaii,Summer,6.5
+2018,hawaii,Winter,5.0
+2018,idaho,Summer,10.5
+2018,idaho,Winter,9.0
+2018,illinois,Summer,14.0
+2018,illinois,Winter,18.0
+2018,indiana,Summer,14.0
+2018,indiana,Winter,14.0
+2018,iowa,Summer,7.5
+2018,iowa,Winter,9.5
+2018,kansas,Summer,12.0
+2018,kansas,Winter,19.5
+2018,kentucky,Summer,13.5
+2018,kentucky,Winter,17.0
+2018,louisiana,Summer,3.5
+2018,louisiana,Winter,6.0
+2018,maine,Summer,10.0
+2018,maine,Winter,11.5
+2018,maryland,Summer,5.0
+2018,maryland,Winter,16.0
+2018,massachusetts,Summer,12.5
+2018,massachusetts,Winter,22.5
+2018,michigan,Summer,10.0
+2018,michigan,Winter,16.0
+2018,minnesota,Summer,15.0
+2018,minnesota,Winter,6.5
+2018,mississippi,Summer,12.5
+2018,mississippi,Winter,10.5
+2018,missouri,Summer,5.5
+2018,missouri,Winter,13.5
+2018,montana,Summer,7.5
+2018,montana,Winter,5.5
+2018,nebraska,Summer,8.5
+2018,nebraska,Winter,10.5
+2018,new jersey,Summer,2.0
+2018,new jersey,Winter,9.5
+2018,new mexico,Summer,9.0
+2018,new mexico,Winter,38.0
+2018,new york,Summer,6.5
+2018,new york,Winter,11.0
+2018,north carolina,Summer,13.0
+2018,north carolina,Winter,22.5
+2018,north dakota,Summer,8.5
+2018,north dakota,Winter,4.5
+2018,ohio,Summer,10.0
+2018,ohio,Winter,23.5
+2018,oklahoma,Summer,14.5
+2018,oklahoma,Winter,10.5
+2018,oregon,Summer,7.0
+2018,oregon,Winter,8.0
+2018,other states,Summer,6.5
+2018,other states,Winter,16.0
+2018,pennsylvania,Summer,5.0
+2018,pennsylvania,Winter,22.5
+2018,south carolina,Summer,10.5
+2018,south carolina,Winter,12.5
+2018,south dakota,Summer,10.5
+2018,south dakota,Winter,3.5
+2018,tennessee,Summer,12.5
+2018,tennessee,Winter,23.0
+2018,texas,Summer,9.0
+2018,texas,Winter,9.0
+2018,utah,Summer,11.0
+2018,utah,Winter,5.5
+2018,vermont,Summer,4.5
+2018,vermont,Winter,11.0
+2018,virginia,Summer,8.0
+2018,virginia,Winter,21.0
+2018,washington,Summer,10.0
+2018,washington,Winter,5.5
+2018,west virginia,Summer,7.5
+2018,west virginia,Winter,21.5
+2018,wisconsin,Summer,13.0
+2018,wisconsin,Winter,15.5
+2018,wyoming,Summer,9.5
+2018,wyoming,Winter,7.0
+2019,alabama,Summer,14.0
+2019,alabama,Winter,12.5
+2019,arizona,Summer,7.0
+2019,arizona,Winter,15.0
+2019,arkansas,Summer,10.0
+2019,arkansas,Winter,21.0
+2019,california,Summer,13.0
+2019,california,Winter,14.5
+2019,colorado,Summer,26.0
+2019,colorado,Winter,8.0
+2019,connecticut,Summer,5.0
+2019,connecticut,Winter,7.5
+2019,florida,Summer,8.0
+2019,florida,Winter,15.0
+2019,georgia,Summer,11.0
+2019,georgia,Winter,11.5
+2019,hawaii,Summer,1.0
+2019,hawaii,Winter,4.0
+2019,idaho,Summer,9.0
+2019,idaho,Winter,9.0
+2019,illinois,Summer,7.0
+2019,illinois,Winter,19.0
+2019,indiana,Summer,6.0
+2019,indiana,Winter,24.5
+2019,iowa,Summer,10.0
+2019,iowa,Winter,17.0
+2019,kansas,Summer,25.0
+2019,kansas,Winter,25.5
+2019,kentucky,Summer,10.0
+2019,kentucky,Winter,24.5
+2019,louisiana,Summer,9.0
+2019,louisiana,Winter,6.0
+2019,maine,Summer,9.0
+2019,maine,Winter,9.5
+2019,maryland,Summer,11.0
+2019,maryland,Winter,18.5
+2019,massachusetts,Summer,8.0
+2019,massachusetts,Winter,15.5
+2019,michigan,Summer,11.0
+2019,michigan,Winter,14.0
+2019,minnesota,Summer,16.0
+2019,minnesota,Winter,9.0
+2019,mississippi,Summer,13.0
+2019,mississippi,Winter,8.0
+2019,missouri,Summer,5.0
+2019,missouri,Winter,11.0
+2019,montana,Summer,12.0
+2019,montana,Winter,5.0
+2019,nebraska,Summer,9.0
+2019,nebraska,Winter,13.0
+2019,new jersey,Summer,4.0
+2019,new jersey,Winter,6.5
+2019,new mexico,Summer,3.0
+2019,new mexico,Winter,21.0
+2019,new york,Summer,12.0
+2019,new york,Winter,11.0
+2019,north carolina,Summer,12.0
+2019,north carolina,Winter,14.5
+2019,north dakota,Summer,15.0
+2019,north dakota,Winter,4.0
+2019,ohio,Summer,8.0
+2019,ohio,Winter,21.0
+2019,oklahoma,Summer,12.0
+2019,oklahoma,Winter,2.0
+2019,oregon,Summer,7.0
+2019,oregon,Winter,10.5
+2019,other states,Summer,15.0
+2019,other states,Winter,11.5
+2019,pennsylvania,Summer,5.0
+2019,pennsylvania,Winter,19.0
+2019,south carolina,Summer,15.0
+2019,south carolina,Winter,8.5
+2019,south dakota,Summer,20.0
+2019,south dakota,Winter,10.5
+2019,tennessee,Summer,32.0
+2019,tennessee,Winter,21.5
+2019,texas,Summer,8.0
+2019,texas,Winter,6.0
+2019,utah,Summer,10.0
+2019,utah,Winter,14.5
+2019,vermont,Summer,2.0
+2019,vermont,Winter,3.5
+2019,virginia,Summer,6.0
+2019,virginia,Winter,18.0
+2019,washington,Summer,22.0
+2019,washington,Winter,11.5
+2019,west virginia,Summer,11.0
+2019,west virginia,Winter,18.0
+2019,wisconsin,Summer,10.0
+2019,wisconsin,Winter,20.0
+2019,wyoming,Summer,11.0
+2019,wyoming,Winter,5.5
+2020,alabama,Summer,33.5
+2020,alabama,Winter,8.5
+2020,arizona,Summer,16.0
+2020,arizona,Winter,23.0
+2020,arkansas,Summer,9.5
+2020,arkansas,Winter,9.0
+2020,california,Summer,9.0
+2020,california,Winter,11.5
+2020,colorado,Summer,16.0
+2020,colorado,Winter,17.5
+2020,connecticut,Summer,3.5
+2020,connecticut,Winter,8.5
+2020,florida,Summer,13.0
+2020,florida,Winter,10.0
+2020,georgia,Summer,10.5
+2020,georgia,Winter,13.5
+2020,hawaii,Summer,1.5
+2020,hawaii,Winter,9.5
+2020,idaho,Summer,17.5
+2020,idaho,Winter,9.5
+2020,illinois,Summer,11.5
+2020,illinois,Winter,17.0
+2020,indiana,Summer,9.5
+2020,indiana,Winter,11.0
+2020,iowa,Summer,8.5
+2020,iowa,Winter,16.0
+2020,kansas,Summer,11.0
+2020,kansas,Winter,12.5
+2020,kentucky,Summer,11.5
+2020,kentucky,Winter,8.0
+2020,louisiana,Summer,4.0
+2020,louisiana,Winter,7.5
+2020,maine,Summer,9.0
+2020,maine,Winter,9.5
+2020,maryland,Summer,8.5
+2020,maryland,Winter,20.5
+2020,massachusetts,Summer,4.0
+2020,massachusetts,Winter,18.0
+2020,michigan,Summer,17.0
+2020,michigan,Winter,10.0
+2020,minnesota,Summer,9.5
+2020,minnesota,Winter,9.0
+2020,mississippi,Summer,9.0
+2020,mississippi,Winter,15.0
+2020,missouri,Summer,7.5
+2020,missouri,Winter,40.0
+2020,montana,Summer,4.0
+2020,montana,Winter,4.5
+2020,nebraska,Summer,7.0
+2020,nebraska,Winter,5.5
+2020,new jersey,Summer,7.5
+2020,new jersey,Winter,4.0
+2020,new mexico,Summer,23.0
+2020,new mexico,Winter,1.0
+2020,new york,Summer,6.5
+2020,new york,Winter,11.0
+2020,north carolina,Summer,11.5
+2020,north carolina,Winter,14.0
+2020,north dakota,Summer,8.0
+2020,north dakota,Winter,7.5
+2020,ohio,Summer,9.5
+2020,ohio,Winter,21.5
+2020,oklahoma,Summer,11.5
+2020,oklahoma,Winter,5.5
+2020,oregon,Summer,6.5
+2020,oregon,Winter,8.0
+2020,other states,Summer,10.5
+2020,other states,Winter,9.0
+2020,pennsylvania,Summer,5.5
+2020,pennsylvania,Winter,13.0
+2020,south carolina,Summer,11.0
+2020,south carolina,Winter,11.0
+2020,south dakota,Summer,15.0
+2020,south dakota,Winter,5.0
+2020,tennessee,Summer,12.0
+2020,tennessee,Winter,15.5
+2020,texas,Summer,7.0
+2020,texas,Winter,8.5
+2020,utah,Summer,8.0
+2020,utah,Winter,10.0
+2020,vermont,Summer,3.0
+2020,vermont,Winter,5.0
+2020,virginia,Summer,14.5
+2020,virginia,Winter,15.5
+2020,washington,Summer,5.0
+2020,washington,Winter,7.5
+2020,west virginia,Summer,7.5
+2020,west virginia,Winter,16.5
+2020,wisconsin,Summer,7.5
+2020,wisconsin,Winter,12.5
+2020,wyoming,Summer,9.0
+2020,wyoming,Winter,6.5
+2021,alabama,Summer,21.5
+2021,alabama,Winter,8.5
+2021,arizona,Summer,19.0
+2021,arizona,Winter,19.0
+2021,arkansas,Summer,11.0
+2021,arkansas,Winter,16.0
+2021,california,Summer,7.5
+2021,california,Winter,14.5
+2021,colorado,Summer,21.0
+2021,colorado,Winter,15.0
+2021,connecticut,Summer,2.5
+2021,connecticut,Winter,15.0
+2021,florida,Summer,13.0
+2021,florida,Winter,10.0
+2021,georgia,Summer,17.0
+2021,georgia,Winter,17.0
+2021,hawaii,Summer,3.5
+2021,hawaii,Winter,8.0
+2021,idaho,Summer,9.5
+2021,idaho,Winter,9.5
+2021,illinois,Summer,6.5
+2021,illinois,Winter,18.0
+2021,indiana,Summer,7.0
+2021,indiana,Winter,16.0
+2021,iowa,Summer,8.0
+2021,iowa,Winter,10.5
+2021,kansas,Summer,21.0
+2021,kansas,Winter,26.0
+2021,kentucky,Summer,6.0
+2021,kentucky,Winter,14.5
+2021,louisiana,Summer,7.5
+2021,louisiana,Winter,8.0
+2021,maine,Summer,10.0
+2021,maine,Winter,5.5
+2021,maryland,Summer,6.0
+2021,maryland,Winter,19.0
+2021,massachusetts,Summer,7.5
+2021,massachusetts,Winter,12.0
+2021,michigan,Summer,5.0
+2021,michigan,Winter,6.0
+2021,minnesota,Summer,6.5
+2021,minnesota,Winter,6.5
+2021,mississippi,Summer,11.5
+2021,mississippi,Winter,12.5
+2021,missouri,Summer,10.5
+2021,missouri,Winter,13.5
+2021,montana,Summer,4.0
+2021,montana,Winter,8.0
+2021,nebraska,Summer,8.5
+2021,nebraska,Winter,10.0
+2021,new jersey,Summer,2.0
+2021,new jersey,Winter,2.5
+2021,new mexico,Summer,6.5
+2021,new mexico,Winter,5.0
+2021,new york,Summer,7.0
+2021,new york,Winter,12.0
+2021,north carolina,Summer,9.5
+2021,north carolina,Winter,14.0
+2021,north dakota,Summer,6.5
+2021,north dakota,Winter,5.0
+2021,ohio,Summer,7.0
+2021,ohio,Winter,15.5
+2021,oklahoma,Summer,14.5
+2021,oklahoma,Winter,5.0
+2021,oregon,Summer,7.0
+2021,oregon,Winter,8.5
+2021,other states,Summer,3.5
+2021,other states,Winter,15.5
+2021,pennsylvania,Summer,7.5
+2021,pennsylvania,Winter,15.5
+2021,south carolina,Summer,10.0
+2021,south carolina,Winter,10.5
+2021,south dakota,Summer,7.5
+2021,south dakota,Winter,4.5
+2021,tennessee,Summer,6.5
+2021,tennessee,Winter,10.5
+2021,texas,Summer,10.0
+2021,texas,Winter,12.5
+2021,utah,Summer,10.0
+2021,utah,Winter,13.0
+2021,vermont,Summer,0.5
+2021,vermont,Winter,10.0
+2021,virginia,Summer,7.0
+2021,virginia,Winter,15.5
+2021,washington,Summer,4.0
+2021,washington,Winter,12.0
+2021,west virginia,Summer,4.5
+2021,west virginia,Winter,10.0
+2021,wisconsin,Summer,7.5
+2021,wisconsin,Winter,9.5
+2021,wyoming,Summer,7.5
+2021,wyoming,Winter,10.5
+2022,alabama,Summer,11.0
+2022,alabama,Winter,11.0
+2022,arizona,Summer,10.0
+2022,arizona,Winter,16.0
+2022,arkansas,Summer,13.0
+2022,arkansas,Winter,7.5
+2022,california,Summer,8.0
+2022,california,Winter,8.0
+2022,colorado,Summer,7.0
+2022,colorado,Winter,9.0
+2022,connecticut,Summer,1.0
+2022,connecticut,Winter,8.0
+2022,florida,Summer,11.0
+2022,florida,Winter,10.0
+2022,georgia,Summer,19.0
+2022,georgia,Winter,15.0
+2022,hawaii,Summer,2.0
+2022,hawaii,Winter,4.5
+2022,idaho,Summer,13.0
+2022,idaho,Winter,7.0
+2022,illinois,Summer,12.0
+2022,illinois,Winter,14.5
+2022,indiana,Summer,16.0
+2022,indiana,Winter,19.0
+2022,iowa,Summer,8.0
+2022,iowa,Winter,9.0
+2022,kansas,Summer,13.0
+2022,kansas,Winter,18.0
+2022,kentucky,Summer,6.0
+2022,kentucky,Winter,11.0
+2022,louisiana,Summer,4.0
+2022,louisiana,Winter,11.0
+2022,maine,Summer,5.0
+2022,maine,Winter,9.0
+2022,maryland,Summer,5.0
+2022,maryland,Winter,18.5
+2022,massachusetts,Summer,2.0
+2022,massachusetts,Winter,9.5
+2022,michigan,Summer,4.0
+2022,michigan,Winter,6.0
+2022,minnesota,Summer,1.0
+2022,minnesota,Winter,6.5
+2022,mississippi,Summer,9.0
+2022,mississippi,Winter,11.0
+2022,missouri,Summer,14.0
+2022,missouri,Winter,7.5
+2022,montana,Summer,1.0
+2022,montana,Winter,9.0
+2022,nebraska,Summer,5.0
+2022,nebraska,Winter,10.0
+2022,new jersey,Summer,1.0
+2022,new jersey,Winter,3.0
+2022,new mexico,Summer,23.0
+2022,new mexico,Winter,29.5
+2022,new york,Summer,4.0
+2022,new york,Winter,22.5
+2022,north carolina,Summer,4.0
+2022,north carolina,Winter,10.0
+2022,north dakota,Summer,4.0
+2022,north dakota,Winter,3.0
+2022,ohio,Summer,3.0
+2022,ohio,Winter,10.0
+2022,oklahoma,Summer,6.0
+2022,oklahoma,Winter,11.0
+2022,oregon,Summer,4.0
+2022,oregon,Winter,7.5
+2022,other states,Summer,3.0
+2022,other states,Winter,8.0
+2022,pennsylvania,Summer,3.0
+2022,pennsylvania,Winter,10.0
+2022,south carolina,Summer,11.0
+2022,south carolina,Winter,14.0
+2022,south dakota,Summer,2.0
+2022,south dakota,Winter,5.0
+2022,tennessee,Summer,38.0
+2022,tennessee,Winter,15.5
+2022,texas,Summer,10.0
+2022,texas,Winter,8.5
+2022,utah,Summer,15.0
+2022,utah,Winter,11.0
+2022,vermont,Summer,2.0
+2022,vermont,Winter,3.0
+2022,virginia,Summer,6.0
+2022,virginia,Winter,14.0
+2022,washington,Summer,6.0
+2022,washington,Winter,7.5
+2022,west virginia,Summer,3.0
+2022,west virginia,Winter,12.5
+2022,wisconsin,Summer,3.0
+2022,wisconsin,Winter,8.5
+2022,wyoming,Summer,8.0
+2022,wyoming,Winter,6.5
