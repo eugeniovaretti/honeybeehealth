@@ -16,7 +16,7 @@ The repository contains different files to perform the analysis
 - `Functional_Depth_Measure.R`
 - `Functional_Permutation_Tests.R`
 - `paired univariate permutation test.Rmd`
-- `anova_for_varroa.Rmd
+- `anova_for_varroa.Rmd-`
 - `Multivariate_Depth_Measure.R`
 
 - `Survival.Rmd`
