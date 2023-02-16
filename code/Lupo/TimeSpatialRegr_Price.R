@@ -125,7 +125,7 @@ covariates[,1] <- as.numeric(df_covariates[,4]) #varroa
 #covariates[,2] <- as.numeric(df_covariates[,6]) #diseases
 covariates[,2] <- as.numeric(df_covariates[,7]) #pesticides
 #covariates[,4] <- as.numeric(df_covariates[,8]) #other
-#covariates[,4] <- as.numeric(df_covariates[,9]) #unknown
+#covariates[,5] <- as.numeric(df_covariates[,9]) #unknown
 #covariates[,5] <- as.numeric(df_covariates[,11]) #min temp
 #covariates[,6] <- as.numeric(df_covariates[,12]) #precipitation
 
@@ -184,11 +184,22 @@ price_temp_cov_inference$optimization$lambda_solution
 price_temp_cov_inference$optimization$GCV_vector
 price_temp_cov_inference$inference$beta
 
+smoothing_temp_cov_inference$solution$rmse
+smoothing_temp_cov_inference$beta
+smoothing_temp_cov_inference$optimization$lambda_solution
+smoothing_temp_cov_inference$optimization$GCV_vector
+smoothing_temp_cov_inference$inference$beta
+
 #Solutions
 # - lambda = (1e-1, 1), rmse = 3.21, beta for varroa, pest, other, unknown: 0.024,
 #-0.022, 0.15, 0.18, GCV = 19.21
+# - lambda = (1e-1, 1e-1), rmse = 2.85, beta for varroa, diseases, pest, other, unknown: 0.005,
+#0.021, -0.0008, 0.020, 0.013, GCV = 23 --> pvalues eigen sign flip: 0
 # - lambda = (1e-1, 1e-1), rmse = 2.85, beta for varroa, pest, other, unknown: 0.007,
 #0.003, 0.02, GCV = 20.25
+
+# optimal gcv (not converged to global optimum): lambda = (2e10, 5e32), rmse = 6.41, gcv = 24
+#pvalues oat for varroa e pesticides: 0.00, 0.918
 
 # 3d plot
 time_instant <- 5 #from 1 to 29
