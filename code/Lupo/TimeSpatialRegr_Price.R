@@ -103,8 +103,8 @@ plot(mesh,asp=1, pch=".")
 box()
 points(mesh$nodes[which(mesh$nodesmarkers==0),], pch=16,cex=0.6)
 points(mesh$nodes[which(mesh$nodesmarkers==1),], pch=16, col='red',cex=0.6)
-points(p,pch=16,cex=1.5,col=c(rep('blue',dim(data_locations)[1]),rep('orange',dim(boundary)[1])))
-plot(st_geometry(orotl_sf), width = 3, add=T) #col="blue"
+points(p,pch=16,cex=1,col=c(rep('blue',dim(data_locations)[1]),rep('orange',dim(boundary)[1])))
+plot(st_geometry(orotl_sf), lwd = 2, add=T) #col="blue"
 
 ###############################################################################.
 ##########                  ADD COVARIATES                           ##########
