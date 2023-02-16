@@ -79,29 +79,31 @@ $$
 #df_new_comp1$state <- factor(df_new_comp1$state)
 df_new_comp[which(df_new_comp$Disesases>50),]
 
-gamm1 <- gamm(cbind(colony_lost,colony_survived) ~ 
-               s(Varroa.mites) + s(Disesases)+ s(I(MinimumTemperature+273))
-              + s(Pesticides) #+ s(Other) + s(Unknown) 
-              #+ s(Other.pests.parasites)
-              #+ s(Precipitation)
+gamm1 <- gam(cbind(colony_lost,colony_survived) ~ 
+               s(Varroa.mites)+s(Disesases)+ s(I(MinimumTemperature+273))
+              + s(Pesticides)
               #+ s(lon,lat)
-              + state #R^2 meglio qua 
-              + s(timet, bs="cc")
-              ,correlation = corAR1(form =~ timet | state )
-              , weights = varIdent(form =~ 1 | state)
+              #+ state #R^2 meglio qua 
+              #+ s(lon,lat,timet, bs="cc")
+              + te(lon,lat, timet, bs=c("tp","cr"), d=c(2,1), k=10)
               ,na.action = na.omit
               ,family = binomial(link = "logit")
               ,data = df_new_comp)
-summary(gamm1$gam)
-plot(gamm1$gam)
+summary(gamm1)
+plot(gamm1)
+
+pdf("gam_plot.pdf")
+plot(gamm1)
+
 ```
 
-The reisduals look fine!
+One can argue about residuals, indeed
 ```{r}
-plot(gamm1$gam$residuals)
+plot(gamm1$residuals)
+
 #plot(x=df_new_comp[which(df_new_comp$months == "Q1"),]$MinimumTemperature, y=df_new_comp[which(df_new_comp$months == "Q1"),]$colony_lost_pct)
 ```
-
+Cluster obtained by Bayesian Non Parametric clustering:
 ```{r}
 #best <- c(1, 1, 1, 2, 1, 2, 2, 2, 1, 3, 1, 1, 1, 2, 1, 1,2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 2, 1, 1, 1, 3, 1, 1, 2, 1, 1, 2, 2)
 best <- c(1, 1, 1, 2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 1, 1,2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 2)
@@ -111,11 +113,11 @@ Z <- df_new_comp[,c(1,6,9,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25)]
 Z$vclus <- vclus
 gamm2 <- gamm(cbind(colony_lost,colony_survived) ~ 
                                                         
-        + s(Varroa.mites, by=vclus )
-  +Other.pests.parasites+                         
-  +Pesticides            +         Other                         
-+ Unknown                 +       MaximumTemperature            
- +MinimumTemperature       +      PalmerDroughtSeverityIndexPDSI
+        + s(Varroa.mites, by = as.numeric(vclus == "1" ))
+        + s(Varroa.mites, by = as.numeric(vclus =="2"))
+  +s(Pesticides)            +         Other                         
+  + Unknown                           
+ + s(MinimumTemperature)
  +Precipitation             +     #AverageTemperature non sign     
  +state                          
  +s(timet)                        
@@ -128,75 +130,60 @@ plot(gamm2$gam)
 ```
 The best cluster on Varroa induced by the BNP clustering is:
 1 1 1 2 1 2 2 2 1 3 1 1 1 2 1 1 2 1 1 2 1 1 2 1 2 1 2 1 2 1 1 2 2 1 1 1 3 1 1 2 1 1 2 2
-```{r}
-amm2 <- gamm(colony_lost~ 
-        vclus                             
-        + s(Varroa.mites, by = as.numeric(vclus=="1") )
-        + s(Varroa.mites, by = as.numeric(vclus=="2") )
-  +Other.pests.parasites+                         
-  +Pesticides            +         Other                         
-+ Unknown                 +       MaximumTemperature            
- +MinimumTemperature       +      PalmerDroughtSeverityIndexPDSI
- +Precipitation             +     #AverageTemperature non sign     
- +state                          
- +s(timet)                        
-              ,correlation = corAR1(form =~ timet | state)
-              ,na.action = na.omit
-              
-              , data = Z)
-```
+
 
 ```{r}
 
 
 gamm0 <- gamm(cbind(colony_lost,colony_survived) ~  
                 Varroa.mites +
-                s(time, by = as.numeric(state == "alabama"))+
-                s(time, by = as.numeric(state == "arizona"))+
-                s(time, by = as.numeric(state == "arkansas"))+
-                s(time, by = as.numeric(state == "california"))+
-                s(time, by = as.numeric(state == "colorado"))+
-                s(time, by = as.numeric(state == "connecticut"))+
-                s(time, by = as.numeric(state == "florida"))+
-                s(time, by = as.numeric(state == "georgia"))+
-                s(time, by = as.numeric(state == "idaho"))+
-                s(time, by = as.numeric(state == "illinois"))+
-                s(time, by = as.numeric(state == "indiana"))+
-                s(time, by = as.numeric(state == "iowa"))+
-                s(time, by = as.numeric(state == "kansas"))+
-                s(time, by = as.numeric(state == "kentucky"))+
-                s(time, by = as.numeric(state == "louisiana"))+
-                s(time, by = as.numeric(state == "maine"))+
-                s(time, by = as.numeric(state == "maryland"))+
-                s(time, by = as.numeric(state == "massachusetts"))+
-                s(time, by = as.numeric(state == "michigan"))+
-                s(time, by = as.numeric(state == "minnesota"))+
-                s(time, by = as.numeric(state == "mississippi"))+
-                s(time, by = as.numeric(state == "missouri"))+
-                s(time, by = as.numeric(state == "montana"))+
-                s(time, by = as.numeric(state == "nebraska"))+
-                s(time, by = as.numeric(state == "new jersey"))+
-                s(time, by = as.numeric(state == "new mexico"))+
-                s(time, by = as.numeric(state == "new york"))+
-                s(time, by = as.numeric(state == "north carolina"))+
-                s(time, by = as.numeric(state == "north dakota"))+
-                s(time, by = as.numeric(state == "ohio"))+
-                s(time, by = as.numeric(state == "oklahoma"))+
-                s(time, by = as.numeric(state == "oregon"))+
-                s(time, by = as.numeric(state == "pennsylvania"))+
-                s(time, by = as.numeric(state == "sout carolina"))+
-                s(time, by = as.numeric(state == "south dakota"))+
-                s(time, by = as.numeric(state == "tennessee"))+
-                s(time, by = as.numeric(state == "texas"))+
-                s(time, by = as.numeric(state == "utah"))+
-                s(time, by = as.numeric(state == "vermont"))+
-                s(time, by = as.numeric(state == "virginia"))+
-                s(time, by = as.numeric(state == "washington"))+
-                s(time, by = as.numeric(state == "west virginia"))+
-                s(time, by = as.numeric(state == "wisconsin"))+
-                s(time, by = as.numeric(state == "wyoming"))
+                s(timet, by = as.numeric(state == "alabama"))+
+                s(timet, by = as.numeric(state == "arizona"))+
+                s(timet, by = as.numeric(state == "arkansas"))+
+                s(timet, by = as.numeric(state == "california"))+
+                s(timet, by = as.numeric(state == "colorado"))+
+                s(timet, by = as.numeric(state == "connecticut"))+
+                s(timet, by = as.numeric(state == "florida"))+
+                s(timet, by = as.numeric(state == "georgia"))+
+                s(timet, by = as.numeric(state == "idaho"))+
+                s(timet, by = as.numeric(state == "illinois"))+
+                s(timet, by = as.numeric(state == "indiana"))+
+                s(timet, by = as.numeric(state == "iowa"))+
+                s(timet, by = as.numeric(state == "kansas"))+
+                s(timet, by = as.numeric(state == "kentucky"))+
+                s(timet, by = as.numeric(state == "louisiana"))+
+                s(timet, by = as.numeric(state == "maine"))+
+                s(timet, by = as.numeric(state == "maryland"))+
+                s(timet, by = as.numeric(state == "massachusetts"))+
+                s(timet, by = as.numeric(state == "michigan"))+
+                s(timet, by = as.numeric(state == "minnesota"))+
+                s(timet, by = as.numeric(state == "mississippi"))+
+                s(timet, by = as.numeric(state == "missouri"))+
+                s(timet, by = as.numeric(state == "montana"))+
+                s(timet, by = as.numeric(state == "nebraska"))+
+                s(timet, by = as.numeric(state == "new jersey"))+
+                s(timet, by = as.numeric(state == "new mexico"))+
+                s(timet, by = as.numeric(state == "new york"))+
+                s(timet, by = as.numeric(state == "north carolina"))+
+                s(timet, by = as.numeric(state == "north dakota"))+
+                s(timet, by = as.numeric(state == "ohio"))+
+                s(timet, by = as.numeric(state == "oklahoma"))+
+                s(timet, by = as.numeric(state == "oregon"))+
+                s(timet, by = as.numeric(state == "pennsylvania"))+
+                s(timet, by = as.numeric(state == "sout carolina"))+
+                s(timet, by = as.numeric(state == "south dakota"))+
+                s(timet, by = as.numeric(state == "tennessee"))+
+                s(timet, by = as.numeric(state == "texas"))+
+                s(timet, by = as.numeric(state == "utah"))+
+                s(timet, by = as.numeric(state == "vermont"))+
+                s(timet, by = as.numeric(state == "virginia"))+
+                s(timet, by = as.numeric(state == "washington"))+
+                s(timet, by = as.numeric(state == "west virginia"))+
+                s(timet, by = as.numeric(state == "wisconsin"))+
+                s(timet, by = as.numeric(state == "wyoming"))
 
-                
+        
+              ,correlation = corAR1(form =~ timet | state)
               ,na.action = na.omit
               ,family = binomial(link = "logit")
               , data = df_new_comp)
