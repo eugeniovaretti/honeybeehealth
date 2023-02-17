@@ -39,6 +39,8 @@ The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tr
 - `paired univariate permutation test.Rmd` : two paired-population permutation test to check if the loss in summers is significantly different from the loss during winters
 - `anova_for_varroa.Rmd-` : anova permutational test between 3 clusters based on minimum temperature to check if the influence of varroa is significantly different among the groups
 - `Multivariate_Depth_Measure.R`: Outliers detection in multivariate case
+- `data_outputs/` contains output (and input) dataset coming from the bayesmix analysis useful for `bnp_clus_and_func.Rmd`
+
 
 ## A Model of loss-stressors relation [LossModel](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/LossModel)
 - `Gam_final.Rmd`: code for the final GAM
@@ -54,7 +56,3 @@ The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tr
 
 ## Utilities [utils](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/utils)
 - `utils/`: contains utilities functions that are useful to manage data and plots
-
-- `data_outputs/` contains output (and input) dataset coming from the bayesmix analysis useful for `bnp_clus_and_func.Rmd`
-
-
