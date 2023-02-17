@@ -26,11 +26,11 @@ In the remaining folders  can find, divided by topic, all the following scripts:
 
 - `Functional_Depth_Measure.R`: Outliers detections in the different features available using functional boxplots and outliergrams
 - `Functional_Permutation_Tests.R`: Functional permutation tests to check difference in distributions of featues among different seasonalities, quarters...
-- `paired univariate permutation test.Rmd`
-- `anova_for_varroa.Rmd-`
+- `paired univariate permutation test.Rmd` : two paired-population permutation test to check if the loss in summers is significantly different from the loss during winters
+- `anova_for_varroa.Rmd-` : anova permutational test between 3 clusters based on minimum temperature to check if the influence of varroa is significantly different among the groups
 - `Multivariate_Depth_Measure.R`: Outliers detection in multivariate case
 
-- `Survival.Rmd`
+- `Survival.Rmd` : Survival Analysis to quantify the impact of the colony loss on beekeepers
 - `SpatialRegression_ColonyLossPct_Price_Plots.R`: Penalized Spatial Spline Regression Models with targets the money loss or the colony loss percentage
 - 'TimeSpatialRegr_Price.R': Penalized Semiparametric Regression Model for Spatial Functional data, using as target the money loss in k$ for each 100 colonies present at a given state in a given quarter, + Eigen Sign-flip score test on beta coefficients of parametric part of the model
 - `TimeSpatialRegr_AbsColonyLoss.R`: Penalized Semiparametric Regression Model for Spatial Functional data with the absolute values of colony loss as target
