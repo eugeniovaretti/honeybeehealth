@@ -19,6 +19,14 @@ The folder [Map_Visualization](https://github.com/eugeniovaretti/honeybeehealth/
 
 The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/Map_visualization)  contains Data_Consistency.ipynb
 
+## How to install the packages
+
+Install the required packages from CRAN
+
+```
+packages_list <- c(“aplpack”, “car”, “DepthProc”, “dplyr”, “factoextra”, “fda”, “fdacluster”, “fdaPDE”, “fdatest”, “forecast”, “ggplot2”, “gridExtra”, “hexbin”, “ISLR2”, “ISLR2”, “latex2exp”, “lattice”, “maps”, “MASS”, “mgcv”, “np”,“pbapply”, “plotly”, “raster”, “RColorBrewer”, “readr”, “rgl”, “roahd”, “robustbase”, “sf”, “shiny”, “splines”, “stats”, “survival”, “survminer”, “svglite”, “tidyverse”, “tseries”, “usmap”, “viridis”, “visdat”, “weathermetrics”)
+install.packages(packages_list)
+```
 
 ## da dividere
 In the remaining folders  can find, divided by topic, all the following scripts:
