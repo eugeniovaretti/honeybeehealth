@@ -28,3 +28,7 @@ The repository [code](https://github.com/eugeniovaretti/honeybeehealth/tree/main
 - `TimeSpatialRegr_AbsColonyLoss.R`
 - `TimeSpatialRegr_ColonyLossPct.R`
 - `TimeSpatialRegr_ColonyLossPct_Inference.R`
+- `Gam_final.Rmd`: code for the final GAM
+- `bnp_clus_and_func.Rmd`: attemptive BNP clustering using ([bayesmix](https://github.com/eugeniovaretti/honeybeehealth)) to cluster ts (and permutional tests on them)
+
+- `utils/`: contains utilities functions that are useful to manage data and plots
