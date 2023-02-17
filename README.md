@@ -66,5 +66,7 @@ The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tr
 
 
 # Authors
-
+- Marta Cerri ([@lucamainini](https://www.github.com/martacerri))
 - Luca Mainini ([@lucamainini](https://www.github.com/lucamainini))
+- Lupo Marsigli ([@lucamainini](https://www.github.com/LupoMarsigli))
+- Eugenio Varetti ([@lucamainini](https://www.github.com/eugeniovaretti))
