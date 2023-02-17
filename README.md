@@ -40,6 +40,10 @@ The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tr
 - `anova_for_varroa.Rmd-` : anova permutational test between 3 clusters based on minimum temperature to check if the influence of varroa is significantly different among the groups
 - `Multivariate_Depth_Measure.R`: Outliers detection in multivariate case
 
+## A Model of loss-stressors relation
+- `Gam_final.Rmd`: code for the final GAM
+- `bnp_clus_and_func.Rmd`: attemptive BNP clustering using ([bayesmix](https://github.com/eugeniovaretti/honeybeehealth)) to cluster time series
+
 ## Quantification of the impact of losses on Beekeepers and economical magnitude
 - `Survival.Rmd` : Survival Analysis to quantify the impact of the colony loss on beekeepers
 - `SpatialRegression_ColonyLossPct_Price_Plots.R`: Penalized Spatial Spline Regression Models with targets the money loss or the colony loss percentage
@@ -47,8 +51,6 @@ The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tr
 - `TimeSpatialRegr_AbsColonyLoss.R`: Penalized Semiparametric Regression Model for Spatial Functional data with the absolute values of colony loss as target
 - `TimeSpatialRegr_ColonyLossPct.R`: Penalized Semiparametric Regression Model for Spatial Functional data with colony loss percentage as target
 - `TimeSpatialRegr_ColonyLossPct_Inference.R`: One-at-a-time and simultaneous Eigen Sign-flip score tests on beta coefficients of parametric part of the Spatial functional regression model
-- `Gam_final.Rmd`: code for the final GAM
-- `bnp_clus_and_func.Rmd`: attemptive BNP clustering using ([bayesmix](https://github.com/eugeniovaretti/honeybeehealth)) to cluster time series
 
 ## Utilities and Outputs
 - `utils/`: contains utilities functions that are useful to manage data and plots
