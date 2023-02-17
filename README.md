@@ -10,11 +10,14 @@ Bees are one of the most ecologically and commercially important insects in the 
 3. show how these losses are not bearable for beekeepers.
 Finally, this information was gathered to provide suggestions for public authorities to better develop resilience plans.
 
-## Running the analysis
+## Preliminary analysis
 
-The repository [code](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code) contains different files to reproduce our analysis
+The folder [Map_Visualization](https://github.com/eugeniovaretti/honeybeehealth/tree/main/Map_visualization) contains a Shiny tool that allows you to produce some plots as average losses per state. 
 
-- `Data_Consistency.ipynb` 
+## Data consistency
+
+The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tree/main/DataConsistency) contains `Data_Consistency.ipynb`
+
 - `Exploration_Plots.ipynb` 
 
 - `Functional_Depth_Measure.R`
