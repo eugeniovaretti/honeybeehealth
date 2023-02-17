@@ -28,7 +28,7 @@ library(latex2exp)
 
 # Model with covariates, using as target variable the absolute value of colony losses
 
-df <- read.csv("data/new_data/data_bystate_temp_perc.csv") #set right path
+df <- read.csv("code/ImpactModel/EconomicLoss/data_bystate_temp_perc.csv") #set right path
 
 #set time grid: from 2015 Q1 to 2022 Q2, without 2019 Q2
 times <- unique(df[,c("year", "months")])
@@ -46,12 +46,12 @@ df_abs[cols] <- sapply(df_abs[cols], '*', df_abs$colony_n)
 
 #Spatial coordinates:
 #in data
-df_coord <- read.csv("data/state_coords_lon_lat.csv") #set right path
+df_coord <- read.csv("code/ImpactModel/EconomicLoss/state_coords_lon_lat.csv") #set right path
 df_coord <- df_coord[df_coord$state != "hawaii",] #remove hawaii
 df_coord <- na.omit(df_coord) #remove Na (for "other states")
 
 #Boundary values:
-boundary <- read.table("code/Eugenio/boundary_gg.txt", head=T) #set the right path
+boundary <- read.table("code/ImpactModel/EconomicLoss/boundary_gg.txt", head=T) #set the right path
 
 df_abs <- merge(df_abs, df_coord, by = "state") 
 
@@ -252,7 +252,7 @@ df_coord <- df_coord[df_coord$state != "hawaii" & df_coord$state != "california"
 df_coord <- na.omit(df_coord) #remove Na (for "other states")
 
 #Boundary values:
-boundary <- read.table("code/Eugenio/boundary_gg.txt", head=T) #set the right path
+boundary <- read.table("code/ImpactModel/EconomicLoss/boundary_gg.txt", head=T) #set the right path
 
 df_abs <- merge(df_abs, df_coord, by = "state") 
 
@@ -301,7 +301,7 @@ mesh <- refine.mesh.2D(mesh_1, maximum_area=1.5, minimum_angle = 30)
 basisobj <- create.FEM.basis(mesh)
 
 #plot the mesh
-shapefile <- "code/Lupo/cb_2018_us_nation_5m/cb_2018_us_nation_5m.shp" #set right path
+shapefile <- "code/ImpactModel/EconomicLoss/cb_2018_us_nation_5m/cb_2018_us_nation_5m.shp" #set right path
 orotl_sf <- st_read(shapefile)
 par(mar=c(0,0,0,0))
 plot(mesh,asp=1, pch=".")

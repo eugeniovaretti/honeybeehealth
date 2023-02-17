@@ -2,8 +2,10 @@
 title: "Final GAM"
 output: html_notebook
 ---
+
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 #if not installed install all the following libraries
+library(dplyr)
 library(tseries)
 library(visdat)
 library(raster)
@@ -22,11 +24,10 @@ library(maps)
 
 ```
 
-
 ```{r}
 ###GAM###
-df <- read.csv("../../data/new_data/data_bystate_temp_perc.csv")
-df_coord <- read.csv("../../data/state_coords_lon_lat.csv")
+df <- read.csv("data_bystate_temp_perc.csv")
+df_coord <- read.csv("state_coords_lon_lat.csv")
 
 df_st <- df[df$state != "hawaii" & df$state != "other states",]
 df_coord <- df_coord[df_coord$state != "hawaii" & df_coord$state != "other states",]
@@ -55,11 +56,9 @@ timet <- rep(1:30, 44)
 df_new_comp$timet <- timet
 ```
 
-A good starting point for our model is:
-$$
+A good starting point for our model is: $$
 Losses_{state,time} = \alpha_{state} + \beta\times Varroa_{state,time} + f_{state}(time_{time}) +  \epsilon_{state,time}
-$$
-where $Losses_{is}$ is the vale of time series $i = 1,..., 40$ in time $s = 1, ..., 30$, where $f_i(time_s)$ is a smoother for time in each state. If we remove the index $i$ we assume the same smoother for each state, hence the time series are assumed to follow the same trend.
+$$ where $Losses_{is}$ is the vale of time series $i = 1,..., 40$ in time $s = 1, ..., 30$, where $f_i(time_s)$ is a smoother for time in each state. If we remove the index $i$ we assume the same smoother for each state, hence the time series are assumed to follow the same trend.
 
 ```{r}
 #attach(df_new_comp)
@@ -68,10 +67,9 @@ df_new_comp$colony_survived <- df_new_comp$colony_max - df_new_comp$colony_lost
 col_ratio <- with(df_new_comp,colony_lost/colony_max)
 with(df_new_comp,xyplot(col_ratio ~ timet | state, col = 1)) #fallo in console con x11();with(df_new_comp,xyplot(col_ratio ~ timet | state, col = 1))
 ```
-From the above plot we notice that some states have considerably more variation, indicating violation of homogeneity.
-The solution is to allow for different spread per time-series.  
-Since the data for each state are time-series assumption of indipendence may be violated, so we implement a residual auto-correlation structure. (we choose an AR1 (see the gam_clean.Rmd for this analysis))
-$$
+
+From the above plot we notice that some states have considerably more variation, indicating violation of homogeneity. The solution is to allow for different spread per time-series.\
+Since the data for each state are time-series assumption of indipendence may be violated, so we implement a residual auto-correlation structure. (we choose an AR1 (see the gam_clean.Rmd for this analysis)) $$
 \epsilon_{i,s} = \rho \times \epsilon_{i,s-1} + \eta_{is}
 $$
 
@@ -98,12 +96,15 @@ plot(gamm1)
 ```
 
 One can argue about residuals, indeed
+
 ```{r}
 plot(gamm1$residuals)
 
 #plot(x=df_new_comp[which(df_new_comp$months == "Q1"),]$MinimumTemperature, y=df_new_comp[which(df_new_comp$months == "Q1"),]$colony_lost_pct)
 ```
+
 Cluster obtained by Bayesian Non Parametric clustering:
+
 ```{r}
 #best <- c(1, 1, 1, 2, 1, 2, 2, 2, 1, 3, 1, 1, 1, 2, 1, 1,2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 2, 1, 1, 1, 3, 1, 1, 2, 1, 1, 2, 2)
 best <- c(1, 1, 1, 2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 1, 1,2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 2)
@@ -128,13 +129,10 @@ gamm2 <- gamm(cbind(colony_lost,colony_survived) ~
 summary(gamm2$gam)
 plot(gamm2$gam)
 ```
-The best cluster on Varroa induced by the BNP clustering is:
-1 1 1 2 1 2 2 2 1 3 1 1 1 2 1 1 2 1 1 2 1 1 2 1 2 1 2 1 2 1 1 2 2 1 1 1 3 1 1 2 1 1 2 2
 
+The best cluster on Varroa induced by the BNP clustering is: 1 1 1 2 1 2 2 2 1 3 1 1 1 2 1 1 2 1 1 2 1 1 2 1 2 1 2 1 2 1 1 2 2 1 1 1 3 1 1 2 1 1 2 2
 
 ```{r}
-
-
 gamm0 <- gamm(cbind(colony_lost,colony_survived) ~  
                 Varroa.mites +
                 s(timet, by = as.numeric(state == "alabama"))+

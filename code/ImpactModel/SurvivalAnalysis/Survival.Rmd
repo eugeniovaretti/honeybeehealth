@@ -6,17 +6,15 @@ date: "2022-12-28"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-```
-
-
-```{r cars}
-data<-read.csv("data/new_data/survival.csv")
 library(survival)
 library(survminer)
 ```
 
+```{r import data}
+data<-read.csv("survival.csv")
+```
 
-```{r pressure, echo=FALSE}
+```{r plot, echo=FALSE}
 ggplot(data=data,aes(x=state,y=time)) + 
   geom_bar(stat='identity',width=0.2) +
   geom_point(aes(color=status,shape=status),size=2) +
@@ -52,7 +50,6 @@ ggsurvplot(fit,
            title="Cumulative Incidence Curve for Lung Cancer Survival")
 ```
 
-
 ```{r}
 #MINIMUM TEMPERATURE
 groups <- levels(factor(data$state))
@@ -65,6 +62,7 @@ plot_usmap(data = df) + labs(title = "Cluster by avg temp")
                   +colors=c("forestgreen","firebrick1","dodgerblue2")
 
 ```
+
 ```{r}
 fit.MIN <- survfit(Surv(time, status=="Event") ~ clusterMIN, data=data)
 ggsurvplot(fit.MIN, 
@@ -87,6 +85,7 @@ hazard_ratio
 #HR= zard_ratio=0.4538251
 
 ```
+
 the risk of death in the northen staes (harsh winters) is 0.45 times the risk in the southern staes (warmer winters)
 
 ```{r}
@@ -117,8 +116,8 @@ log_rank_test <- survdiff(Surv(time, status=="Event") ~ clusterPREC, data=data)
 hazard_ratio <- (log_rank_test$obs[2]/log_rank_test$exp[2])/(log_rank_test$obs[1]/log_rank_test$exp[1])
 hazard_ratio
 ```
-HR= zard_ratio=0.4250286
-the risk of deaths in cluster1 (states where the preciptation are higher) is 0.4250286 times the risk in cluster2 (states where the preciptation are much lower)
+
+HR= zard_ratio=0.4250286 the risk of deaths in cluster1 (states where the preciptation are higher) is 0.4250286 times the risk in cluster2 (states where the preciptation are much lower)
 
 ```{r}
 ###MODEL
@@ -141,4 +140,3 @@ ggcoxdiagnostics(cox.age, type = "martingale")
 #the residual are centered around 0 and not oscillating above or below 0!
 
 ```
-

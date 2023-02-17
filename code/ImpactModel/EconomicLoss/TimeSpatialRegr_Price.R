@@ -26,7 +26,7 @@ library(latex2exp)
 
 ####### MODEL WITH COVARIATES ####### ---
 
-df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
+df <- read.csv("code/ImpactModel/EconomicLoss/data_bystate_temp_perc.csv")
 
 #time: from 2015 Q1 to 2022 Q2, without 2019 Q2
 times <- unique(df[,c("year", "months")])
@@ -38,7 +38,7 @@ df_st <- df[,c(1,2,3,7)]
 df_st <- df_st[df_st$state != "hawaii" & df_st$state != "other states",]
 df_st$state <- gsub( " ", "", df_st$state)
 
-df_prices <- read.csv("data/production_year_new.csv")
+df_prices <- read.csv("code/ImpactModel/EconomicLoss/production_year_new.csv")
 df_prices <- df_prices[,-1]
 df_prices$state <- tolower(df_prices$state)
 df_prices <- df_prices[df_prices$state != "hawaii",]
@@ -61,9 +61,9 @@ data <- data_obs %>% tidyr::pivot_wider(
   values_fill = NULL
 )
 
-boundary <- read.table("code/Eugenio/boundary_gg.txt", head=T)
+boundary <- read.table("code/ImpactModel/EconomicLoss/boundary_gg.txt", head=T)
 
-df_coord <- read.csv("data/state_coords_lon_lat.csv")
+df_coord <- read.csv("code/ImpactModel/EconomicLoss/state_coords_lon_lat.csv")
 #remove hawaii:
 df_coord <- df_coord[df_coord$state != "hawaii",]
 #remove Na (for "other states"):
@@ -96,7 +96,7 @@ mesh <- refine.mesh.2D(mesh_1, maximum_area=1.5, minimum_angle = 30)
 basisobj <- create.FEM.basis(mesh)
 
 #plot the mesh
-shapefile <- "code/Lupo/cb_2018_us_nation_5m/cb_2018_us_nation_5m.shp"
+shapefile <- "code/ImpactModel/EconomicLoss/cb_2018_us_nation_5m/cb_2018_us_nation_5m.shp"
 orotl_sf <- st_read(shapefile)
 par(mar=c(0,0,0,0))
 plot(mesh,asp=1, pch=".")
@@ -110,7 +110,7 @@ plot(st_geometry(orotl_sf), lwd = 2, add=T) #col="blue"
 ##########                  ADD COVARIATES                           ##########
 ###############################################################################.
 
-df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
+df <- read.csv("code/ImpactModel/EconomicLoss/data_bystate_temp_perc.csv")
 df <- df[df$state != "hawaii" & df$state != "other states",]
 
 #Varroa.mites = 11, Other pests = 12, Diseases = 13, #Pesticides = 14

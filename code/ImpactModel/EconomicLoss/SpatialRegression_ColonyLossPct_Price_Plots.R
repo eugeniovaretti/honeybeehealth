@@ -1,5 +1,3 @@
-
-
 rm(list=ls())
 graphics.off()
 set.seed(1)
@@ -24,19 +22,18 @@ library(latex2exp)
 
 #create mesh first
 
-df_coord <- read.csv("data/state_coords_lon_lat.csv")
+df_coord <- read.csv("code/ImpactModel/EconomicLoss/state_coords_lon_lat.csv")
 #remove 'hawaii' and remove Na (for "other states"):
 df_coord <- df_coord[df_coord$state != "hawaii",]
 df_coord <- na.omit(df_coord)
 df_coord <- df_coord %>% arrange(state)
 
 #shapefile for US boundaries
-shapefile <- "code/Lupo/cb_2018_us_nation_5m/cb_2018_us_nation_5m.shp"
+shapefile <- "code/ImpactModel/EconomicLoss/cb_2018_us_nation_5m/cb_2018_us_nation_5m.shp"
 orotl_sf <- st_read(shapefile)
 
 #boundary points:
-boundary <- read.table("code/Eugenio/boundary_gg.txt", head=T)
-#boundary <- read.table("/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Lupo/boundary_gg_first.txt", head=T)
+boundary <- read.table("code/ImpactModel/EconomicLoss/boundary_gg.txt", head=T)
 
 #data locations matrix (in long-lat coordinates)
 data_locations <- matrix(NA,nrow=dim(df_coord)[1],ncol=2)
@@ -69,7 +66,7 @@ plot(st_geometry(orotl_sf), lwd = 3, add=T) #col="blue"
 basisobj <- create.FEM.basis(mesh)
 
 #data
-df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
+df <- read.csv("code/ImpactModel/EconomicLoss/data_bystate_temp_perc.csv")
 #remove 'hawaii' and 'other states':
 df <- df[df$state != "hawaii" & df$state != "other states",]
 
@@ -77,7 +74,7 @@ times <- unique(df[,c("year", "months")])
 rownames(times) <- NULL
 seq_t <- c(seq(1,17, by=4), c(20,24,28))
 
-df_prices <- read.csv("data/production_year_new.csv")
+df_prices <- read.csv("code/ImpactModel/EconomicLoss/production_year_new.csv")
 df_prices$state <- tolower(df_prices$state)
 df_prices <- df_prices[df_prices$state != "hawaii",]
 

@@ -7,9 +7,9 @@
 #NO COVARIATES!
 
 #load already computed model
-#load("/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Lupo/smoothing_iso_temp_06022022.Rdata")
+#load("code/ImpactModel/EconomicLoss/smoothing_iso_temp_06022022.Rdata")
 
-df <- read.csv("data/new_data/data_bystate_temp_perc.csv")
+df <- read.csv("code/ImpactModel/EconomicLoss/data_bystate_temp_perc.csv")
 
 #time: from 2015 Q1 to 2022 Q2, without 2019 Q2
 times <- unique(df[,c("year", "months")])
@@ -31,7 +31,7 @@ col_order <- order(colnames(data))
 col_order <- c(1,head(col_order,-1))
 data <- data[,col_order]
 
-boundary_all <- read.table("code/Lupo/boundary.txt", header=TRUE)
+boundary_all <- read.table("code/ImpactModel/EconomicLoss/boundary.txt", header=TRUE)
 
 #boundary <- data.frame(
 #  long = c(min(boundary_all$long), max(boundary_all$long), max(boundary_all$long), min(boundary_all$long)),
@@ -45,9 +45,9 @@ boundary_all <- read.table("code/Lupo/boundary.txt", header=TRUE)
 #boundary <-  data.frame( long=long, lat=lat)
 
 #Boundary Gege:
-boundary <- read.table("/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Eugenio/boundary_gg.txt", head=T)
+boundary <- read.table("code/ImpactModel/EconomicLoss/boundary_gg.txt", head=T)
 
-df_coord <- read.csv("data/state_coords_lon_lat.csv")
+df_coord <- read.csv("code/ImpactModel/EconomicLoss/state_coords_lon_lat.csv")
 #remove hawaii:
 df_coord <- df_coord[df_coord$state != "hawaii",]
 #remove Na (for "other states"):
@@ -82,7 +82,7 @@ mesh <- refine.mesh.2D(mesh_1, maximum_area=1.5, minimum_angle = 30)
 basisobj <- create.FEM.basis(mesh)
 
 #plot the mesh
-shapefile <- "/Users/lupomarsigli/Desktop/NP_project/NP_github/np_project/code/Lupo/cb_2018_us_nation_5m/cb_2018_us_nation_5m.shp"
+shapefile <- "code/ImpactModel/EconomicLoss/cb_2018_us_nation_5m/cb_2018_us_nation_5m.shp"
 orotl_sf <- st_read(shapefile)
 par(mar=c(0,0,0,0))
 plot(mesh,asp=1, pch=".")
