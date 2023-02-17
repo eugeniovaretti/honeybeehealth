@@ -4,7 +4,11 @@ Evaluation of Factors and Strategies to Mitigate Colony Loss in US
 Project for the course of NonParametric Statistics
 
 ## Description
-
+Bees are one of the most ecologically and commercially important insects in the world, in our project:
+1. we analyze the risk factors that can be associated with the disappearance of colonies,
+2. estimate the economic impact associated with lost honey, (although losses from missed pollination could be even more significant),
+3. show how these losses are not bearable for beekeepers.
+Finally, this information was gathered to provide suggestions for public authorities to better develop resilience plans.
 
 ## Running the analysis
 
