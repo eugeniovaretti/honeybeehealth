@@ -53,7 +53,6 @@ The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tr
 - `TimeSpatialRegr_ColonyLossPct_Inference.R`: One-at-a-time and simultaneous Eigen Sign-flip score tests on beta coefficients of parametric part of the Spatial functional regression model
 
 ## Utilities
-[FinalDataSet](https://github.com/eugeniovaretti/honeybeehealth/tree/main/FinalDataSet)
 - `utils/`: contains utilities functions that are useful to manage data and plots
 
 - `data_outputs/` contains output (and input) dataset coming from the bayesmix analysis useful for `bnp_clus_and_func.Rmd`
