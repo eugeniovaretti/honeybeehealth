@@ -14,12 +14,13 @@ The repository [data](https://github.com/eugeniovaretti/honeybeehealth/tree/main
 
 The folder [code](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code) contains alle the code useful for the analysis, divided in subfolders (to maintain a certain order)
 
-## Preliminary analysis
+## Preliminary analysis and Data consistency
 The folder [Map_Visualization](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/Map_visualization) contains a Shiny tool that allows you to produce some plots as average losses per state. 
 
-## Data consistency
 The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/Map_visualization)  contains Data_Consistency.ipynb
 
+
+## da dividere
 In the remaining folders  can find, divided by topic, all the following scripts:
 
 - `Exploration_Plots.ipynb`: first exploratory analysis for colony losses distribution over states and seasons, effects of the stressors and creation of survival metrics.
