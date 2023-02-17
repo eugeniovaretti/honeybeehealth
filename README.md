@@ -12,7 +12,7 @@ Finally, this information was gathered to provide suggestions for public authori
 
 ## Running the analysis
 
-The repository [code](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code) contains different files to perform the analysis
+The repository [code](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code) contains different files to reproduce our analysis
 
 - `Data_Consistency.ipynb` 
 - `Exploration_Plots.ipynb` 
