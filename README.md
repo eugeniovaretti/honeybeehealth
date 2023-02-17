@@ -10,6 +10,14 @@ Bees are one of the most ecologically and commercially important insects in the 
 3. show how these losses are not bearable for beekeepers.
 Finally, this information was gathered to provide suggestions for public authorities to better develop resilience plans.
 
+## Install the required packages from CRAN
+
+```
+packages_list <- c(“aplpack”, “car”, “DepthProc”, “dplyr”, “factoextra”, “fda”, “fdacluster”, “fdaPDE”, “fdatest”, “forecast”, “ggplot2”, “gridExtra”, “hexbin”, “ISLR2”, “ISLR2”, “latex2exp”, “lattice”, “maps”, “MASS”, “mgcv”, “np”,“pbapply”, “plotly”, “raster”, “RColorBrewer”, “readr”, “rgl”, “roahd”, “robustbase”, “sf”, “shiny”, “splines”, “stats”, “survival”, “survminer”, “svglite”, “tidyverse”, “tseries”, “usmap”, “viridis”, “visdat”, “weathermetrics”)
+install.packages(packages_list)
+```
+
+## Preliminary Analysis
 The repository [data](https://github.com/eugeniovaretti/honeybeehealth/tree/main/data) contains all the datasets used for the sub-analyses carried out
 
 The folder [code](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code) contains alle the code useful for the analysis, divided in subfolders (to maintain a certain order)
@@ -18,15 +26,6 @@ The folder [code](https://github.com/eugeniovaretti/honeybeehealth/tree/main/cod
 The folder [Map_Visualization](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/Map_visualization) contains a Shiny tool that allows you to produce some plots as average losses per state. 
 
 The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/Map_visualization)  contains Data_Consistency.ipynb
-
-## How to install the packages
-
-Install the required packages from CRAN
-
-```
-packages_list <- c(“aplpack”, “car”, “DepthProc”, “dplyr”, “factoextra”, “fda”, “fdacluster”, “fdaPDE”, “fdatest”, “forecast”, “ggplot2”, “gridExtra”, “hexbin”, “ISLR2”, “ISLR2”, “latex2exp”, “lattice”, “maps”, “MASS”, “mgcv”, “np”,“pbapply”, “plotly”, “raster”, “RColorBrewer”, “readr”, “rgl”, “roahd”, “robustbase”, “sf”, “shiny”, “splines”, “stats”, “survival”, “survminer”, “svglite”, “tidyverse”, “tseries”, “usmap”, “viridis”, “visdat”, “weathermetrics”)
-install.packages(packages_list)
-```
 
 ## da dividere
 In the remaining folders  can find, divided by topic, all the following scripts:
