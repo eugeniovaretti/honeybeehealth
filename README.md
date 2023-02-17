@@ -1,7 +1,7 @@
 # Honey Bee Health 
 Evaluation of Factors and Strategies to Mitigate Colony Loss in US
 
-Project for the course of NonParametric Statistics
+Project for the course of NonParametric Statistics, 2022, Politecnico di Milano
 
 ## Description
 Bees are one of the most ecologically and commercially important insects in the world, in our project:
@@ -30,18 +30,17 @@ To facilitate furher researches, a cleaned version of the dataset is provided in
 ## Preliminary analysis and Data consistency
 The folder [Map_Visualization](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/Map_visualization) contains a Shiny tool that allows you to produce some plots as average losses per state. 
 
-The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/Map_visualization)  contains Data_Consistency.ipynb
+The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/DataConsistency) contains Data_Consistency.ipynb which is used to explain some apparent inconsistency in data.
 
-In the remaining folders  can find, divided by topic, all the following scripts:
-
+## Analysis of potential exploratory factors
 - `Exploration_Plots.ipynb`: first exploratory analysis for colony losses distribution over states and seasons, effects of the stressors and creation of survival metrics.
-
 - `Functional_Depth_Measure.R`: Outliers detections in the different features available using functional boxplots and outliergrams
 - `Functional_Permutation_Tests.R`: Functional permutation tests to check difference in distributions of featues among different seasonalities, quarters...
 - `paired univariate permutation test.Rmd` : two paired-population permutation test to check if the loss in summers is significantly different from the loss during winters
 - `anova_for_varroa.Rmd-` : anova permutational test between 3 clusters based on minimum temperature to check if the influence of varroa is significantly different among the groups
 - `Multivariate_Depth_Measure.R`: Outliers detection in multivariate case
 
+## Quantification of the impact of losses on Beekeepers and economical magnitude
 - `Survival.Rmd` : Survival Analysis to quantify the impact of the colony loss on beekeepers
 - `SpatialRegression_ColonyLossPct_Price_Plots.R`: Penalized Spatial Spline Regression Models with targets the money loss or the colony loss percentage
 - 'TimeSpatialRegr_Price.R': Penalized Semiparametric Regression Model for Spatial Functional data, using as target the money loss in k$ for each 100 colonies present at a given state in a given quarter, + Eigen Sign-flip score test on beta coefficients of parametric part of the model
@@ -51,6 +50,7 @@ In the remaining folders  can find, divided by topic, all the following scripts:
 - `Gam_final.Rmd`: code for the final GAM
 - `bnp_clus_and_func.Rmd`: attemptive BNP clustering using ([bayesmix](https://github.com/eugeniovaretti/honeybeehealth)) to cluster time series
 
+## Utilities and Outputs
 - `utils/`: contains utilities functions that are useful to manage data and plots
 - `data_outputs/`: contains output (and input) dataset coming from the bayesmix analysis useful for `bnp_clus_and_func.Rmd`
 
