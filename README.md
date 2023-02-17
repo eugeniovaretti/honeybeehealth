@@ -17,17 +17,21 @@ packages_list <- c(“aplpack”, “car”, “DepthProc”, “dplyr”, “fa
 install.packages(packages_list)
 ```
 
-## Preliminary Analysis
-The repository [data](https://github.com/eugeniovaretti/honeybeehealth/tree/main/data) contains all the datasets used for the sub-analyses carried out
+## Data
+In our analyis, we use different public data set:
+- factors which stress directly bee colonies as Varroa Mite or pesticides (source: USDA)
+- other possible influential factors, in particular Temperature, Drought, Precipitation (source: National Centers for Environmental Information)
+- annual production and price of the honey for each state (USDA)
 
-The folder [code](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code) contains alle the code useful for the analysis, divided in subfolders (to maintain a certain order)
+The required data for each Notebook is present in the folder where the code is.
+
+To facilitate furher researches, a cleaned version of the dataset is provided in the folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tree/main/FinalDataSet)
 
 ## Preliminary analysis and Data consistency
 The folder [Map_Visualization](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/Map_visualization) contains a Shiny tool that allows you to produce some plots as average losses per state. 
 
 The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/Map_visualization)  contains Data_Consistency.ipynb
 
-## da dividere
 In the remaining folders  can find, divided by topic, all the following scripts:
 
 - `Exploration_Plots.ipynb`: first exploratory analysis for colony losses distribution over states and seasons, effects of the stressors and creation of survival metrics.
