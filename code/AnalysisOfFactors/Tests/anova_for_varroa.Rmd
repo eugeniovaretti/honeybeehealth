@@ -6,11 +6,12 @@ date: "2022-12-6"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(readr)
 ```
 
 ```{r}
-data<-read.csv('data/new_data/data_bystate_temp_perc.csv')
-indexes<-read.csv('data/cluster_index.csv')
+data <- read_csv("code/AnlysisOfFactors/Tests/data_bystate_temp_perc.csv")
+indexes<-read_csv('code/AnalysisOfFactors/Tests/cluster_index.csv')
 
 n<-dim(data)[1]
 for(i in 1:n){
@@ -28,7 +29,6 @@ cluster2<-tolower(indexes[which(indexes$temp_avg==2),1])
 cluster3<-tolower(indexes[which(indexes$temp_avg==3),1])
 ```
 
-
 ```{r cars}
 p_value <- numeric(8)
 p_val_s<- numeric(8)
@@ -41,8 +41,6 @@ p_val_2_3_w<- numeric(8)
 p_val_1_2_w<- numeric(8)
 year<-c("2015","2016","2017","2018","2019","2020","2021","2022")
 ```
-
-
 
 ```{r pressure, echo=FALSE}
 x11()
@@ -327,6 +325,3 @@ for (j in 1:8){
   p_val_1_2_w[j] = sum(T2_w>=T20_w)/B 
 }
 ```
-
-
-
