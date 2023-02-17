@@ -32,9 +32,10 @@ In the remaining folders  can find, divided by topic, all the following scripts:
 
 - `Survival.Rmd`
 - `SpatialRegression_ColonyLossPct_Price_Plots.R`: Penalized Spatial Spline Regression Models with targets the money loss or the colony loss percentage
-- `TimeSpatialRegr_AbsColonyLoss.R`:
-- `TimeSpatialRegr_ColonyLossPct.R`:
-- `TimeSpatialRegr_ColonyLossPct_Inference.R`:
+- 'TimeSpatialRegr_Price.R': Penalized Semiparametric Regression Model for Spatial Functional data, using as target the money loss in k$ for each 100 colonies present at a given state in a given quarter, + Eigen Sign-flip score test on beta coefficients of parametric part of the model
+- `TimeSpatialRegr_AbsColonyLoss.R`: Penalized Semiparametric Regression Model for Spatial Functional data with the absolute values of colony loss as target
+- `TimeSpatialRegr_ColonyLossPct.R`: Penalized Semiparametric Regression Model for Spatial Functional data with colony loss percentage as target
+- `TimeSpatialRegr_ColonyLossPct_Inference.R`: One-at-a-time and simultaneous Eigen Sign-flip score tests on beta coefficients of parametric part of the Spatial functional regression model
 - `Gam_final.Rmd`: code for the final GAM
 - `bnp_clus_and_func.Rmd`: attemptive BNP clustering using ([bayesmix](https://github.com/eugeniovaretti/honeybeehealth)) to cluster time series
 
