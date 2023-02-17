@@ -12,7 +12,7 @@ Finally, this information was gathered to provide suggestions for public authori
 
 ## Running the analysis
 
-The repository contains different files to perform the analysis
+The repository [code](https://github.com/gabrielecorbo/Bayesian-mixture-model-for-environmental-application/tree/main/code) contains different files to perform the analysis
 
 - `Data_Consistency.ipynb` 
 - `Exploration_Plots.ipynb` 
