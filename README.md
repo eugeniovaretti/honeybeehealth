@@ -15,7 +15,7 @@ Finally, this information was gathered to provide suggestions for public authori
 ```
 git clone https://github.com/eugeniovaretti/honeybeehealth
 
-``
+```
 
 ## Install the required packages from CRAN
 
