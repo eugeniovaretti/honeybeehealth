@@ -22,19 +22,19 @@ The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tr
 
 In the remaining folders  can find, divided by topic, all the following scripts:
 
-- `Exploration_Plots.ipynb` 
+- `Exploration_Plots.ipynb`: first exploratory analysis for colony losses distribution over states and seasons, effects of the stressors and creation of survival metrics.
 
-- `Functional_Depth_Measure.R`
-- `Functional_Permutation_Tests.R`
+- `Functional_Depth_Measure.R`: Outliers detections in the different features available using functional boxplots and outliergrams
+- `Functional_Permutation_Tests.R`: Functional permutation tests to check difference in distributions of featues among different seasonalities, quarters...
 - `paired univariate permutation test.Rmd`
 - `anova_for_varroa.Rmd-`
-- `Multivariate_Depth_Measure.R`
+- `Multivariate_Depth_Measure.R`: Outliers detection in multivariate case
 
 - `Survival.Rmd`
-- `SpatialRegression_ColonyLossPct_Price_Plots.R`
-- `TimeSpatialRegr_AbsColonyLoss.R`
-- `TimeSpatialRegr_ColonyLossPct.R`
-- `TimeSpatialRegr_ColonyLossPct_Inference.R`
+- `SpatialRegression_ColonyLossPct_Price_Plots.R`: Penalized Spatial Spline Regression Models with targets the money loss or the colony loss percentage
+- `TimeSpatialRegr_AbsColonyLoss.R`:
+- `TimeSpatialRegr_ColonyLossPct.R`:
+- `TimeSpatialRegr_ColonyLossPct_Inference.R`:
 - `Gam_final.Rmd`: code for the final GAM
 - `bnp_clus_and_func.Rmd`: attemptive BNP clustering using ([bayesmix](https://github.com/eugeniovaretti/honeybeehealth)) to cluster time series
 
