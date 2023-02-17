@@ -32,7 +32,7 @@ The folder [Map_Visualization](https://github.com/eugeniovaretti/honeybeehealth/
 
 The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/DataConsistency) contains Data_Consistency.ipynb which is used to explain some apparent inconsistency in data.
 
-## Analysis of potential exploratory factors
+## Analysis of potential exploratory factors [AnalysisOfFactors](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/AnalysisOfFactors)
 - `Exploration_Plots.ipynb`: first exploratory analysis for colony losses distribution over states and seasons, effects of the stressors and creation of survival metrics.
 - `Functional_Depth_Measure.R`: Outliers detections in the different features available using functional boxplots and outliergrams
 - `Functional_Permutation_Tests.R`: Functional permutation tests to check difference in distributions of featues among different seasonalities, quarters...
@@ -40,11 +40,11 @@ The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tr
 - `anova_for_varroa.Rmd-` : anova permutational test between 3 clusters based on minimum temperature to check if the influence of varroa is significantly different among the groups
 - `Multivariate_Depth_Measure.R`: Outliers detection in multivariate case
 
-## A Model of loss-stressors relation
+## A Model of loss-stressors relation [LossModel](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/LossModel)
 - `Gam_final.Rmd`: code for the final GAM
 - `bnp_clus_and_func.Rmd`: attemptive BNP clustering using ([bayesmix](https://github.com/eugeniovaretti/honeybeehealth)) to cluster time series
 
-## Quantification of the impact of losses on Beekeepers and economical magnitude
+## Quantification of the impact of losses on Beekeepers and economical magnitude [ImpactModel](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/ImpactModel)
 - `Survival.Rmd` : Survival Analysis to quantify the impact of the colony loss on beekeepers
 - `SpatialRegression_ColonyLossPct_Price_Plots.R`: Penalized Spatial Spline Regression Models with targets the money loss or the colony loss percentage
 - 'TimeSpatialRegr_Price.R': Penalized Semiparametric Regression Model for Spatial Functional data, using as target the money loss in k$ for each 100 colonies present at a given state in a given quarter, + Eigen Sign-flip score test on beta coefficients of parametric part of the model
