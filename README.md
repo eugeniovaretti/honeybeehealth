@@ -10,6 +10,13 @@ Bees are one of the most ecologically and commercially important insects in the 
 3. show how these losses are not bearable for beekeepers.
 Finally, this information was gathered to provide suggestions for public authorities to better develop resilience plans.
 
+## How to clone the repository
+
+```
+git clone https://github.com/eugeniovaretti/honeybeehealth
+
+``
+
 ## Install the required packages from CRAN
 
 ```
@@ -56,3 +63,8 @@ The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tr
 
 ## Utilities [utils](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/utils)
 - `utils/`: contains utilities functions that are useful to manage data and plots
+
+
+# Authors
+
+- Luca Mainini ([@lucamainini](https://www.github.com/lucamainini))
