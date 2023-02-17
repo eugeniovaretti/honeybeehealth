@@ -12,11 +12,11 @@ Finally, this information was gathered to provide suggestions for public authori
 
 ## Preliminary analysis
 
-The folder [code](https://github.com/eugeniovaretti/honeybeehealth/tree/main/Map_visualization) contains a Shiny tool that allows you to produce some plots as average losses per state.
+The folder [Map_Visualization](https://github.com/eugeniovaretti/honeybeehealth/tree/main/Map_visualization) contains a Shiny tool that allows you to produce some plots as average losses per state.
 
 ## Data consistency
 
-The folder [code](https://github.com/eugeniovaretti/honeybeehealth/tree/main/DataConsistency) contains `Data_Consistency.ipynb`
+The folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tree/main/DataConsistency) contains `Data_Consistency.ipynb`
 
 - `Exploration_Plots.ipynb` 
 
