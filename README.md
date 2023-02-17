@@ -25,7 +25,7 @@ In our analyis, we use different public data set:
 
 The required data for each Notebook is present in the folder where the code is.
 
-To facilitate furher researches, a cleaned version of the dataset is provided in the folder [DataConsistency](https://github.com/eugeniovaretti/honeybeehealth/tree/main/FinalDataSet)
+To facilitate furher researches, a cleaned version of the dataset is provided in the folder [FinalDataSet](https://github.com/eugeniovaretti/honeybeehealth/tree/main/FinalDataSet)
 
 ## Preliminary analysis and Data consistency
 The folder [Map_Visualization](https://github.com/eugeniovaretti/honeybeehealth/tree/main/code/Map_visualization) contains a Shiny tool that allows you to produce some plots as average losses per state. 
