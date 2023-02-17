@@ -12,7 +12,7 @@ Finally, this information was gathered to provide suggestions for public authori
 
 ## Preliminary analysis
 
-The folder [Map_Visualization](https://github.com/eugeniovaretti/honeybeehealth/tree/main/Map_visualization) contains a Shiny tool that allows you to produce some plots as average losses per state.
+The folder [Map_Visualization](https://github.com/eugeniovaretti/honeybeehealth/tree/main/Map_visualization) contains a Shiny tool that allows you to produce some plots as average losses per state. 
 
 ## Data consistency
 
