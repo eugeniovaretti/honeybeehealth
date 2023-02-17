@@ -8,16 +8,13 @@ date: "2022-11-16"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-GOAL:understand if the mean loss of colony during summer is significantly different from the one in the winter
-being, for each year, Y(i_summer)∼iid Y(summer) and Y(i_winter)∼iid Y(winter), we want to test the equality of the two distributions
+GOAL:understand if the mean loss of colony during summer is significantly different from the one in the winter being, for each year, Y(i_summer)∼iid Y(summer) and Y(i_winter)∼iid Y(winter), we want to test the equality of the two distributions
 
-H0:Y(summer)=Y(winter) vs H1:Y(summer)≠Y(winter)
-to avoid dependency, perform the test for each year.
+H0:Y(summer)=Y(winter) vs H1:Y(summer)≠Y(winter) to avoid dependency, perform the test for each year.
 
 ```{r cars}
-df_season <- read.csv('data/df_season.csv')
+df_season <- read.csv('df_season.csv')
 ```
-
 
 ```{r pressure, echo=FALSE}
 i2<-which(df_season$season=="Summer"&df_season$year_revisited=="2015")
@@ -64,12 +61,14 @@ plot(ecdf(T2))
 abline(v=T20,col=3,lwd=4)
 
 ```
+
 ```{r}
 
 # p-value
 p_val <- sum(T2>=T20)/B
 p_val
 ```
+
 ```{r}
 #same for evey year
 i2<-which(df_season$season=="Summer"&df_season$year_revisited=="2016")
@@ -121,4 +120,3 @@ t2<-df_season[i3,4]
 
 #p_val=0.00229
 ```
-

@@ -1,10 +1,9 @@
-
 library(fda)
 library(roahd)
 library(tidyverse)
 library(fdatest)
 
-df_final <- read.csv("data/new_data/data_bystate_temp_perc.csv")
+df_final <- read.csv("code/AnalysisOfFactors/Tests/data_bystate_temp_perc.csv")
 df_final <- na.omit(df_final)
 which(is.na(df_final))
 
@@ -307,3 +306,4 @@ periods[domain_indices2]
 #no relevant results!!
 
 #--------------------------------------------------------------------
+

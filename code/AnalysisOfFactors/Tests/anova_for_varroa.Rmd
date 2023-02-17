@@ -7,11 +7,12 @@ date: "2022-12-6"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(readr)
+library(dplyr)
 ```
 
 ```{r}
-data <- read_csv("code/AnlysisOfFactors/Tests/data_bystate_temp_perc.csv")
-indexes<-read_csv('code/AnalysisOfFactors/Tests/cluster_index.csv')
+data <- read_csv("data_bystate_temp_perc.csv")
+indexes<-read_csv('cluster_index.csv')
 
 n<-dim(data)[1]
 for(i in 1:n){
@@ -42,12 +43,9 @@ p_val_1_2_w<- numeric(8)
 year<-c("2015","2016","2017","2018","2019","2020","2021","2022")
 ```
 
-```{r pressure, echo=FALSE}
+```{r}
 x11()
 par(mfrow=c(4,4))
-```
-
-```{r}
 for (j in 1:8){
   
   index<-which(data$year==year[j])

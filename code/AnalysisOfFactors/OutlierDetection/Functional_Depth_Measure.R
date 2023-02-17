@@ -1,4 +1,4 @@
-#Lupo functional depth measures
+# Functional depth measures
 
 #source("code/utils/read_statedata.R")
 #source("code/utils/read_rawstatedata.R")
@@ -14,7 +14,7 @@ library(fdacluster)
 
 #write.csv(readstate, "data/new_data/temp_prec_trimesters.csv", row.names=FALSE)
 
-df_final <- read.csv("data/new_data/data_bystate_temp_perc.csv")
+df_final <- read.csv("code/AnalysisOfFactors/OutlierDetection/data_bystate_temp_perc.csv")
 
 #from readstate dataset: there are more states rather than data_bystate_temp_perc
 #note that 'Alaska' has missing values in pdsi.

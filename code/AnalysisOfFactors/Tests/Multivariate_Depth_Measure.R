@@ -1,5 +1,4 @@
-
-#Lupo Multivariate Depth Measure
+# Multivariate Depth Measure
 
 library(MASS)
 library(rgl)
@@ -9,9 +8,9 @@ library(aplpack)
 library(robustbase)
 library(dplyr)
 
-df_final <- read.csv("data/new_data/data_bystate_temp_perc.csv")
+df_final <- read.csv("code/AnalysisOfFactors/Tests/data_bystate_temp_perc.csv")
 
-#2015
+# year = 2015
 
 # df_years <-  df_final %>% group_by(year, state, months) ????
   
@@ -96,3 +95,4 @@ losspct_avg_2017 <- losspct_avg_2017[,-c(1,2)]
 
 ddPlot(x = losspct_avg_2015,y = losspct_avg_2017,depth_params = list(method='Tukey'))
 #same distribution of colony lost pct between 2015 and 2017
+
