@@ -30,8 +30,8 @@ For the Varroa clustering: the value associated to the coordinate point i is rel
 Let's prepare our dataset:
 #Let's study our coordinate:
 ```{r}
-data <- read.csv("../../data/new_data/data_bystate_temp_perc.csv")
-coord <- read.csv("../../data/state_coords_lon_lat.csv")
+data <- read.csv("data_bystate_temp_perc.csv")
+coord <- read.csv("state_coords_lon_lat.csv")
 
 # remove data relative to hawaii & other state
 
